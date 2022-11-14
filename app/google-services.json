@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "439446314711",
+    "project_id": "backseat-drivers-fe3ba",
+    "storage_bucket": "backseat-drivers-fe3ba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:439446314711:android:c28f64355877cee2a45a92",
+        "android_client_info": {
+          "package_name": "com.example.backseatdrivers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "439446314711-04u87f1191gvg8pg00kfdg9tneao7lmh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXEhzjnWPdvTk1CclmuYcKtUVSyPUjXL8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "439446314711-04u87f1191gvg8pg00kfdg9tneao7lmh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
