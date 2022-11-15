@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.example.backseatdrivers.MainActivity
 import com.example.backseatdrivers.database.User
 import com.example.backseatdrivers.databinding.ActivityLoginBinding
 import com.example.backseatdrivers.ui.home.dashboard.DashboardFragment
@@ -63,12 +64,17 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithEmail:success")
-                    user = auth.currentUser
-
-                    val intent = Intent(this, VerifySignUpActivity::class.java)
-                    intent.putExtra("user", user)
-                    startActivity(intent)
+                    val verified = auth.currentUser?.isEmailVerified
+                    if (verified == true) {
+                        Log.d(TAG, "signInWithEmail:success")
+                        user = auth.currentUser
+                        val intent = Intent(this, MainActivity::class.java)
+                        intent.putExtra("user", user)
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(baseContext, "Please verify your Email.",
+                            Toast.LENGTH_SHORT).show()
+                    }
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
