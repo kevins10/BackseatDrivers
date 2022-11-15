@@ -1,8 +1,8 @@
 package com.example.backseatdrivers.database
 
-class DriverProfile (
-    var license_type: Int,
-    var vehicle_model: String,
-    var vehicle_color: String,
-    var vehicle_rules: String
+data class DriverProfile (
+    var license_type: Int? = null,
+    var vehicle_model: String? = null,
+    var vehicle_color: String? = null,
+    var vehicle_rules: String? = null
 )
