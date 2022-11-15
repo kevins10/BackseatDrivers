@@ -8,12 +8,11 @@ import android.widget.Toast
 import com.example.backseatdrivers.database.User
 import com.example.backseatdrivers.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import java.lang.ref.Reference
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -95,7 +94,6 @@ class SignUpActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "createUserWithEmail:success")
-//                    val user = auth.currentUser
                     auth.currentUser?.sendEmailVerification()?.addOnSuccessListener {
                         Toast.makeText(baseContext, "Please verify your Email",
                             Toast.LENGTH_SHORT).show()
@@ -108,19 +106,20 @@ class SignUpActivity : AppCompatActivity() {
                                 Toast.LENGTH_SHORT).show()
                         }
 
-                    updateUI()
+                    goToVerificationPage(auth.currentUser)
+                    finish()
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
+                    Toast.makeText(baseContext, "Signup failed.",
                         Toast.LENGTH_SHORT).show()
-//                    updateUI(null)
                 }
             }
     }
 
-    private fun updateUI() {
+    private fun goToVerificationPage(currentUser: FirebaseUser?) {
         val intent = Intent(this, VerifySignUpActivity::class.java)
+        intent.putExtra("user", currentUser)
         startActivity(intent)
     }
 }
