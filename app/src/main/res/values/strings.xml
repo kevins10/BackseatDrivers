@@ -3,6 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_profile">Profile</string>
 
     <!--Login/Signup-->
     <string name="email_hint_text">Email</string>
@@ -28,4 +29,9 @@
         <item>idk what else</item>
     </string-array>
     <string name="no_account_text">Don\'t have an account?</string>
+
+    <!--Email Verification-->
+    <string name="verify_email_text">Verify your email</string>
+    <string name="continue_btn_text">Continue</string>
+    <string name="resend_email_text">Resend verification email</string>
 </resources>

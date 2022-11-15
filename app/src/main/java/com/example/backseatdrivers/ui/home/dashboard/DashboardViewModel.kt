@@ -1,4 +1,4 @@
-package com.example.backseatdrivers.ui.dashboard
+package com.example.backseatdrivers.ui.home.dashboard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
