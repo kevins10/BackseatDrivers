@@ -3,6 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/parmi/Downloads/BackseatDrivers-main/BackseatDrivers-main/BackseatDrivers/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.116" />
+        <entry key="..\:/Users/parmi/Downloads/BackseatDrivers-main/BackseatDrivers-main/BackseatDrivers/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.1215" />
+        <entry key="..\:/Users/parmi/Downloads/BackseatDrivers-main/BackseatDrivers-main/BackseatDrivers/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.116" />
+        <entry key="..\:/Users/parmi/Downloads/BackseatDrivers-main/BackseatDrivers-main/BackseatDrivers/app/src/main/res/drawable/ic_launcher_background.xml" value="0.116" />
+        <entry key="..\:/Users/parmi/Downloads/BackseatDrivers-main/BackseatDrivers-main/BackseatDrivers/app/src/main/res/drawable/ic_lock.xml" value="0.116" />
+        <entry key="..\:/Users/parmi/Downloads/BackseatDrivers-main/BackseatDrivers-main/BackseatDrivers/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.116" />
+        <entry key="..\:/Users/parmi/Downloads/BackseatDrivers-main/BackseatDrivers-main/BackseatDrivers/app/src/main/res/drawable/loginpage.xml" value="0.119" />
+        <entry key="..\:/Users/parmi/Downloads/BackseatDrivers-main/BackseatDrivers-main/BackseatDrivers/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/parmi/Downloads/BackseatDrivers-main/BackseatDrivers-main/BackseatDrivers/app/src/main/res/layout/activity_main.xml" value="0.18072916666666666" />
+        <entry key="..\:/Users/parmi/Downloads/BackseatDrivers-main/BackseatDrivers-main/BackseatDrivers/app/src/main/res/layout/activity_sign_up.xml" value="0.18072916666666666" />
+        <entry key="..\:/Users/parmi/Downloads/BackseatDrivers-main/BackseatDrivers-main/BackseatDrivers/app/src/main/res/layout/activity_verify_sign_up.xml" value="0.18072916666666666" />
+        <entry key="..\:/Users/parmi/Downloads/BackseatDrivers-main/BackseatDrivers-main/BackseatDrivers/app/src/main/res/layout/fragment_dashboard.xml" value="0.18072916666666666" />
+        <entry key="..\:/Users/parmi/Downloads/BackseatDrivers-main/BackseatDrivers-main/BackseatDrivers/app/src/main/res/layout/fragment_home.xml" value="0.18072916666666666" />
+        <entry key="..\:/Users/parmi/Downloads/BackseatDrivers-main/BackseatDrivers-main/BackseatDrivers/app/src/main/res/layout/fragment_notifications.xml" value="0.18072916666666666" />
         <entry key="..\:/Users/stse/AndroidStudioProjects/BackseatDrivers/BackseatDrivers/app/src/main/res/layout/activity_login.xml" value="0.2128623188405797" />
         <entry key="..\:/Users/stse/AndroidStudioProjects/BackseatDrivers/BackseatDrivers/app/src/main/res/layout/activity_main.xml" value="0.17857142857142858" />
         <entry key="..\:/Users/stse/AndroidStudioProjects/BackseatDrivers/BackseatDrivers/app/src/main/res/layout/activity_sign_up.xml" value="0.2128623188405797" />
@@ -11,7 +25,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
