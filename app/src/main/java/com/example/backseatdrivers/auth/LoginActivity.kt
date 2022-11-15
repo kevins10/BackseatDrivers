@@ -53,8 +53,8 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        if(user != null) {
-            val intent = Intent(this, VerifySignUpActivity::class.java)
+        if(user != null && user?.isEmailVerified == true) {
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
     }
@@ -64,16 +64,17 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    val verified = auth.currentUser?.isEmailVerified
+                    user = auth.currentUser
+                    val verified = user?.isEmailVerified
                     if (verified == true) {
                         Log.d(TAG, "signInWithEmail:success")
-                        user = auth.currentUser
                         val intent = Intent(this, MainActivity::class.java)
                         intent.putExtra("user", user)
                         startActivity(intent)
                     } else {
-                        Toast.makeText(baseContext, "Please verify your Email.",
-                            Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, VerifySignUpActivity::class.java)
+                        intent.putExtra("user", user)
+                        startActivity(intent)
                     }
                 } else {
                     // If sign in fails, display a message to the user.

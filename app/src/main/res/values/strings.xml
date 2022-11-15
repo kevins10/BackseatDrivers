@@ -32,5 +32,6 @@
 
     <!--Email Verification-->
     <string name="verify_email_text">Verify your email</string>
-    <string name="check_email_actions_text">Check your email and click the link to activate your account.</string>
+    <string name="continue_btn_text">Continue</string>
+    <string name="resend_email_text">Resend verification email</string>
 </resources>
