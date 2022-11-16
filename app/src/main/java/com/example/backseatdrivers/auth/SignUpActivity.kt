@@ -13,6 +13,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -58,8 +60,12 @@ class SignUpActivity : AppCompatActivity() {
                 binding.ageEt.error = "Age is Required"
                 return@setOnClickListener
             }
+            val domainMatch: Matcher = Pattern.compile(".*@sfu\\.ca").matcher(email)
             if (email.isEmpty()) {
                 binding.emailEt.error = "Email is Required"
+                return@setOnClickListener
+            } else if (!domainMatch.matches()) {
+                binding.emailEt.error = "Not a valid email. Please Signup with your SFU email"
                 return@setOnClickListener
             }
             if (password.isEmpty()) {
