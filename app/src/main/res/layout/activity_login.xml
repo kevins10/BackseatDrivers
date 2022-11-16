@@ -12,7 +12,7 @@
 
     <LinearLayout
         android:layout_width="366dp"
-        android:layout_height="581dp"
+        android:layout_height="700dp"
         android:layout_centerVertical="true"
         android:baselineAligned="false"
         android:orientation="vertical"
@@ -20,6 +20,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:text="Welcome to Back Seat Drivers"
+            android:textAlignment="center"
+            android:textColor="#0b786b"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:layout_width="350dp"
@@ -31,7 +41,7 @@
             android:id="@+id/login_title_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:text="Login"
             android:textAlignment="center"
             android:textColor="#0b786b"
@@ -71,9 +81,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
             android:text="@string/no_account_text"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="#0b786b"/>
 
         <Button
             android:id="@+id/signup_btn"
