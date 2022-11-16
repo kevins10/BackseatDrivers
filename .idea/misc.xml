@@ -3,11 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/stse/AndroidStudioProjects/BackseatDrivers/BackseatDrivers/app/src/main/res/layout/activity_login.xml" value="0.2128623188405797" />
-        <entry key="..\:/Users/stse/AndroidStudioProjects/BackseatDrivers/BackseatDrivers/app/src/main/res/layout/activity_main.xml" value="0.17857142857142858" />
-        <entry key="..\:/Users/stse/AndroidStudioProjects/BackseatDrivers/BackseatDrivers/app/src/main/res/layout/activity_sign_up.xml" value="0.2128623188405797" />
-        <entry key="..\:/Users/stse/AndroidStudioProjects/BackseatDrivers/BackseatDrivers/app/src/main/res/layout/activity_verify_sign_up.xml" value="0.25" />
-        <entry key="..\:/Users/stse/AndroidStudioProjects/BackseatDrivers/BackseatDrivers/app/src/main/res/layout/fragment_dashboard.xml" value="0.1" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/drawable-anydpi/profile_tab.xml" value="0.148" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/drawable-hdpi/profile_tab.xml" value="0.148" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1895" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.121" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_main.xml" value="0.234375" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_verify_sign_up.xml" value="0.165625" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_home.xml" value="0.234375" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_notifications.xml" value="0.234375" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_profile.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_profile2.xml" value="0.2203125" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/menu/bottom_nav_menu.xml" value="0.234375" />
       </map>
     </option>
   </component>

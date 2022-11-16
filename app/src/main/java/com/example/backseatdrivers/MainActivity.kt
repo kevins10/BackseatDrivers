@@ -8,13 +8,24 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.backseatdrivers.databinding.ActivityMainBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
+    private lateinit var mAuth : FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mAuth = FirebaseAuth.getInstance()
+
+        val user = mAuth.currentUser
+
+        if (user != null) {
+            println("SIGNED IN AS: ${user}")
+        }
+
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
