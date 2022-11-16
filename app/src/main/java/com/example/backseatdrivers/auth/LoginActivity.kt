@@ -7,9 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.backseatdrivers.MainActivity
-import com.example.backseatdrivers.database.User
 import com.example.backseatdrivers.databinding.ActivityLoginBinding
-import com.example.backseatdrivers.ui.home.dashboard.DashboardFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
