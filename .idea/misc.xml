@@ -19,6 +19,7 @@
         <entry key="..\:/Users/parmi/Downloads/BackseatDrivers-main/BackseatDrivers-main/BackseatDrivers/app/src/main/res/layout/fragment_home.xml" value="0.18072916666666666" />
         <entry key="..\:/Users/parmi/Downloads/BackseatDrivers-main/BackseatDrivers-main/BackseatDrivers/app/src/main/res/layout/fragment_notifications.xml" value="0.18072916666666666" />
         <entry key="..\:/Users/parmi/Downloads/BackseatDrivers-main/BackseatDrivers-main/BackseatDrivers/app/src/main/res/layout/fragment_profile.xml" value="0.14427083333333332" />
+        <entry key="..\:/Users/parmi/Downloads/BackseatDrivers-main/BackseatDrivers-main/BackseatDrivers/app/src/main/res/layout/fragment_rides.xml" value="0.10840932117527863" />
         <entry key="..\:/Users/parmi/Downloads/BackseatDrivers-main/BackseatDrivers-main/BackseatDrivers/app/src/main/res/menu/bottom_nav_menu.xml" value="0.14427083333333332" />
         <entry key="..\:/Users/parmi/Downloads/BackseatDrivers-main/BackseatDrivers-main/BackseatDrivers/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/stse/AndroidStudioProjects/BackseatDrivers/BackseatDrivers/app/src/main/res/layout/activity_login.xml" value="0.2128623188405797" />
@@ -30,7 +31,7 @@
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
