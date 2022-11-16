@@ -34,4 +34,6 @@
     <string name="verify_email_text">Verify your email</string>
     <string name="continue_btn_text">Continue</string>
     <string name="resend_email_text">Resend verification email</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
