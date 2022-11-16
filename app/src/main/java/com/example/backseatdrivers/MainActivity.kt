@@ -1,5 +1,6 @@
 package com.example.backseatdrivers
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -23,7 +24,12 @@ class MainActivity : AppCompatActivity() {
         val user = mAuth.currentUser
 
         if (user != null) {
-            println("SIGNED IN AS: ${user}")
+            println("SIGNED IN AS: ${user.uid}")
+        }
+        val user2 : FirebaseUser? = intent.getParcelableExtra<FirebaseUser>("user");
+
+        if (user2 != null) {
+            println("signed in as: ${user2.uid}")
         }
 
 
