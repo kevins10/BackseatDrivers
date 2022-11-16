@@ -10,7 +10,7 @@
     <string name="password_hint_text">Password</string>
     <string name="confirm_password_hint_text">Confirm Password</string>
     <string name="login_btn_text">Login</string>
-    <string name="signup_btn_text">Sign Up With Gmail Account</string>
+    <string name="signup_btn_text">Sign Up With SFU Email</string>
     <string name="firstname_hint_text">First Name</string>
     <string name="lastname_hint_text">Last Name</string>
     <string name="age_hint_text">Age</string>
@@ -29,6 +29,7 @@
         <item>idk what else</item>
     </string-array>
     <string name="no_account_text">Don\'t have an account?</string>
+    <string name="bad_email_pw_text">*The email or password is incorrect</string>
 
     <!--Email Verification-->
     <string name="verify_email_text">Verify your email</string>
