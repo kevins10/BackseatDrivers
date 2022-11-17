@@ -24,22 +24,24 @@ import com.google.firebase.ktx.Firebase
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var mAuth : FirebaseAuth
+//    private lateinit var mAuth : FirebaseAuth
 
     private lateinit var usersRef: DatabaseReference
+    private var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mAuth = FirebaseAuth.getInstance()
-        val uid = mAuth.currentUser?.uid
+        //Create Listener for user data changes
 
-        usersRef = Firebase.database.reference.child("Users")
-        val bob = uid?.let { usersRef.child(it) }
         val usersListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val user = dataSnapshot.getValue<User>()
-                println("listener object $user")
+                user = dataSnapshot.getValue<User>()
+                if(user != null) {
+                    println("listener object $user")
+                } else {
+                    println("user is null")
+                }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -47,10 +49,12 @@ class MainActivity : AppCompatActivity() {
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
             }
         }
-        if (bob != null) {
-            bob.addValueEventListener(usersListener)
-        }
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
 
+        usersRef = Firebase.database.reference
+            .child("Users")
+            .child(uid.toString())
+        usersRef.addValueEventListener(usersListener)
 
 
 
