@@ -29,6 +29,7 @@
         <item>idk what else</item>
     </string-array>
     <string name="no_account_text">Don\'t have an account?</string>
+    <string name="bad_email_pw_text">*The email or password is incorrect</string>
 
     <!--Email Verification-->
     <string name="verify_email_text">Verify your email</string>

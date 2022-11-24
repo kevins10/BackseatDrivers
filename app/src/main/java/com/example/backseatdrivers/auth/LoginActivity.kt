@@ -5,8 +5,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import android.widget.Toast
 import com.example.backseatdrivers.MainActivity
+import com.example.backseatdrivers.R
 import com.example.backseatdrivers.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -28,11 +30,15 @@ class LoginActivity : AppCompatActivity() {
         auth = Firebase.auth
 
         binding.loginBtn.setOnClickListener {
+            binding.errorMsg.text = null
             val email = binding.emailEt.text.toString()
             val password = binding.passwordEt.text.toString()
 
             if (email.isEmpty()) {
                 binding.emailEt.error = "Email invalid or not found"
+                return@setOnClickListener
+            } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                binding.emailEt.error = "Email address is badly formatted. Please remove any trailing spaces"
                 return@setOnClickListener
             }
             if (password.isEmpty()) {
@@ -77,6 +83,7 @@ class LoginActivity : AppCompatActivity() {
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
+                    binding.errorMsg.text = getString(R.string.bad_email_pw_text)
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
                 }
