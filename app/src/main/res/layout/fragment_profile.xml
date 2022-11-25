@@ -58,11 +58,20 @@
         </EditText>
 
     </LinearLayout>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/profile_save_button"
         android:text="Save">
+
+    </Button>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/profile_logout_button"
+        android:text="Logout">
 
     </Button>
 

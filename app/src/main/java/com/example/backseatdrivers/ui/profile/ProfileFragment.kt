@@ -1,5 +1,6 @@
 package com.example.backseatdrivers.ui.profile
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.text.Editable
@@ -12,6 +13,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.example.backseatdrivers.R
+import com.example.backseatdrivers.auth.LoginActivity
+import com.example.backseatdrivers.auth.VerifySignUpActivity
+import com.example.backseatdrivers.database.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -46,44 +50,51 @@ class ProfileFragment : Fragment() {
             current_user = database.child(user.uid)
         }
 
-//        if (user != null) {
-//            println("gang ${database.child(user.uid).child("age").get().addOnCompleteListener { it ->
-//                println("hehe im the best ${it.result.value}")
-//            }}")
-//        }
 
         var first_name = view.findViewById<EditText>(R.id.fn_et)
         var last_name = view.findViewById<EditText>(R.id.ln_et)
         var profile_email = view.findViewById<EditText>(R.id.profile_email)
         var saveBtn = view.findViewById<Button>(R.id.profile_save_button)
         var age = view.findViewById<EditText>(R.id.profile_age)
+        var logoutBtn = view.findViewById<Button>(R.id.profile_logout_button)
         saveBtn.setOnClickListener(){
             onSave(view)
         }
-        current_user.addValueEventListener(
-            object : ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
+        logoutBtn.setOnClickListener(){
+            logout(mAuth)
+        }
+//        current_user.addValueEventListener(
+//            object : ValueEventListener{
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    val age1 = snapshot.child("age").value
+//                    val email = snapshot.child("email").value
+//                    val first_name1 = snapshot.child("first_name").value
+//                    val last_name1 = snapshot.child("last_name").value
+//                    first_name.setText("${first_name1.toString()}")
+//                    last_name.setText("${last_name1.toString()}")
+//                    profile_email.setText("$email")
+//                    age.setText("$age1")
+//                }
+//
+//                override fun onCancelled(error: DatabaseError) {
+//                    Log.i("debug","error reading")
+//                }
+//
+//            }
+//        )
 
-                    val age1 = snapshot.child("age").value
-                    val email = snapshot.child("email").value
-                    val first_name1 = snapshot.child("first_name").value
-                    val last_name1 = snapshot.child("last_name").value
-                    first_name.setText("${first_name1.toString()}")
-                    last_name.setText("${last_name1.toString()}")
-                    profile_email.setText("$email")
-                    age.setText("$age1")
-
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    Log.i("debug","error reading")
-                }
-
-            }
-        )
-
-
-
+        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+        viewModel.update()
+        viewModel.userSnapshot.observe(viewLifecycleOwner){
+            val age1 = it.child("age").value
+            val email = it.child("email").value
+            val first_name1 = it.child("first_name").value
+            val last_name1 = it.child("last_name").value
+            first_name.setText("${first_name1.toString()}")
+            last_name.setText("${last_name1.toString()}")
+            profile_email.setText("$email")
+            age.setText("$age1")
+        }
         return view
     }
 
@@ -96,6 +107,15 @@ class ProfileFragment : Fragment() {
         current_user.child("last_name").setValue(ln)
         current_user.child("email").setValue(profile_email)
         current_user.child("age").setValue(age)
+
+    }
+
+    fun logout(mAuth: FirebaseAuth){
+        mAuth.signOut()
+        val intent = Intent(requireContext(), LoginActivity::class.java)
+        activity?.finish()
+        startActivity(intent)
+
 
     }
 
