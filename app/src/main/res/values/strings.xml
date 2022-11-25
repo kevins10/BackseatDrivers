@@ -13,14 +13,13 @@
     <string name="signup_btn_text">Sign Up With Gmail Account</string>
     <string name="firstname_hint_text">First Name</string>
     <string name="lastname_hint_text">Last Name</string>
-    <string name="age_hint_text">Age</string>
+    <string name="dob_hint_text">Date of Birth</string>
+    <string name="phone_hint_text">Phone Number</string>
+    <string name="address_hint_text">Address</string>
     <!--Gender-->
-    <string name="gender_hint_text">Gender</string>
-    <string-array name="gender_spinner_array">
-        <item>Male</item>
-        <item>Female</item>
-        <item>Other</item>
-    </string-array>
+    <string name="male_text">Male</string>
+    <string name="female_text">Female</string>
+    <string name="other_text">Other</string>
     <!--License Type-->
     <string name="license_hint_text">License Type</string>
     <string-array name="license_type_array">

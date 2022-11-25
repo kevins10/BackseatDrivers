@@ -10,15 +10,11 @@ data class User (
 
     val first_name: String? = null,
     val last_name: String? = null,
-    val age: String? = null,
-
-    /*
-    TODO: add fields to signup
+    val gender: String? = null,
 
     var date_of_birth: String,
     var phone_number: String,
     var home_address: String,
 
-    var driver_profile: DriverProfile
-    */
+//    var driver_profile: DriverProfile
 )

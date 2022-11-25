@@ -1,11 +1,16 @@
 package com.example.backseatdrivers.auth
 
+import android.app.DatePickerDialog
 import android.content.Intent
+import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.telephony.PhoneNumberUtils
 import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
+import androidx.core.view.get
+import com.example.backseatdrivers.R
 import com.example.backseatdrivers.database.User
 import com.example.backseatdrivers.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -39,13 +44,29 @@ class SignUpActivity : AppCompatActivity() {
         //initialize Firebase Realtime Database, with reference to Users collection
         database = Firebase.database.reference.child("Users")
 
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        var dateOfBirth = ""
+        binding.dobEt.setOnClickListener {
+            DatePickerDialog(this, { view, year, monthOfYear, dayOfMonth ->
+                // Display Selected date in EditText
+                dateOfBirth = "${(monthOfYear + 1)}/$dayOfMonth/$year"
+                binding.dobEt.setText(dateOfBirth)
+            }, year, month, day).show()
+        }
+
 
         binding.signupBtn.setOnClickListener {
+            binding.errorMsg.text = null
             val email = binding.emailEt.text.toString()
             val password = binding.passwordEt.text.toString()
+            val genderId = binding.genderRg.checkedRadioButtonId
+            val phone = binding.phoneEt.text.toString()
+            val address = binding.addressEt.text.toString()
             val firstName = binding.firstNameEt.text.toString()
             val lastName = binding.lastNameEt.text.toString()
-            val age = binding.ageEt.text.toString()
             val confirmPassword = binding.confirmPasswordEt.text.toString()
 
             // validate input
@@ -57,8 +78,19 @@ class SignUpActivity : AppCompatActivity() {
                 binding.lastNameEt.error = "Last Name is Required"
                 return@setOnClickListener
             }
-            if (age.isEmpty()) {
-                binding.ageEt.error = "Age is Required"
+            if (genderId == -1) {
+                binding.errorMsg.text = "*Gender is Required"
+                return@setOnClickListener
+            }
+            if (phone.isEmpty()) {
+                binding.phoneEt.error = "Phone Number is Required"
+                return@setOnClickListener
+            } else if (!PhoneNumberUtils.isGlobalPhoneNumber(phone)){
+                binding.phoneEt.error = "Not a valid phone number"
+                return@setOnClickListener
+            }
+            if (address.isEmpty()) {
+                binding.addressEt.error = "Address is Required"
                 return@setOnClickListener
             }
             val domainMatch: Matcher = Pattern.compile(".*@sfu\\.ca").matcher(email)
@@ -87,13 +119,28 @@ class SignUpActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            var gender = ""
+            val femaleId = binding.femaleRb.id
+            val maleId = binding.maleRb.id
+            val otherId = binding.otherRb.id
+            if (genderId == maleId) {
+                gender = "Male"
+            } else if (genderId == femaleId) {
+                gender = "Female"
+            } else if (genderId == otherId) {
+                gender = "Other"
+            }
+
             //Create User object and pass into createAccount()
             val user = User(
                 email,
                 password,
                 firstName,
                 lastName,
-                age
+                gender,
+                dateOfBirth,
+                phone,
+                address
             )
             createAccount(email, password, user)
         }

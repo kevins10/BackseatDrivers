@@ -46,37 +46,74 @@
             android:background="#30ffffff"
             android:minHeight="48dp" />
 
+        <RadioGroup
+            android:id="@+id/gender_rg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/male_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/male_text"
+                android:textColor="#dff2f5" />
+
+            <RadioButton
+                android:id="@+id/female_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/female_text"
+                android:textColor="#dff2f5" />
+
+            <RadioButton
+                android:id="@+id/other_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/other_text"
+                android:textColor="#dff2f5" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/error_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FF0000" />
+
         <EditText
-            android:id="@+id/age_et"
+            android:id="@+id/dob_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/dob_hint_text"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:textColorHint="#dff2f5"
+            android:background="#30ffffff"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/phone_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
-            android:hint="@string/age_hint_text"
-            android:inputType="number"
+            android:hint="@string/phone_hint_text"
+            android:inputType="phone"
             android:textColorHint="#dff2f5"
             android:textColor="#dff2f5"
             android:background="#30ffffff"
             android:minHeight="48dp" />
 
-        <Spinner
-            android:id="@+id/gender_spinner"
+        <EditText
+            android:id="@+id/address_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:spinnerMode="dropdown"
-            android:background="#30ffffff"
             android:layout_marginVertical="10dp"
+            android:hint="@string/address_hint_text"
+            android:inputType="textPostalAddress"
+            android:textColorHint="#dff2f5"
             android:textColor="#dff2f5"
-            android:entries="@array/gender_spinner_array" />
-
-        <Spinner
-            android:id="@+id/license_type_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:spinnerMode="dropdown"
             android:background="#30ffffff"
-            android:layout_marginVertical="10dp"
-            android:textColor="#dff2f5"
-            android:entries="@array/license_type_array" />
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/email_et"
