@@ -60,4 +60,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.0.3')
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.android.gms:play-services-auth:20.3.0'
+
+    //HTTP library
+    implementation "com.squareup.okhttp3:okhttp:4.10.0"
 }
