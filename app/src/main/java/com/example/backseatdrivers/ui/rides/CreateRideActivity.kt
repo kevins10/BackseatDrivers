@@ -1,13 +1,11 @@
 package com.example.backseatdrivers.ui.rides
 
 import android.location.Geocoder
+import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextWatcher
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import com.example.backseatdrivers.R
 import com.example.backseatdrivers.database.User
 import com.example.backseatdrivers.databinding.ActivityCreateRideBinding
@@ -20,13 +18,14 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
-import com.google.android.material.textfield.TextInputLayout
-import org.w3c.dom.Text
+import okhttp3.*
+import okio.IOException
 
 class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var binding: ActivityCreateRideBinding
 
+    private lateinit var http: OkHttpClient
     private lateinit var mMap: GoogleMap
     private lateinit var markerOptions: MarkerOptions
     private lateinit var polyLineOptions: PolylineOptions
@@ -47,7 +46,8 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        //fetch user data from viewmodel
+        //init http client and fetch user data from viewmodel
+        http = OkHttpClient()
         userData = intent.getSerializableExtra("user") as User
         println("debug: user object = $userData")
 
@@ -91,6 +91,7 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
 
             TODO("Get directions from Directions API")
 
+
             println("debug: address = $startAddressList")
             if (startAddressList.size >= 1 && endAddressList.size >= 1) {
                 val startLocation = LatLng(startAddressList[0].latitude, startAddressList[0].longitude)
@@ -110,5 +111,33 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
             }
         }
+    }
+
+    private fun getDirections(startCoordinates: LatLng, endCoordinates: LatLng) {
+        TODO("Get Directions API key")
+        val request = Request.Builder()
+            .url("https://maps.googleapis.com/maps/api/directions/json" +
+                    "?destination=${startCoordinates.latitude}%${startCoordinates.longitude}" +
+                    "&origin=${endCoordinates.latitude}%${endCoordinates.longitude}" +
+                    "&key=")
+            .build()
+
+        http.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.use {
+                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
+
+                    for ((name, value) in response.headers) {
+                        println("$name: $value")
+                    }
+
+                    println(response.body!!.string())
+                }
+            }
+        })
     }
 }
