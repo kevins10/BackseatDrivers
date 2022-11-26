@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.example.backseatdrivers.R
 import com.example.backseatdrivers.database.User
@@ -46,8 +47,12 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+        //fetch user data from viewmodel
         userData = intent.getSerializableExtra("user") as User
         println("debug: user object = $userData")
+
+        //initialize UI variables
+        findRouteBtn = binding.findRouteBtn
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -79,23 +84,30 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
         findRouteBtn.setOnClickListener {
             mMap.clear()
 
-            println("debug: input was ${startLocationInput}")
+            println("debug: start location input = ${startLocationInput}")
 
             val startAddressList = geocoder.getFromLocationName(startLocationInput, 1)
             val endAddressList = geocoder.getFromLocationName(endLocationInput, 1)
 
+            TODO("Get directions from Directions API")
+
             println("debug: address = $startAddressList")
-            if (startAddressList.size >= 1) {
+            if (startAddressList.size >= 1 && endAddressList.size >= 1) {
                 val startLocation = LatLng(startAddressList[0].latitude, startAddressList[0].longitude)
+                val endLocation = LatLng(endAddressList[0].latitude, endAddressList[0].longitude)
+
                 markerOptions.position(startLocation)
                 mMap.addMarker(markerOptions)
+                markerOptions.position(endLocation)
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(startLocation, 15f))
             }
             else {
-                val startLocation = LatLng(49.2827, -123.1207)
-                markerOptions.position(startLocation)
+                mMap.clear()
+                val vancouver = LatLng(49.2827, -123.1207)
+                markerOptions.position(vancouver)
                 mMap.addMarker(markerOptions)
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(startLocation, 15f))
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(vancouver, 15f))
+                Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
             }
         }
     }

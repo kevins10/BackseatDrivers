@@ -55,14 +55,12 @@ class RidesFragment : Fragment() {
         view.findViewById<Button>(R.id.createRideBtn).setOnClickListener {
             startCreateRideActivity()
         }
-
     }
 
     private fun createNotificationListener() {
         val notificationListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val notification = dataSnapshot.getValue<ArrayList<Notification>>()
-
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
