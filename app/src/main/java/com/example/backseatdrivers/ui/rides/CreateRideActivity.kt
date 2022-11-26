@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import com.example.backseatdrivers.R
 import com.example.backseatdrivers.database.User
 import com.example.backseatdrivers.databinding.ActivityCreateRideBinding
@@ -18,6 +19,9 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 import okhttp3.*
 import okio.IOException
 
@@ -31,6 +35,8 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var polyLineOptions: PolylineOptions
     private lateinit var polylines: ArrayList<Polyline>
     private lateinit var geocoder: Geocoder
+
+    private var directionsObject: String? = null
 
     private lateinit var findRouteBtn: Button
 //    private lateinit var endLocationInput: EditText
@@ -53,6 +59,7 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
 
         //initialize UI variables
         findRouteBtn = binding.findRouteBtn
+        findRouteClickListener()
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -73,29 +80,40 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
         markerOptions.position(startPoint)
         mMap.addMarker(markerOptions)
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(startPoint, 15f))
-
-        onFindRouteClick()
     }
 
-    private fun onFindRouteClick() {
-        val startLocationInput = binding.startLocationInput.editText?.text.toString()
-        val endLocationInput = binding.endLocationInput.editText?.text.toString()
-
+    private fun findRouteClickListener() {
         findRouteBtn.setOnClickListener {
             mMap.clear()
 
-            println("debug: start location input = ${startLocationInput}")
+            val startLocationInput = binding.startLocationInput.text.toString()
+            val endLocationInput = binding.endLocationInput.text.toString()
+
+            if(startLocationInput.isEmpty()) {
+                binding.startLocationInput.error = "Please enter a start location"
+                return@setOnClickListener
+            }
+            if(endLocationInput.isEmpty()) {
+                binding.endLocationInput.error = "Please enter a destination"
+                return@setOnClickListener
+            }
+
 
             val startAddressList = geocoder.getFromLocationName(startLocationInput, 1)
             val endAddressList = geocoder.getFromLocationName(endLocationInput, 1)
 
-            TODO("Get directions from Directions API")
-
-
-            println("debug: address = $startAddressList")
             if (startAddressList.size >= 1 && endAddressList.size >= 1) {
                 val startLocation = LatLng(startAddressList[0].latitude, startAddressList[0].longitude)
                 val endLocation = LatLng(endAddressList[0].latitude, endAddressList[0].longitude)
+
+                val startLocationStr = startAddressList[0].latitude.toString() + "%20" + startAddressList[0].longitude.toString()
+                val endLocationStr = endAddressList[0].latitude.toString() + "%20" +  endAddressList[0].longitude.toString()
+
+
+                lifecycleScope.launch {
+                    getDirections(startLocationStr, endLocationStr)
+                }
+                println("debug: directions = $directionsObject")
 
                 markerOptions.position(startLocation)
                 mMap.addMarker(markerOptions)
@@ -113,31 +131,38 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun getDirections(startCoordinates: LatLng, endCoordinates: LatLng) {
-        TODO("Get Directions API key")
+    private suspend fun getDirections(startCoordinates: String, endCoordinates: String) {
+
         val request = Request.Builder()
             .url("https://maps.googleapis.com/maps/api/directions/json" +
-                    "?destination=${startCoordinates.latitude}%${startCoordinates.longitude}" +
-                    "&origin=${endCoordinates.latitude}%${endCoordinates.longitude}" +
-                    "&key=")
+//                    "?destination=${startCoordinates.latitude}%${startCoordinates.longitude}" +
+//                    "&origin=${endCoordinates.latitude}%${endCoordinates.longitude}" +
+                    "?destination=$startCoordinates" +
+                    "&origin=$endCoordinates" +
+                    "&key=AIzaSyDFNc9XgXaO6iDFjP7fhDxX8FQVAmXFY0A")
             .build()
 
-        http.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                e.printStackTrace()
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                response.use {
-                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
-
-                    for ((name, value) in response.headers) {
-                        println("$name: $value")
-                    }
-
-                    println(response.body!!.string())
+        var coroutine = CoroutineScope(IO).launch {
+            http.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    e.printStackTrace()
                 }
-            }
-        })
+
+                override fun onResponse(call: Call, response: Response) {
+                    response.use {
+                        if (!response.isSuccessful) throw IOException("Unexpected code $response")
+
+                        for ((name, value) in response.headers) {
+                            println("$name: $value")
+                        }
+
+                        directionsObject = response.body.toString()
+                        println("debug: response = $response")
+                        println("debug: API call = " + response.body!!.string())
+                    }
+                }
+            })
+        }
+        coroutine.join()
     }
 }
