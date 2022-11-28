@@ -39,4 +39,9 @@
     <!--Home dashboard -->
     <string name="hello_name">Hello</string>
 
+=======
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_create_ride">CreateRideActivity</string>
+>>>>>>> 8507fa6433e6b6f799417ed9d91948fd0f750157
 </resources>
