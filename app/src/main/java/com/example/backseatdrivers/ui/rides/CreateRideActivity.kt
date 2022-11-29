@@ -6,6 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -27,7 +31,7 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
+class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
 
     private lateinit var binding: ActivityCreateRideBinding
 
@@ -49,10 +53,19 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
         binding = ActivityCreateRideBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //set fragment for more details
+//        if (savedInstanceState == null) {
+//            supportFragmentManager.commit {
+//                setReorderingAllowed(true)
+//                add<RideDetailsFragment>(R.id.rideDetailsContainer)
+//            }
+//        }
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+        nextButtonListener()
 
         //fetch user data from intent extras, and init ride object
         userData = intent.getSerializableExtra("user") as User
@@ -109,7 +122,6 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 val startLocationStr = startAddressList[0].latitude.toString() + "%20" + startAddressList[0].longitude.toString()
                 val endLocationStr = endAddressList[0].latitude.toString() + "%20" +  endAddressList[0].longitude.toString()
-
 
                 markerOptions.position(startLocation)
                 mMap.addMarker(markerOptions)
@@ -186,4 +198,14 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
         val requestQueue = Volley.newRequestQueue(this)
         requestQueue.add(directionsRequest)
     }
+
+    private fun nextButtonListener() {
+        findViewById<Button>(R.id.nextBtn).setOnClickListener {
+            supportFragmentManager.commit {
+                setReorderingAllowed(true)
+                add<RideDetailsFragment>(R.id.rideDetailsContainer)
+            }
+        }
+    }
+
 }

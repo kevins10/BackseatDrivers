@@ -25,7 +25,7 @@ class UserViewModel : ViewModel() {
         if(mAuth.currentUser != null){
             return database.child(mAuth.currentUser!!.uid)
         }
-        else{
+        else {
             return null
         }
     }

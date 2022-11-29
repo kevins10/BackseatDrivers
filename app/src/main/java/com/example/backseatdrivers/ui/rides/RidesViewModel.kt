@@ -18,7 +18,6 @@ class RidesViewModel : ViewModel() {
     }
 
     fun setRide(ride: Ride) {
-        println("debug: rides viewmodel update = $ride")
         _ride.value = ride
     }
 }

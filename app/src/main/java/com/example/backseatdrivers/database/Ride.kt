@@ -1,6 +1,7 @@
 package com.example.backseatdrivers.database
 
 import org.json.JSONObject
+import java.io.Serializable
 import java.util.UUID
 
 data class Ride (
@@ -19,4 +20,4 @@ data class Ride (
 
     //Array of passenger IDs
     val passengers: ArrayList<String>? = null
-    )
+    ) : Serializable

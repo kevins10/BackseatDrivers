@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.rides.CreateRideActivity"
+    android:orientation="vertical">
+
+<fragment
     android:id="@+id/map"
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.rides.CreateRideActivity" >
+    >
+
 
     <LinearLayout
         android:layout_height="wrap_content"
@@ -63,6 +71,14 @@
             android:text="Find Route"
             />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/nextBtn"
+            android:text="Next"
+            />
+
         <TextView
             android:id="@+id/routeInfoTV"
             android:textColor="@color/black"
@@ -70,6 +86,14 @@
             android:layout_height="match_parent"
             android:gravity="bottom"
             android:text="" />
+
     </LinearLayout>
 
-</fragment>
+    <androidx.fragment.app.FragmentContainerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rideDetailsContainer"
+        />
+    </fragment>
+
+</LinearLayout>
