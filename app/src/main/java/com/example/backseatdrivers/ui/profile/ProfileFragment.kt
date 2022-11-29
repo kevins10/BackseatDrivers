@@ -63,25 +63,6 @@ class ProfileFragment : Fragment() {
         logoutBtn.setOnClickListener(){
             logout(mAuth)
         }
-//        current_user.addValueEventListener(
-//            object : ValueEventListener{
-//                override fun onDataChange(snapshot: DataSnapshot) {
-//                    val age1 = snapshot.child("age").value
-//                    val email = snapshot.child("email").value
-//                    val first_name1 = snapshot.child("first_name").value
-//                    val last_name1 = snapshot.child("last_name").value
-//                    first_name.setText("${first_name1.toString()}")
-//                    last_name.setText("${last_name1.toString()}")
-//                    profile_email.setText("$email")
-//                    age.setText("$age1")
-//                }
-//
-//                override fun onCancelled(error: DatabaseError) {
-//                    Log.i("debug","error reading")
-//                }
-//
-//            }
-//        )
 
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         viewModel.update()
