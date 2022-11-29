@@ -11,7 +11,8 @@ data class User(
 
     val first_name: String? = null,
     val last_name: String? = null,
-    val age: String? = null,
+    val gender: String? = null,
+    val age: Int? = null,
 
     var date_of_birth: String? = null,
     var phone_number: String? = null,
