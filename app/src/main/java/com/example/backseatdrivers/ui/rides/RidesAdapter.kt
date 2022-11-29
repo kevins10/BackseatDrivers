@@ -8,7 +8,7 @@ import android.widget.TextView
 import com.example.backseatdrivers.R
 import com.example.backseatdrivers.database.Ride
 
-class RidesAdapter(private val context: Context, private var list: List<Ride>): BaseAdapter() {
+class RidesAdapter(private val context: Context, private var list: ArrayList<Ride>): BaseAdapter() {
     override fun getCount(): Int {
         return list.size
     }
