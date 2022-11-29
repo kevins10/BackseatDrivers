@@ -5,14 +5,12 @@ import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.backseatdrivers.R
-import com.example.backseatdrivers.Utils.mapUtils
 import com.example.backseatdrivers.database.Ride
 import com.example.backseatdrivers.database.User
 import com.example.backseatdrivers.databinding.ActivityCreateRideBinding
@@ -24,7 +22,6 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.maps.android.PolyUtil
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -182,7 +179,7 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
                 duration = duration,
                 distance = distance
             )
-            mapUtils.ridesViewModel.setRide(ride)
+            ridesViewModel.setRide(ride)
         }, Response.ErrorListener {
             continuation.resumeWithException(it)
         }){}
