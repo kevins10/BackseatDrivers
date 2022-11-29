@@ -1,13 +1,15 @@
 package com.example.backseatdrivers.ui.rides
 
 import android.location.Geocoder
-import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.example.backseatdrivers.R
+import com.example.backseatdrivers.Utils.mapUtils
+import com.example.backseatdrivers.database.Ride
 import com.example.backseatdrivers.database.User
 import com.example.backseatdrivers.databinding.ActivityCreateRideBinding
 
@@ -15,32 +17,24 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.model.Polyline
-import com.google.android.gms.maps.model.PolylineOptions
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
+import com.google.android.gms.maps.model.*
 import kotlinx.coroutines.launch
-import okhttp3.*
-import okio.IOException
 
 class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var binding: ActivityCreateRideBinding
 
-    private lateinit var http: OkHttpClient
     private lateinit var mMap: GoogleMap
     private lateinit var markerOptions: MarkerOptions
     private lateinit var polyLineOptions: PolylineOptions
     private lateinit var polylines: ArrayList<Polyline>
     private lateinit var geocoder: Geocoder
 
-    private var directionsObject: String? = null
-
     private lateinit var findRouteBtn: Button
 //    private lateinit var endLocationInput: EditText
+
     private lateinit var userData: User
+    private lateinit var ride: Ride
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,9 +46,10 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        //init http client and fetch user data from viewmodel
-        http = OkHttpClient()
+        //fetch user data from viewmodel and init ride object
         userData = intent.getSerializableExtra("user") as User
+        ride = Ride()
+
         println("debug: user object = $userData")
 
         //initialize UI variables
@@ -110,14 +105,17 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
                 val endLocationStr = endAddressList[0].latitude.toString() + "%20" +  endAddressList[0].longitude.toString()
 
 
-                lifecycleScope.launch {
-                    getDirections(startLocationStr, endLocationStr)
-                }
-                println("debug: directions = $directionsObject")
-
                 markerOptions.position(startLocation)
                 mMap.addMarker(markerOptions)
+
                 markerOptions.position(endLocation)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                mMap.addMarker(markerOptions)
+
+                //Util function for drawing route between two points
+                val routeInfoTextView = findViewById<TextView>(R.id.routeInfoTV)
+                mapUtils.drawRoute(this, startLocationStr, endLocationStr, mMap, ride, routeInfoTextView)
+
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(startLocation, 15f))
             }
             else {
@@ -129,39 +127,5 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show()
             }
         }
-    }
-
-    private suspend fun getDirections(startCoordinates: String, endCoordinates: String) {
-
-        val request = Request.Builder()
-            .url("https://maps.googleapis.com/maps/api/directions/json" +
-//                    "?destination=${startCoordinates.latitude}%${startCoordinates.longitude}" +
-//                    "&origin=${endCoordinates.latitude}%${endCoordinates.longitude}" +
-                    "?destination=$startCoordinates" +
-                    "&origin=$endCoordinates" +
-                    "&key=AIzaSyDFNc9XgXaO6iDFjP7fhDxX8FQVAmXFY0A")
-            .build()
-
-        var coroutine = CoroutineScope(IO).launch {
-            http.newCall(request).enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    e.printStackTrace()
-                }
-
-                override fun onResponse(call: Call, response: Response) {
-                    response.use {
-                        if (!response.isSuccessful) throw IOException("Unexpected code $response")
-
-                        for ((name, value) in response.headers) {
-                            println("$name: $value")
-                        }
-
-                        directionsObject = response.body!!.string()
-                        println("debug: response = $directionsObject")
-                    }
-                }
-            })
-        }
-        coroutine.join()
     }
 }

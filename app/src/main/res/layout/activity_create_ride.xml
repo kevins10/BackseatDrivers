@@ -63,6 +63,13 @@
             android:text="Find Route"
             />
 
+        <TextView
+            android:id="@+id/routeInfoTV"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:text="" />
     </LinearLayout>
 
 </fragment>
