@@ -1,5 +1,6 @@
 package com.example.backseatdrivers.ui.rides
 
+import android.graphics.Color
 import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +8,9 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.example.backseatdrivers.R
 import com.example.backseatdrivers.Utils.mapUtils
 import com.example.backseatdrivers.database.Ride
@@ -18,7 +22,13 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.maps.android.PolyUtil
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import org.json.JSONObject
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -33,8 +43,9 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var findRouteBtn: Button
 //    private lateinit var endLocationInput: EditText
 
+    private val ridesViewModel = RidesViewModel()
     private lateinit var userData: User
-    private lateinit var ride: Ride
+    private var ride: Ride? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,10 +57,8 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        //fetch user data from viewmodel and init ride object
+        //fetch user data from intent extras, and init ride object
         userData = intent.getSerializableExtra("user") as User
-        ride = Ride()
-
         println("debug: user object = $userData")
 
         //initialize UI variables
@@ -113,8 +122,14 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
                 mMap.addMarker(markerOptions)
 
                 //Util function for drawing route between two points
-                val routeInfoTextView = findViewById<TextView>(R.id.routeInfoTV)
-                mapUtils.drawRoute(this, startLocationStr, endLocationStr, mMap, ride, routeInfoTextView)
+
+                lifecycleScope.launch {
+                    try {
+                        ride = fetchDirections(startLocationStr, endLocationStr, mMap)
+                        println("debug: ride is $ride")
+                    }
+                    catch (e: Exception) { println("debug: could not get ride because $e")}
+                }
 
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(startLocation, 15f))
             }
@@ -127,5 +142,51 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    suspend fun fetchDirections(startCoordinates: String, endCoordinates: String, mMap: GoogleMap)
+            = suspendCoroutine<Ride> { continuation ->
+
+        val urlDirections = "https://maps.googleapis.com/maps/api/directions/json" +
+//                    "?destination=${startCoordinates.latitude}%${startCoordinates.longitude}" +
+//                    "&origin=${endCoordinates.latitude}%${endCoordinates.longitude}" +
+                "?destination=$startCoordinates" +
+                "&origin=$endCoordinates" +
+                "&key=AIzaSyBXEhzjnWPdvTk1CclmuYcKtUVSyPUjXL8"
+
+        val path: MutableList<List<LatLng>> = ArrayList()
+        val directionsRequest = object : StringRequest(Method.GET, urlDirections, Response.Listener<String> {
+                response ->
+            val jsonResponse = JSONObject(response)
+            // Get routes
+            val routes = jsonResponse.getJSONArray("routes")
+            val legs = routes.getJSONObject(0).getJSONArray("legs")
+            val steps = legs.getJSONObject(0).getJSONArray("steps")
+            val duration = legs.getJSONObject(0).getJSONObject("duration").get("text").toString()
+            val distance = legs.getJSONObject(0).getJSONObject("distance").get("text").toString()
+
+            for (i in 0 until steps.length()) {
+                val points = steps.getJSONObject(i).getJSONObject("polyline").getString("points")
+                path.add(PolyUtil.decode(points))
+            }
+            for (i in 0 until path.size) {
+                mMap!!.addPolyline(PolylineOptions().addAll(path[i]).color(Color.RED))
+            }
+
+            continuation.resume(Ride(
+                duration = duration,
+                distance = distance)
+            )
+            //set data in viewmodel
+            val ride = Ride(
+                duration = duration,
+                distance = distance
+            )
+            mapUtils.ridesViewModel.setRide(ride)
+        }, Response.ErrorListener {
+            continuation.resumeWithException(it)
+        }){}
+        val requestQueue = Volley.newRequestQueue(this)
+        requestQueue.add(directionsRequest)
     }
 }
