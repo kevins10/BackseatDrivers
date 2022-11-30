@@ -196,14 +196,11 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
 
             continuation.resume(Ride(
                 duration = duration,
-                distance = distance)
+                distance = distance,
+                start_location = startCoordinates,
+                end_location = endCoordinates)
             )
             //set data in viewmodel
-            val ride = Ride(
-                duration = duration,
-                distance = distance
-            )
-            ridesViewModel.setRide(ride)
         }, Response.ErrorListener {
             continuation.resumeWithException(it)
         }){}

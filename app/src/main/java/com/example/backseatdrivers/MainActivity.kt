@@ -33,26 +33,30 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         //Create Listener for user data changes
-        val usersListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                user = dataSnapshot.getValue<User>()
-                if(user != null) {
-                    println("listener object $user")
-                } else {
-                    println("user is null")
-                }
-            }
 
-            override fun onCancelled(databaseError: DatabaseError) {
-                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
-            }
-        }
-        val uid = FirebaseAuth.getInstance().currentUser?.uid
+//        val usersListener = object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                user = dataSnapshot.getValue<User>()
+//                if(user != null) {
+//                    println("listener object $user")
+//                } else {
+//                    println("user is null")
+//                }
+//            }
+//
+//            override fun onCancelled(databaseError: DatabaseError) {
+//                // Getting Post failed, log a message
+//                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+//            }
+//        }
+//        val uid = FirebaseAuth.getInstance().currentUser?.uid
+//
+//        usersRef = Firebase.database.reference
+//            .child("Users")
+//            .child(uid.toString())
+//        usersRef.addValueEventListener(usersListener)
 
-        usersRef = Firebase.database.reference
-            .child("Users")
-            .child(uid.toString())
-        usersRef.addValueEventListener(usersListener)
+
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
