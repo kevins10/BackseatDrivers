@@ -51,6 +51,9 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
         binding.sendReq.setOnClickListener(){
             onRequest()
         }
+        binding.rvCancel.setOnClickListener(){
+            finish()
+        }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.rv_map) as SupportMapFragment
@@ -166,9 +169,7 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
             }
             catch (e: Exception) { println("debug: could not get ride because $e")}
         }
-
         finish()
-
-
     }
+
 }
