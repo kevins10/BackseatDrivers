@@ -18,7 +18,6 @@
     <string name="dob_hint_text">Date of Birth</string>
     <string name="phone_hint_text">Phone Number</string>
     <string name="address_hint_text">Address</string>
-
     <!--Gender-->
     <string name="male_text">Male</string>
     <string name="female_text">Female</string>
@@ -42,6 +41,14 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_create_ride">CreateRideActivity</string>
     <string name="title_activity_ride_view">RideView</string>
+
+    <!--Profile-->
+    <string name="profile_text">Profile</string>
+    <string name="edit_profile_text">Edit Profile</string>
+    <string name="edit_btn_text">Edit</string>
+    <string name="save_btn_text">Save</string>
+    <string name="cancel_btn_text">Cancel</string>
+    <string name="logout_btn_text">Logout</string>
 
     <!--Ride Details Page-->
     <string name="ride_details_title">Enter details below</string>
