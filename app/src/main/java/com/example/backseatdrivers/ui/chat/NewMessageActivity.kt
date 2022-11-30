@@ -60,18 +60,22 @@ class NewMessageActivity:AppCompatActivity() {
                     Log.d("newmessage", users.toString())
                     if(users != null){
                         adapter.add(UserItem(users))
+
+                    }
+                    adapter.setOnItemClickListener { item, view ->
+                        val anotherref = FirebaseAuth.getInstance().uid
+                        val userItem = item as UserItem
+                        val intent = Intent(view.context, ChatLogActivity::class.java )
+                        intent.putExtra(USER_EMAIL,userItem.user.toString())
+                        intent.putExtra(USER_ID, newID)
+                        //startActivity(intent)
+                        //intent.putExtra(USER_ID,anotherref)
+                        startActivity(intent)
+                        finish()
                     }
                 }
 
-                adapter.setOnItemClickListener { item, view ->
-                    val anotherref = FirebaseAuth.getInstance().uid
-                    val userItem = item as UserItem
-                    val intent = Intent(view.context, ChatLogActivity::class.java )
-                    intent.putExtra(USER_EMAIL,userItem.user.toString())
-                    intent.putExtra(USER_ID,anotherref)
-                    startActivity(intent)
-                    finish()
-                }
+
 
                 recyclerview_newmessage.adapter= adapter
             }

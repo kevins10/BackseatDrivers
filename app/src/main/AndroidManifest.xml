@@ -38,7 +38,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="${MAPS_API_KEY}" />
+            android:value="AIzaSyDs-daOsE2KMdF7dak-i7Utr5_RrO21Osc" />
 
         <activity
             android:name=".ui.rides.RideView"

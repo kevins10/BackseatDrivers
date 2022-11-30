@@ -43,7 +43,11 @@ class ChatLogActivity : AppCompatActivity() {
     }
 
     private fun listenForMessages() {
-        val ref = FirebaseDatabase.getInstance().getReference("/messages")
+        val fromId= FirebaseAuth.getInstance().uid
+        val toId=intent.getStringExtra(NewMessageActivity.USER_ID)
+
+        //val toId = intent.getStringExtra(NewMessageActivity.USER_EMAIL)
+        val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId")
         ref.addChildEventListener(object: ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val chatMessage=snapshot.getValue(ChatMessage::class.java)
@@ -91,12 +95,15 @@ class ChatLogActivity : AppCompatActivity() {
         val fromId = FirebaseAuth.getInstance().uid
 
         //val fromId = FirebaseDatabase.getInstance().getReference("/Users").parent?.key.toString()
-        val userEmail = intent.getStringExtra(NewMessageActivity.USER_EMAIL)
-
-        val toId = userEmail
+        //val userEmail = intent.getStringExtra(NewMessageActivity.USER_EMAIL)
+        val userId=intent.getStringExtra(NewMessageActivity.USER_ID)
+        val toId = userId
+        //val toId = userEmail
 
         //val reference = FirebaseDatabase.getInstance().getReference("/messages").push()
-        val reference = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
+       val reference = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
+
+       val toReference = FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()
 
 
         val chatMessage = ChatMessage(reference.key!!,text, fromId!!, toId!!,
@@ -105,7 +112,8 @@ class ChatLogActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 Log.d(TAG, "saved our chat message.....:${reference.key}")
             }
-        //TODO("Not yet implemented")
+
+        toReference.setValue(chatMessage)
     }
 
     private fun setupDummyData(){
@@ -131,7 +139,7 @@ class ChatToItem(val text:String): Item<ViewHolder>(){
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.textView_to_row.text = text
         //load our users email into textview
-        viewHolder.itemView.textView_initials_to_row.text=text
+        //viewHolder.itemView.textView_initials_to_row.text=text
         //TODO("Not yet implemented")
     }
     override fun getLayout(): Int {
