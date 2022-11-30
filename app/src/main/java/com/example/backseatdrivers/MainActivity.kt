@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         //Create Listener for user data changes
-
         val usersListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 user = dataSnapshot.getValue<User>()
@@ -45,7 +44,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
             }
         }
@@ -55,8 +53,6 @@ class MainActivity : AppCompatActivity() {
             .child("Users")
             .child(uid.toString())
         usersRef.addValueEventListener(usersListener)
-
-
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

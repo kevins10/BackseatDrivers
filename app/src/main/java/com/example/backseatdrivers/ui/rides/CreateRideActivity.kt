@@ -2,19 +2,16 @@ package com.example.backseatdrivers.ui.rides
 
 import android.graphics.Color
 import android.location.Geocoder
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.add
-import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.backseatdrivers.R
+import com.example.backseatdrivers.UserViewModel
 import com.example.backseatdrivers.database.Ride
 import com.example.backseatdrivers.database.User
 import com.example.backseatdrivers.databinding.ActivityCreateRideBinding
@@ -24,6 +21,8 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
 import com.google.maps.android.PolyUtil
 import kotlinx.coroutines.launch
 import org.json.JSONObject
@@ -41,11 +40,14 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
     private lateinit var polylines: ArrayList<Polyline>
     private lateinit var geocoder: Geocoder
 
+    private lateinit var usersRef: DatabaseReference
+
     private lateinit var findRouteBtn: Button
 //    private lateinit var endLocationInput: EditText
 
     private val ridesViewModel = RidesViewModel()
-    private lateinit var userData: User
+    private val userViewModel = UserViewModel()
+    private var user: User? = null
     private var ride: Ride? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,8 +70,18 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
         nextButtonListener()
 
         //fetch user data from intent extras, and init ride object
-        userData = intent.getSerializableExtra("user") as User
-        println("debug: user object = $userData")
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        userViewModel.getUserObj()?.child(uid.toString())?.get()?.addOnSuccessListener {
+            user = it.value as User?
+            println("debug: user fetched as = $user")
+        }
+
+        //listener for updates to the current ride
+        ridesViewModel.ride.observe(this) {viewModelRide ->
+            if(viewModelRide != null) {
+                ride = viewModelRide
+            }
+        }
 
         //initialize UI variables
         findRouteBtn = binding.findRouteBtn
@@ -84,8 +96,8 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
         geocoder = Geocoder(this)
 
         // Orient map to Vancouver by default if user does not have a home_address value
-        val startPoint = if (userData.home_address != null) {
-            val addressList = geocoder.getFromLocationName(userData.home_address, 1)
+        val startPoint = if (user?.home_address != null) {
+            val addressList = geocoder.getFromLocationName(user!!.home_address, 1)
             LatLng(addressList[0].latitude, addressList[0].longitude)
         } else {
             LatLng(49.2827, -123.1207)
@@ -201,10 +213,16 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
 
     private fun nextButtonListener() {
         findViewById<Button>(R.id.nextBtn).setOnClickListener {
-            supportFragmentManager.commit {
-                setReorderingAllowed(true)
-                add<RideDetailsFragment>(R.id.rideDetailsContainer)
-            }
+            val rideDetailsFragment = RideDetailsFragment()
+
+            val bundle = Bundle()
+            bundle.putSerializable("ride", ride)
+            rideDetailsFragment.arguments = bundle
+
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.rideDetailsContainer, rideDetailsFragment)
+            transaction.setReorderingAllowed(true)
+            transaction.commit()
         }
     }
 
