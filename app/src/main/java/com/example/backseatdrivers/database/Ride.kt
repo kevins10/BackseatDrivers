@@ -5,7 +5,7 @@ import java.io.Serializable
 import java.util.UUID
 
 data class Ride (
-    var ride_id: UUID? = null,
+    var ride_id: String? = null,
     var host_id: String? = null,
     var driverProfile: DriverProfile? = null,
     var num_seats: Int? = null,
