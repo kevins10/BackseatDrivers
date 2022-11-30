@@ -1,39 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/listbackground"
     android:orientation="vertical">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id = "@+id/na_pickup"
-        android:text="Date"/>
+        android:layout_height="wrap_content">
 
-    <TextView
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id = "@+id/ra_date"
+            android:layout_toRightOf="@+id/date_icon"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Date"/>
+
+        <ImageView
+            android:id="@+id/date_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="10.3dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="17dp"
+            android:src="@drawable/ic_baseline_calendar_today_24"/>
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id = "@+id/na_passenger"
-        android:text="Destination"/>
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id = "@+id/ra_dest"
+            android:layout_toRightOf="@+id/dest_icon"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Destination"/>
+
+        <ImageView
+            android:id="@+id/dest_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="10.3dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="17dp"
+            android:src="@drawable/ic_baseline_location_on_24"/>
+    </RelativeLayout>
+
+
     <LinearLayout
         android:layout_width="wrap_content"
+        android:layout_margin="8dp"
         android:layout_height="wrap_content">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Deny"
-            android:id="@+id/na_deny">
+            android:layout_margin="3dp"
+
+            android:text="Accept"
+
+            android:id="@+id/na_accept">
         </Button>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Accept"
-            android:id="@+id/na_accept">
+            android:layout_margin="3dp"
+            android:text="Deny"
+            android:id="@+id/na_deny">
         </Button>
 
     </LinearLayout>
-
-
 
 
 </LinearLayout>
