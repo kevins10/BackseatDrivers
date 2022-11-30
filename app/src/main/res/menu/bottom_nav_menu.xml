@@ -18,7 +18,7 @@
 
     <item
         android:id="@+id/navigation_chat"
-        android:icon="@drawable/ic_baseline_person_24"
+        android:icon="@drawable/ic_baseline_chat_24"
         android:title="@string/title_chat"
         />
 
