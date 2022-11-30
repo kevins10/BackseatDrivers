@@ -1,6 +1,9 @@
 package com.example.backseatdrivers.ui.profile
 
+import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +12,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.backseatdrivers.R
 import com.example.backseatdrivers.auth.LoginActivity
 import com.example.backseatdrivers.databinding.FragmentDriverProfileSetUpBinding
@@ -17,6 +22,9 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.example.backseatdrivers.databinding.FragmentProfileBinding
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import java.io.File
 
 
 class ProfileFragment : Fragment() {
@@ -33,6 +41,7 @@ class ProfileFragment : Fragment() {
     private lateinit var database: DatabaseReference
     private lateinit var mAuth : FirebaseAuth
     private lateinit var currentUser : DatabaseReference
+    private lateinit var storageReference: StorageReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +55,7 @@ class ProfileFragment : Fragment() {
         database = Firebase.database.getReference("Users")
         if (user != null){
             currentUser = database.child(user.uid)
+            getProfileImage()
         }
 
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
@@ -81,6 +91,16 @@ class ProfileFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+    }
+
+    private fun getProfileImage() {
+        val uid = mAuth.currentUser!!.uid
+        storageReference = FirebaseStorage.getInstance().reference.child("Users/$uid.jpg")
+        val localFile = File.createTempFile("tempImage", "jpg")
+        storageReference.getFile(localFile).addOnSuccessListener {
+            val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
+            binding.profileIv.setImageBitmap(bitmap)
+        }
     }
 
 }
