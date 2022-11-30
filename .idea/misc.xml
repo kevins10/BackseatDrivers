@@ -3,10 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_ride_view.xml" value="0.2171875" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_chat.xml" value="0.1796875" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_notifications.xml" value="0.1" />
         <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
         <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_rides.xml" value="0.1" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_user_profile_set_up.xml" value="0.11927083333333334" />
         <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/rides_adapter.xml" value="0.1859375" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1796875" />
         <entry key="..\:/Users/parmi/Downloads/BackseatDrivers-main/BackseatDrivers-main/BackseatDrivers/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.116" />
         <entry key="..\:/Users/parmi/Downloads/BackseatDrivers-main/BackseatDrivers-main/BackseatDrivers/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.1215" />
         <entry key="..\:/Users/parmi/Downloads/BackseatDrivers-main/BackseatDrivers-main/BackseatDrivers/app/src/main/res/drawable/ic_email.xml" value="0.1375" />
