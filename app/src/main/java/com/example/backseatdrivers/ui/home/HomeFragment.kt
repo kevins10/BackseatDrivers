@@ -28,13 +28,18 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        val userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         homeViewModel.update()
+        println("CALLED UPDATE")
+        var homeAdapter = HomeAdapter(requireActivity(), upcomingRides)
+        var LV = binding.hfLv
+        LV.adapter = homeAdapter
         homeViewModel.update.observe(viewLifecycleOwner) {
+            println("NOW WE INSIDE OBSERVE")
             upcomingRides = homeViewModel.getSnapshot()
+            LV.adapter = homeAdapter
 //            for (i in upcomingRides){
 //                if (i.child("host_id").value == userViewModel.getUser()?.uid){
 //                    println("inside home fragment and host_id is: ${i.child("host_id").value}")
@@ -42,18 +47,16 @@ class HomeFragment : Fragment() {
 //                }
 //            }
         }
-        var homeAdapter = HomeAdapter(requireActivity(), upcomingRides)
-        var LV = binding.hfLv
-        LV.adapter = homeAdapter
-        if (LV != null) {
-            LV.setOnItemClickListener { parent, view, position, id ->
 
-                var intent = Intent(activity, RideView::class.java)
-                intent.putExtra("data", ridesAdapter.getItem(position) as Ride)
-                startActivity(intent)
-
-            }
-        }
+//        if (LV != null) {
+//            LV.setOnItemClickListener { parent, view, position, id ->
+//
+//                var intent = Intent(activity, RideView::class.java)
+//                intent.putExtra("data", ridesAdapter.getItem(position) as Ride)
+//                startActivity(intent)
+//
+//            }
+//        }
 
         return root
     }

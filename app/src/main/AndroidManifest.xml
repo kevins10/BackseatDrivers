@@ -66,6 +66,14 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
+        <activity
+            android:name=".ui.chat.NewMessageActivity"
+            tools:ignore="WrongManifestParent">
+        </activity>
+        <activity
+            android:name=".ui.chat.ChatLogActivity"
+            android:exported="false">
+        </activity>
     </application>
 
 </manifest>

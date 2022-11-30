@@ -17,8 +17,6 @@ class HomeViewModel : ViewModel() {
     var userSnapshot = ArrayList<DataSnapshot>()
     var mAuth : FirebaseAuth = FirebaseAuth.getInstance()
     var database : DatabaseReference = Firebase.database.getReference("Rides")
-//    var userRides : DatabaseReference = database.child("Rides")
-    var upcomingRides: ArrayList<Ride> = arrayListOf()
     val update = MutableLiveData<Long>(0L)
 
     private val _text = MutableLiveData<String>().apply {
