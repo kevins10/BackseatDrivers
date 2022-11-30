@@ -87,8 +87,8 @@ class RidesFragment : Fragment() {
 
     private fun startCreateRideActivity() {
         val intent = Intent(activity, CreateRideActivity::class.java)
-        intent.putExtra("user", User(first_name = "Bob", last_name = "Marley"))
-        startActivity(intent)
+        //intent.putExtra("user", User(first_name = "Bob", last_name = "Marley"))
+        //startActivity(intent)
     }
 
     override fun onDestroyView() {

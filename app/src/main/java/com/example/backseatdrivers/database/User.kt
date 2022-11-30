@@ -5,7 +5,7 @@ import java.io.Serializable
 
 @IgnoreExtraProperties
 data class User(
-//    val user_id: String? = null,
+    //val user_id: String? = null,
     val email: String? = null,
     val password: String? = null,
 
@@ -20,3 +20,6 @@ data class User(
     var driver_profile: DriverProfile? = null,
     var request_notifications: ArrayList<RequestNotification>? = null
 ) : Serializable
+//class Users(val email:String, val password: String, val first_name: String, val last_name: String,val age: String, val date_of_birth: String, val phone_number: String, val home_address: String){
+  //  constructor(): this("","","","","","","","")
+//}

@@ -126,7 +126,7 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
                 markerOptions.position(vancouver)
                 mMap.addMarker(markerOptions)
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(vancouver, 15f))
-                Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
+                Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -156,9 +156,8 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
                             println("$name: $value")
                         }
 
-                        directionsObject = response.body.toString()
-                        println("debug: response = $response")
-                        println("debug: API call = " + response.body!!.string())
+                        directionsObject = response.body!!.string()
+                        println("debug: response = $directionsObject")
                     }
                 }
             })
