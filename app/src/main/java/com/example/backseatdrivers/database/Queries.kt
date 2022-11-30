@@ -59,7 +59,7 @@ class Queries {
         return database.child("Rides").get() as ArrayList<Ride>
     }
 
-    suspend fun getFirstName(driver:String) = Firebase.database.reference
+    suspend fun getFirstName(driver: String) = Firebase.database.reference
         .child("Users")
         .child(driver)
         .child("first_name")
@@ -67,10 +67,18 @@ class Queries {
         .await()
         .value
 
-    suspend fun getLastName(driver:String) = Firebase.database.reference
+    suspend fun getLastName(driver: String) = Firebase.database.reference
         .child("Users")
         .child(driver)
         .child("last_name")
+        .get()
+        .await()
+        .value
+
+    suspend fun getDateFromRideId(rideId: String) = Firebase.database.reference
+        .child("Rides")
+        .child(rideId)
+        .child("departure_time")
         .get()
         .await()
         .value
