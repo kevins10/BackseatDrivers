@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.backseatdrivers.R
+import com.example.backseatdrivers.database.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
@@ -41,7 +42,7 @@ class ChatLogActivity : AppCompatActivity() {
     private fun performSendMessage() {
         //How to send message to firebase
         val text =editText_chat_log.text.toString()
-        val fromId = FirebaseAuth.getInstance().uid!!
+        val fromId = FirebaseAuth.getInstance().uid
 
         //val fromId = FirebaseDatabase.getInstance().getReference("/Users").parent?.key.toString()
         val userEmail = intent.getStringExtra(NewMessageActivity.USER_EMAIL)
@@ -50,7 +51,7 @@ class ChatLogActivity : AppCompatActivity() {
         val toId = userEmail
 
         val reference = FirebaseDatabase.getInstance().getReference("/messages").push()
-        val chatMessage = ChatMessage(reference.key!!,text, fromId, toId!!,
+        val chatMessage = ChatMessage(reference.key!!,text, fromId!!, toId!!,
         System.currentTimeMillis()/1000)
         reference.setValue(chatMessage)
             .addOnSuccessListener {

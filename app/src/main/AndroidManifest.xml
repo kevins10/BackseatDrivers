@@ -28,11 +28,11 @@
             android:name=".MainActivity"
             android:exported="true"
             tools:ignore="WrongManifestParent">
-            <intent-filter>
+           <!-- <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
         <activity
             android:name=".ui.rides.CreateRideActivity"
@@ -58,11 +58,11 @@
             android:name=".ui.notifications.LatestMessageActivity"
             android:exported="true"
             tools:ignore="WrongManifestParent">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
         <activity
             android:name=".ui.notifications.NewMessageActivity"
