@@ -14,29 +14,36 @@ import com.google.firebase.ktx.Firebase
 
 class HomeViewModel : ViewModel() {
 
-    var userSnapshot = MutableLiveData<ArrayList<DataSnapshot>>()
+    var userSnapshot = ArrayList<DataSnapshot>()
     var mAuth : FirebaseAuth = FirebaseAuth.getInstance()
     var database : DatabaseReference = Firebase.database.getReference("Rides")
 //    var userRides : DatabaseReference = database.child("Rides")
     var upcomingRides: ArrayList<Ride> = arrayListOf()
+    val update = MutableLiveData<Long>(0L)
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"
     }
+
+    fun getSnapshot(): ArrayList<DataSnapshot>{
+        return userSnapshot
+    }
+
     val text: LiveData<String> = _text
 
     fun update(){
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 //println("this is kinda working ${snapshot}")
-                userSnapshot.value?.clear()
+                userSnapshot.clear()
                 for (dataSnapshot in snapshot.children){
                     println("this is kinda working ${dataSnapshot.child("host_id").value}")
                     if (dataSnapshot.child("host_id").value == mAuth.currentUser?.uid){
                         println("adding")
-                        userSnapshot.value?.add(dataSnapshot)
+                        userSnapshot.add(dataSnapshot)
                     }
                 }
+                update.value = System.currentTimeMillis()
             }
 
             override fun onCancelled(error: DatabaseError) {
