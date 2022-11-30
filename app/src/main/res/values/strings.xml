@@ -40,4 +40,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_create_ride">CreateRideActivity</string>
     <string name="title_activity_ride_view">RideView</string>
+
+    <!--Profile-->
+    <string name="profile_text">Profile</string>
+    <string name="edit_profile_text">Edit Profile</string>
+    <string name="edit_btn_text">Edit</string>
+    <string name="save_btn_text">Save</string>
+    <string name="cancel_btn_text">Cancel</string>
+    <string name="logout_btn_text">Logout</string>
 </resources>
