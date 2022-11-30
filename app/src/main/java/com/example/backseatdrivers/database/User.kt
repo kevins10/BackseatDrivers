@@ -5,7 +5,7 @@ import java.io.Serializable
 
 @IgnoreExtraProperties
 data class User(
-    //val user_id: String? = null,
+    val user_id: String? = null,
     val email: String? = null,
     val password: String? = null,
 

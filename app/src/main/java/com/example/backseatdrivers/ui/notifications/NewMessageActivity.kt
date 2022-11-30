@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.backseatdrivers.R
+import com.example.backseatdrivers.database.User
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -34,6 +36,7 @@ class NewMessageActivity:AppCompatActivity() {
     }
     companion object{
         val USER_EMAIL = "email"
+        val USER_ID="key"
     }
 
     private fun fetchUsers(){
@@ -42,11 +45,16 @@ class NewMessageActivity:AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val adapter = GroupAdapter<ViewHolder>()
 
+                val userss = snapshot.children.toString()
+                Log.d("userValuesssss", userss.toString())
 
                 snapshot.children.forEach {
-                    val user = it.child("first_name").value
+                    val user = it.getValue().toString()
                     Log.d("userValue", user.toString())
 
+
+                    val newID=it.key
+                    Log.d("UserID", newID.toString())
                     //get users emails
                     val users= it.child("email").value
                     Log.d("newmessage", users.toString())
@@ -54,11 +62,13 @@ class NewMessageActivity:AppCompatActivity() {
                         adapter.add(UserItem(users))
                     }
                 }
-                
+
                 adapter.setOnItemClickListener { item, view ->
+                    val anotherref = FirebaseAuth.getInstance().uid
                     val userItem = item as UserItem
                     val intent = Intent(view.context, ChatLogActivity::class.java )
                     intent.putExtra(USER_EMAIL,userItem.user.toString())
+                    intent.putExtra(USER_ID,anotherref)
                     startActivity(intent)
                     finish()
                 }
