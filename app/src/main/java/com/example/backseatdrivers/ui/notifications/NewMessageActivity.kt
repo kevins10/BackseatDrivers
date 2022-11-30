@@ -32,6 +32,9 @@ class NewMessageActivity:AppCompatActivity() {
         fetchUsers()
 
     }
+    companion object{
+        val USER_EMAIL = "email"
+    }
 
     private fun fetchUsers(){
         val ref = FirebaseDatabase.getInstance().getReference("/Users")
@@ -41,6 +44,9 @@ class NewMessageActivity:AppCompatActivity() {
 
 
                 snapshot.children.forEach {
+                    val user = it.child("first_name").value
+                    Log.d("userValue", user.toString())
+
                     //get users emails
                     val users= it.child("email").value
                     Log.d("newmessage", users.toString())
@@ -50,7 +56,9 @@ class NewMessageActivity:AppCompatActivity() {
                 }
                 
                 adapter.setOnItemClickListener { item, view ->
+                    val userItem = item as UserItem
                     val intent = Intent(view.context, ChatLogActivity::class.java )
+                    intent.putExtra(USER_EMAIL,userItem.user.toString())
                     startActivity(intent)
                     finish()
                 }
