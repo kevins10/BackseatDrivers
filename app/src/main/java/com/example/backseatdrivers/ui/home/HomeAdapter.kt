@@ -5,17 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import android.widget.Toast
 import com.example.backseatdrivers.R
 import com.example.backseatdrivers.database.Queries
-import com.example.backseatdrivers.database.Ride
-import com.example.backseatdrivers.database.User
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.*
-import kotlinx.coroutines.tasks.await
 
 class HomeAdapter(private val context: Context, private var list: ArrayList<DataSnapshot>): BaseAdapter() {
 
@@ -47,8 +43,8 @@ class HomeAdapter(private val context: Context, private var list: ArrayList<Data
         val destination = currentItem.child("end_address").value
 
         CoroutineScope(Dispatchers.Main).launch {
-            val firstName = getFirstName(driver.toString())
-            val lastName = getLastName(driver.toString())
+            val firstName = Queries().getFirstName(driver.toString())
+            val lastName = Queries().getLastName(driver.toString())
             dateTimeTextView.text = "Leave at: ${dateTime.toString()}"
             driverTextView.text = "Driver: $firstName $lastName"
             destTextView.text = "Desination: ${destination.toString()}"
@@ -57,19 +53,4 @@ class HomeAdapter(private val context: Context, private var list: ArrayList<Data
         return view
     }
 
-    suspend fun getFirstName(driver:String) = Firebase.database.reference
-        .child("Users")
-        .child(driver)
-        .child("first_name")
-        .get()
-        .await()
-        .value
-
-    suspend fun getLastName(driver:String) = Firebase.database.reference
-        .child("Users")
-        .child(driver)
-        .child("last_name")
-        .get()
-        .await()
-        .value
 }

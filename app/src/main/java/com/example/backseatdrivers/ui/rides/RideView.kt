@@ -11,6 +11,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.backseatdrivers.R
 import com.example.backseatdrivers.UserViewModel
+import com.example.backseatdrivers.database.Queries
 import com.example.backseatdrivers.database.Request
 import com.example.backseatdrivers.database.Ride
 import com.example.backseatdrivers.databinding.ActivityRideViewBinding
@@ -22,6 +23,8 @@ import com.google.android.gms.maps.model.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.maps.android.PolyUtil
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.util.*
@@ -46,8 +49,15 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
         val intent = intent
         var rideobj = intent.getSerializableExtra("data") as Ride
         binding.rvDate.text = rideobj.departure_time
-//        binding.rvDestination.text = rideobj.end_location
-        binding.rvDriver.text = rideobj.host_id
+        binding.rvStart.text = rideobj.start_address
+        binding.rvDestination.text = rideobj.end_address
+        val hostId = rideobj.host_id
+        CoroutineScope(Dispatchers.Main).launch {
+            val firstName = Queries().getFirstName(hostId.toString())
+            val lastName = Queries().getLastName(hostId.toString())
+            binding.rvDriver.text = "Driver: $firstName $lastName"
+        }
+
         binding.sendReq.setOnClickListener(){
             onRequest()
         }

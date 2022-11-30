@@ -6,8 +6,13 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.example.backseatdrivers.R
+import com.example.backseatdrivers.database.Queries
 import com.example.backseatdrivers.database.Ride
+import com.example.backseatdrivers.ui.home.HomeAdapter
 import com.google.firebase.database.DataSnapshot
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class RidesAdapter(private val context: Context, private var list: ArrayList<Ride>): BaseAdapter() {
     override fun getCount(): Int {
@@ -23,12 +28,16 @@ class RidesAdapter(private val context: Context, private var list: ArrayList<Rid
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+
         val view = View.inflate(context, R.layout.rides_adapter, null)
         val date_tv = view.findViewById<TextView>(R.id.ra_date)
+        val start_tv = view.findViewById<TextView>(R.id.ra_start)
         val dest_tv = view.findViewById<TextView>(R.id.ra_dest)
         date_tv.text = list[position].departure_time
-        dest_tv.text = list[position].end_location
-        return view
+        start_tv.text = "Start: ${list[position].start_address}"
+        dest_tv.text = "Destination: ${list[position].end_address}"
+        println("debug: dest: ${list[position].end_address}")
 
+        return view
     }
 }

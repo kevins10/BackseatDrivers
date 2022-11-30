@@ -24,7 +24,6 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import java.util.*
 import kotlin.collections.ArrayList
 
 class RidesFragment : Fragment() {
@@ -85,6 +84,8 @@ class RidesFragment : Fragment() {
                     ride.host_id = i.child("host_id").value.toString()
                     ride.end_location = i.child("end_location").value.toString()
                     ride.start_location = i.child("start_location").value.toString()
+                    ride.end_address = i.child("end_address").value.toString()
+                    ride.start_address = i.child("start_address").value.toString()
                     ride.host_id = i.child("host_id").value.toString()
                     arrayList.add(ride)
                 }
