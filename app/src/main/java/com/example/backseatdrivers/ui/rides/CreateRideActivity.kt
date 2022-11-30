@@ -51,6 +51,10 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
     private lateinit var currentUser : DatabaseReference
     private var hostId: String? = null
 
+    // location
+    private lateinit var startLocationInput: String
+    private lateinit var endLocationInput: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateRideBinding.inflate(layoutInflater)
@@ -103,8 +107,8 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
     private fun findRoute() {
         mMap.clear()
 
-        val startLocationInput = binding.startLocationInput.text.toString()
-        val endLocationInput = binding.endLocationInput.text.toString()
+        startLocationInput = binding.startLocationInput.text.toString()
+        endLocationInput = binding.endLocationInput.text.toString()
 
         if(startLocationInput.isEmpty()) {
             binding.startLocationInput.error = "Please enter a start location"
@@ -189,7 +193,9 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
                 distance = distance,
                 is_full = false,
                 start_location = startCoordinates,
-                end_location = endCoordinates)
+                end_location = endCoordinates,
+                start_address = startLocationInput,
+                end_address = endLocationInput)
             )
             //set data in viewmodel
         }, Response.ErrorListener {

@@ -1,8 +1,6 @@
 package com.example.backseatdrivers.database
 
-import org.json.JSONObject
 import java.io.Serializable
-import java.util.UUID
 
 data class Ride (
     var ride_id: String? = null,
@@ -12,6 +10,8 @@ data class Ride (
     var is_full:Boolean? = null,
     var start_location: String? = null,
     var end_location: String? = null,
+    var start_address: String? = null,
+    var end_address: String? = null,
     var departure_time: String? = null,
 
     //fields from map
