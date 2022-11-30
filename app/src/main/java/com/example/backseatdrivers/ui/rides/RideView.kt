@@ -45,7 +45,7 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
         setContentView(binding.root)
         val intent = intent
         var rideobj = intent.getSerializableExtra("data") as Ride
-        binding.rvDate.text = rideobj.ride_id.toString()
+        binding.rvDate.text = rideobj.departure_time
 //        binding.rvDestination.text = rideobj.end_location
         binding.rvDriver.text = rideobj.host_id
         binding.sendReq.setOnClickListener(){
