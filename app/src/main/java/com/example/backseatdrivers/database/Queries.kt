@@ -10,6 +10,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.tasks.await
 
 class Queries {
 
@@ -57,4 +58,28 @@ class Queries {
     fun getAllRides(): ArrayList<Ride> {
         return database.child("Rides").get() as ArrayList<Ride>
     }
+
+    suspend fun getFirstName(driver: String) = Firebase.database.reference
+        .child("Users")
+        .child(driver)
+        .child("first_name")
+        .get()
+        .await()
+        .value
+
+    suspend fun getLastName(driver: String) = Firebase.database.reference
+        .child("Users")
+        .child(driver)
+        .child("last_name")
+        .get()
+        .await()
+        .value
+
+    suspend fun getDateFromRideId(rideId: String) = Firebase.database.reference
+        .child("Rides")
+        .child(rideId)
+        .child("departure_time")
+        .get()
+        .await()
+        .value
 }

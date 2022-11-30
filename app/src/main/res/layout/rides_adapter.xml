@@ -29,7 +29,20 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
+<<<<<<< HEAD
         android:layout_height="wrap_content">
+=======
+        android:layout_height="wrap_content"
+        android:id = "@+id/ra_start"
+        android:text="Start"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id = "@+id/ra_dest"
+        android:text="Destination"/>
+
+>>>>>>> 18d73bcc62830f0ba04a14f90d04986a3865b07e
 
         <TextView
             android:layout_width="wrap_content"

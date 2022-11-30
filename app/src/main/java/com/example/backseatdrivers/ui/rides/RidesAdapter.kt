@@ -29,6 +29,5 @@ class RidesAdapter(private val context: Context, private var list: ArrayList<Rid
         date_tv.text = list[position].departure_time
         dest_tv.text = list[position].end_location
         return view
-
     }
 }

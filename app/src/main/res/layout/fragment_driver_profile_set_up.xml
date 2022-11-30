@@ -4,13 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".auth.DriverProfileSetUpFragment"
+    android:background="@drawable/signinbackground"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/driver_profile_text" />
+        android:text="@string/driver_profile_text"
+        android:layout_margin="25dp"
+        android:gravity="center"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/white"
+        android:textSize="25sp" />
 
     <Spinner
         android:id="@+id/license_type_spinner"
@@ -19,29 +25,107 @@
         android:spinnerMode="dropdown"
         android:layout_marginVertical="10dp" />
 
-    <EditText
-        android:id="@+id/vehicle_model_et"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/vehicle_model_text" />
+        android:layout_marginLeft="62dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="62dp"
+        android:background="@drawable/blue_border_rounded_cornwe">
 
-    <EditText
-        android:id="@+id/vehicle_color_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/vehicle_color_text" />
+        <EditText
+            android:id="@+id/vehicle_model_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/car_icon"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="@string/vehicle_model_text"
+            android:maxLines="1"
+            android:paddingLeft="17dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:textSize="12sp" />
 
-    <EditText
-        android:id="@+id/vehicle_rules_et"
-        android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/car_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="17dp"
+            android:src="@drawable/ic_baseline_directions_car_24"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/vehicle_rules_text" />
+        android:layout_marginLeft="62dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="62dp"
+        android:background="@drawable/blue_border_rounded_cornwe">
+
+        <EditText
+            android:id="@+id/vehicle_color_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/color_icon"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="@string/vehicle_color_text"
+            android:maxLines="1"
+            android:paddingLeft="17dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/color_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="17dp"
+
+            android:src="@drawable/ic_baseline_color_lens_24"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="62dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="62dp"
+        android:background="@drawable/blue_border_rounded_cornwe">
+
+        <EditText
+            android:id="@+id/vehicle_rules_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/rules_icon"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="@string/vehicle_rules_text"
+            android:maxLines="1"
+            android:paddingLeft="17dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/rules_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="17dp"
+            android:src="@drawable/ic_baseline_info_24"/>
+    </RelativeLayout>
 
     <Button
         android:id="@+id/signup_btn"
+        android:background="@drawable/red_fill__rounded_color"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
+        android:paddingHorizontal="30dp"
+        android:layout_marginTop="250dp"
         android:layout_height="wrap_content"
         android:text="@string/signup_btn_text" />
-
-
 </LinearLayout>

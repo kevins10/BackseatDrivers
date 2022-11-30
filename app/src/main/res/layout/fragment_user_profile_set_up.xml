@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/signinbackground"
+    android:background="@drawable/drivesignup"
     tools:context=".auth.UserProfileSetUpFragment">
 
     <RelativeLayout
@@ -16,16 +16,30 @@
             android:id="@+id/signup_title_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
             android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
             android:text="@string/signup_text"
-            android:textColor="@color/white"
+            android:textColor="#54585A"
             android:textSize="35sp" />
+
+        <ImageView
+            android:id="@+id/car_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/signup_title_tv"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/ic_baseline_directions_car_24"
+            android:padding="40dp" />
 
         <LinearLayout
             android:id="@+id/names"
             android:layout_width="match_parent"
-            android:layout_below="@id/signup_title_tv"
+            android:layout_below="@id/car_icon"
             android:layout_margin="5dp"
             android:layout_height="match_parent"
             android:orientation="horizontal">
@@ -221,13 +235,13 @@
 
         <Button
             android:id="@+id/next_btn"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="30dp"
             android:layout_below="@id/passwords"
             android:layout_width="wrap_content"
             android:background="@drawable/red_fill__rounded_color"
             android:fontFamily="@font/poppins_medium"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="20dp"
+            android:paddingHorizontal="50dp"
             android:layout_centerHorizontal="true"
             android:text="@string/next_btn_text" />
 

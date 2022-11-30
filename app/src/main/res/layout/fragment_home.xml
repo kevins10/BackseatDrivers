@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.rides.RidesFragment"
+    android:background="@drawable/signupbackground"
     android:orientation="vertical">
 
     <TextView
@@ -15,12 +16,12 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
+        android:fontFamily="@font/poppins_medium"
         android:textSize="20sp"
+        android:textColor="@color/white"
         android:text="Upcoming Rides"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:gravity="center" />
+
     <ListView
         android:id="@+id/hf_lv"
         android:layout_width="match_parent"

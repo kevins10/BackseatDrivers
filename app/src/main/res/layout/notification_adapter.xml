@@ -7,7 +7,13 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
+<<<<<<< HEAD
         android:layout_height="wrap_content">
+=======
+        android:layout_height="wrap_content"
+        android:id = "@+id/na_date"
+        android:text="Date"/>
+>>>>>>> 18d73bcc62830f0ba04a14f90d04986a3865b07e
 
         <TextView
             android:layout_width="wrap_content"
@@ -28,6 +34,7 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
+<<<<<<< HEAD
         android:layout_height="wrap_content">
 
         <TextView
@@ -48,6 +55,17 @@
     </RelativeLayout>
 
 
+=======
+        android:layout_height="wrap_content"
+        android:id = "@+id/na_pickup"
+        android:text="Pickup Location"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id = "@+id/na_passenger"
+        android:text="Passenger"/>
+>>>>>>> 18d73bcc62830f0ba04a14f90d04986a3865b07e
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_margin="8dp"
