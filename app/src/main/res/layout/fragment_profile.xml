@@ -1,79 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profile.ProfileFragment"
-    android:orientation="vertical">
+    tools:context=".ui.profile.ProfileFragment">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="30dp">
 
-        <TextView
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_iv"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/blank_profile_picture" />
+
+        <LinearLayout
+            android:id="@+id/basic_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="First Name" />
+            android:layout_below="@id/profile_iv"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
 
-        <EditText
+            <TextView
+                android:id="@+id/first_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/last_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="4dp" />
+
+            <TextView
+                android:id="@+id/age_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="6dp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/edit_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:id="@+id/fn_et">
-        </EditText>
-        <TextView
+            android:layout_below="@id/basic_info"
+            android:layout_centerHorizontal="true"
+            android:text="@string/edit_profile_text" />
+
+        <Button
+            android:id="@+id/profile_logout_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Last Name" />
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="50dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/logout_btn_text"
+            app:iconTint="#FFFFFF" />
+    </RelativeLayout>
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:id="@+id/ln_et">
-        </EditText>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Email" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:id="@+id/profile_email">
-        </EditText>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Age" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:id="@+id/profile_age">
-        </EditText>
-
-    </LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/profile_save_button"
-        android:text="Save">
-
-    </Button>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/profile_logout_button"
-        android:text="Logout">
-
-    </Button>
-
-
-</LinearLayout>
+</RelativeLayout>

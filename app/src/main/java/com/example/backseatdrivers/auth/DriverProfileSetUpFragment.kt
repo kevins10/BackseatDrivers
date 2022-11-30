@@ -71,8 +71,8 @@ class DriverProfileSetUpFragment : Fragment() {
             val vehicleColor = binding.vehicleColorEt.text.toString()
             val vehicleRules = binding.vehicleRulesEt.text.toString()
 
-            val activityType = licenseTypeSpinner.selectedItem.toString()
-            val licenseTypeIndex = licenseTypes.indexOf(activityType)
+            val licenseType = licenseTypeSpinner.selectedItem.toString()
+            val licenseTypeId = licenseTypes.indexOf(licenseType)
 
             if (vehicleModel.isEmpty()) {
                 binding.vehicleModelEt.error = "Vehicle Model is Required"
@@ -84,7 +84,7 @@ class DriverProfileSetUpFragment : Fragment() {
             }
 
             val driverProfile = DriverProfile()
-            driverProfile.license_type = licenseTypeIndex
+            driverProfile.license_type = licenseTypeId
             driverProfile.vehicle_model = vehicleModel
             driverProfile.vehicle_color = vehicleColor
             driverProfile.vehicle_rules = vehicleRules

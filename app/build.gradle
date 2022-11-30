@@ -61,7 +61,11 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.0.3')
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.android.gms:play-services-auth:20.3.0'
+    implementation 'com.google.firebase:firebase-storage-ktx:20.1.0'
 
     //HTTP library
     implementation "com.android.volley:volley:1.2.1"
+
+    // circular imageview
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }
