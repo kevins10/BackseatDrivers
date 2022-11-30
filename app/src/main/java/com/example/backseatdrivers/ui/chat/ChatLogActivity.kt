@@ -95,7 +95,10 @@ class ChatLogActivity : AppCompatActivity() {
 
         val toId = userEmail
 
-        val reference = FirebaseDatabase.getInstance().getReference("/messages").push()
+        //val reference = FirebaseDatabase.getInstance().getReference("/messages").push()
+        val reference = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
+
+
         val chatMessage = ChatMessage(reference.key!!,text, fromId!!, toId!!,
             System.currentTimeMillis()/1000)
         reference.setValue(chatMessage)
@@ -127,6 +130,8 @@ class ChatFromItem(val text:String): Item<ViewHolder>(){
 class ChatToItem(val text:String): Item<ViewHolder>(){
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.textView_to_row.text = text
+        //load our users email into textview
+        viewHolder.itemView.textView_initials_to_row.text=text
         //TODO("Not yet implemented")
     }
     override fun getLayout(): Int {

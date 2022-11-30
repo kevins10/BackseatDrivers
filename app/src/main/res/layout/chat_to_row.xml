@@ -14,11 +14,11 @@
         android:padding="16dp"
         android:text="This is my message fjhdjdhjghdjghjghjsdghhdjgghfjghhfjdhjghgfj"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/textView2" />
+        app:layout_constraintEnd_toStartOf="@+id/textView_initials_to_row"
+        app:layout_constraintTop_toTopOf="@+id/textView_initials_to_row" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView_initials_to_row"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:text="PS"
