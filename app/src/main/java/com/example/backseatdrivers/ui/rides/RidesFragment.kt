@@ -40,15 +40,14 @@ class RidesFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var arrayList: ArrayList<Ride>
     private lateinit var database: DatabaseReference
+    private lateinit var rideDatabase : DatabaseReference
     private lateinit var userViewModel: UserViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        arrayList = arrayListOf(Ride(null,null,null,null,null,"SFU Vancouver","oct 1"),
-            Ride(null,null,null,null,null,"SFU Burnaby","sept 5"),
-            Ride(null,null,null,null,null,"SFU Surrey","july 1"))
+
         _binding = FragmentRidesBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -61,6 +60,7 @@ class RidesFragment : Fragment() {
         createNotificationListener()
 
         //set on click listener for create a ride button
+        arrayList = arrayListOf()
         var ridesAdapter = RidesAdapter(requireActivity().applicationContext, arrayList)
         var LV = view.findViewById<ListView>(R.id.rides_lv)
         LV.adapter = ridesAdapter
@@ -73,6 +73,26 @@ class RidesFragment : Fragment() {
 
             }
         }
+
+        rideDatabase = Firebase.database.getReference("Rides")
+        rideDatabase.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (i in snapshot.children){
+                    var ride : Ride = Ride()
+                    ride.departure_time = i.child("departure_time").value.toString()
+                    ride.host_id = i.child("host_id").value.toString()
+                    ride.end_location = i.child("end_location").value.toString()
+                    arrayList.add(ride)
+                }
+                LV.adapter = ridesAdapter
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                //TODO("Not yet implemented")
+            }
+
+
+        })
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         view.findViewById<Button>(R.id.createRideBtn).setOnClickListener {
             startCreateRideActivity()

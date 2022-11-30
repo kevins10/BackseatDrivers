@@ -7,6 +7,7 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import com.example.backseatdrivers.R
 import com.example.backseatdrivers.database.Ride
+import com.google.firebase.database.DataSnapshot
 
 class RidesAdapter(private val context: Context, private var list: ArrayList<Ride>): BaseAdapter() {
     override fun getCount(): Int {

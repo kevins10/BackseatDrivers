@@ -25,7 +25,9 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
         setContentView(binding.root)
         val intent = intent
         var rideobj = intent.getSerializableExtra("data") as Ride
-        binding.filler.text = rideobj.departure_time
+        binding.rvDate.text = rideobj.departure_time
+        binding.rvDestination.text = rideobj.end_location
+        binding.rvDriver.text = rideobj.host_id
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.rv_map) as SupportMapFragment

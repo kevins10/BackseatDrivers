@@ -32,28 +32,16 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        homeViewModel.update()
-        homeViewModel.update.observe(viewLifecycleOwner) {
-            upcomingRides = homeViewModel.getSnapshot()
-//            for (i in upcomingRides){
-//                if (i.child("host_id").value == userViewModel.getUser()?.uid){
-//                    println("inside home fragment and host_id is: ${i.child("host_id").value}")
-//                    binding.hfTv.text = "${i.child("host_id").value}"
-//                }
-//            }
-        }
         var homeAdapter = HomeAdapter(requireActivity(), upcomingRides)
         var LV = binding.hfLv
         LV.adapter = homeAdapter
-        if (LV != null) {
-            LV.setOnItemClickListener { parent, view, position, id ->
-
-                var intent = Intent(activity, RideView::class.java)
-                intent.putExtra("data", ridesAdapter.getItem(position) as Ride)
-                startActivity(intent)
-
-            }
+        homeViewModel.update()
+        homeViewModel.update.observe(viewLifecycleOwner) {
+            upcomingRides = homeViewModel.getSnapshot()
+            homeAdapter.notifyDataSetChanged()
+            LV.adapter = homeAdapter
         }
+
 
         return root
     }
