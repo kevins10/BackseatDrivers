@@ -49,8 +49,8 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
         val intent = intent
         var rideobj = intent.getSerializableExtra("data") as Ride
         binding.rvDate.text = rideobj.departure_time
-        binding.rvStart.text = rideobj.start_address
-        binding.rvDestination.text = rideobj.end_address
+        binding.rvStart.text = "Start: ${rideobj.start_address}"
+        binding.rvDestination.text = "Destination: ${rideobj.end_address}"
         val hostId = rideobj.host_id
         CoroutineScope(Dispatchers.Main).launch {
             val firstName = Queries().getFirstName(hostId.toString())
