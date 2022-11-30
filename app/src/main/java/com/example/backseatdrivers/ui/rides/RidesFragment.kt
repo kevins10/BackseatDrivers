@@ -77,11 +77,15 @@ class RidesFragment : Fragment() {
         rideDatabase = Firebase.database.getReference("Rides")
         rideDatabase.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                arrayList.clear()
                 for (i in snapshot.children){
                     var ride : Ride = Ride()
+                    ride.ride_id = i.key
                     ride.departure_time = i.child("departure_time").value.toString()
                     ride.host_id = i.child("host_id").value.toString()
                     ride.end_location = i.child("end_location").value.toString()
+                    ride.start_location = i.child("start_location").value.toString()
+                    ride.host_id = i.child("host_id").value.toString()
                     arrayList.add(ride)
                 }
                 LV.adapter = ridesAdapter

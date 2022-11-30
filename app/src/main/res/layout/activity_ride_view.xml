@@ -17,14 +17,6 @@
             android:text="Testing"
             android:layout_marginBottom="16dp"
             android:layout_marginTop="16dp" />
-        <TextView
-            android:id="@+id/rv_destination"
-            android:gravity="center_horizontal"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="Testing"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp" />
 
         <TextView
             android:id="@+id/rv_date"
@@ -35,6 +27,17 @@
             android:layout_marginBottom="16dp"
             android:layout_marginTop="16dp" />
 
+        <TextView
+            android:id="@+id/rv_destination"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Planned Route"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp" />
+
+
+
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:map="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
@@ -44,15 +47,34 @@
             android:layout_height="300dp"
             tools:context=".ui.rides.RideView" />
 
-        <TextView
-            android:id="@+id/filler"
+        <EditText
+            android:id="@+id/pickup_location"
             android:gravity="center_horizontal"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:text="Testing"
+            android:hint="Enter Pickup Location"
             android:layout_marginBottom="16dp"
             android:layout_marginTop="16dp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text= "Cancel"
+                android:id="@+id/rv_cancel">
+
+            </Button>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text= "Send Request"
+                android:id="@+id/send_req">
+            </Button>
+        </LinearLayout>
     </LinearLayout>
+
 
 
 </ScrollView>
