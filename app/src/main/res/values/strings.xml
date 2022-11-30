@@ -4,6 +4,7 @@
     <string name="title_rides">Rides</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_profile">Profile</string>
+    <string name="title_chat">Chat</string>
 
     <!--Login/Signup-->
     <string name="email_hint_text">Email</string>
