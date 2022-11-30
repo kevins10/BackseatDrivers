@@ -1,29 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+<<<<<<< HEAD
     android:background="@drawable/waves"
+=======
+>>>>>>> 3c9c91cb95db167399dd9690609e8ec6184f2b5f
     tools:context=".auth.SignUpActivity">
 
-    <LinearLayout
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="50dp"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/signup_title_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="@string/signup_btn_text"
-            android:textAlignment="center"
-            android:textColor="#0b786b"
-            android:textSize="28sp"
-            android:textStyle="bold" />
+        android:layout_height="match_parent">
+    </androidx.fragment.app.FragmentContainerView>
 
+<<<<<<< HEAD
         <EditText
             android:id="@+id/first_name_et"
             android:layout_width="match_parent"
@@ -109,3 +103,6 @@
     </LinearLayout>
 
 </ScrollView>
+=======
+</LinearLayout>
+>>>>>>> 3c9c91cb95db167399dd9690609e8ec6184f2b5f

@@ -4,32 +4,38 @@
     <string name="title_rides">Rides</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_profile">Profile</string>
-
-    <!--Login/Signup-->
-    <string name="email_hint_text">Email</string>
+    <string name="title_chat">Chat</string>
+8    <!--Login/Signup-->
+    <string name="signup_text">Sign Up</string>
+    <string name="email_hint_text">SFU Email</string>
     <string name="password_hint_text">Password</string>
     <string name="confirm_password_hint_text">Confirm Password</string>
     <string name="login_btn_text">Login</string>
+<<<<<<< HEAD
     <string name="signup_btn_text">Sign Up With SFU Email</string>
+=======
+    <string name="signup_btn_text">Sign Up</string>
+>>>>>>> 3c9c91cb95db167399dd9690609e8ec6184f2b5f
     <string name="firstname_hint_text">First Name</string>
     <string name="lastname_hint_text">Last Name</string>
     <string name="age_hint_text">Age</string>
+    <string name="dob_hint_text">Date of Birth</string>
+    <string name="phone_hint_text">Phone Number</string>
+    <string name="address_hint_text">Address</string>
     <!--Gender-->
-    <string name="gender_hint_text">Gender</string>
-    <string-array name="gender_spinner_array">
-        <item>Male</item>
-        <item>Female</item>
-        <item>Other</item>
-    </string-array>
-    <!--License Type-->
-    <string name="license_hint_text">License Type</string>
-    <string-array name="license_type_array">
-        <item>Class 5</item>
-        <item>Class 7</item>
-        <item>idk what else</item>
-    </string-array>
+    <string name="male_text">Male</string>
+    <string name="female_text">Female</string>
+    <string name="other_text">Other</string>
     <string name="no_account_text">Don\'t have an account?</string>
     <string name="bad_email_pw_text">*The email or password is incorrect</string>
+    <string name="next_btn_text">Next</string>
+
+    <!--Driver Profile-->
+    <string name="driver_profile_text">Set Up Your Drive Profile</string>
+    <string name="license_hint_text">License Type</string>
+    <string name="vehicle_model_text">Vehicle model</string>
+    <string name="vehicle_color_text">Vehicle Color</string>
+    <string name="vehicle_rules_text">Vehicle Rules</string>
 
     <!--Email Verification-->
     <string name="verify_email_text">Verify your email</string>
@@ -43,5 +49,27 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_create_ride">CreateRideActivity</string>
+<<<<<<< HEAD
     >>>>>>> 8507fa6433e6b6f799417ed9d91948fd0f750157
+=======
+    <string name="title_activity_ride_view">RideView</string>
+
+    <!--Profile-->
+    <string name="profile_text">Profile</string>
+    <string name="edit_profile_text">Edit Profile</string>
+    <string name="edit_btn_text">Edit</string>
+    <string name="save_btn_text">Save</string>
+    <string name="cancel_btn_text">Cancel</string>
+    <string name="logout_btn_text">Logout</string>
+
+    <!--Ride Details Page-->
+    <string name="ride_details_title">Enter details below</string>
+    <string name="departure_time">departure time</string>
+    <string name="post_ride">Post Ride</string>
+    <string name="available_seats">available seats</string>
+    <string name="back">Back</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="time_of_day">time of day</string>
+>>>>>>> 3c9c91cb95db167399dd9690609e8ec6184f2b5f
 </resources>

@@ -1,13 +1,18 @@
 package com.example.backseatdrivers.ui.rides
 
+import android.graphics.Color
 import android.location.Geocoder
-import android.location.Location
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.example.backseatdrivers.R
+import com.example.backseatdrivers.UserViewModel
+import com.example.backseatdrivers.database.Ride
 import com.example.backseatdrivers.database.User
 import com.example.backseatdrivers.databinding.ActivityCreateRideBinding
 
@@ -15,47 +20,68 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.model.Polyline
-import com.google.android.gms.maps.model.PolylineOptions
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
+import com.google.android.gms.maps.model.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.maps.android.PolyUtil
 import kotlinx.coroutines.launch
-import okhttp3.*
-import okio.IOException
+import org.json.JSONObject
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
-class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
+class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
 
     private lateinit var binding: ActivityCreateRideBinding
 
-    private lateinit var http: OkHttpClient
     private lateinit var mMap: GoogleMap
     private lateinit var markerOptions: MarkerOptions
     private lateinit var polyLineOptions: PolylineOptions
     private lateinit var polylines: ArrayList<Polyline>
     private lateinit var geocoder: Geocoder
 
-    private var directionsObject: String? = null
+    private lateinit var usersRef: DatabaseReference
 
     private lateinit var findRouteBtn: Button
 //    private lateinit var endLocationInput: EditText
-    private lateinit var userData: User
+
+    private val ridesViewModel = RidesViewModel()
+    private val userViewModel = UserViewModel()
+    private var user: User? = null
+    private var ride: Ride? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateRideBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //set fragment for more details
+//        if (savedInstanceState == null) {
+//            supportFragmentManager.commit {
+//                setReorderingAllowed(true)
+//                add<RideDetailsFragment>(R.id.rideDetailsContainer)
+//            }
+//        }
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+        nextButtonListener()
 
-        //init http client and fetch user data from viewmodel
-        http = OkHttpClient()
-        userData = intent.getSerializableExtra("user") as User
-        println("debug: user object = $userData")
+        //fetch user data from intent extras, and init ride object
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        userViewModel.getUserObj()?.child(uid.toString())?.get()?.addOnSuccessListener {
+            user = it.value as User?
+            println("debug: user fetched as = $user")
+        }
+
+        //listener for updates to the current ride
+        ridesViewModel.ride.observe(this) {viewModelRide ->
+            if(viewModelRide != null) {
+                ride = viewModelRide
+            }
+        }
 
         //initialize UI variables
         findRouteBtn = binding.findRouteBtn
@@ -70,8 +96,8 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
         geocoder = Geocoder(this)
 
         // Orient map to Vancouver by default if user does not have a home_address value
-        val startPoint = if (userData.home_address != null) {
-            val addressList = geocoder.getFromLocationName(userData.home_address, 1)
+        val startPoint = if (user?.home_address != null) {
+            val addressList = geocoder.getFromLocationName(user!!.home_address, 1)
             LatLng(addressList[0].latitude, addressList[0].longitude)
         } else {
             LatLng(49.2827, -123.1207)
@@ -109,15 +135,23 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
                 val startLocationStr = startAddressList[0].latitude.toString() + "%20" + startAddressList[0].longitude.toString()
                 val endLocationStr = endAddressList[0].latitude.toString() + "%20" +  endAddressList[0].longitude.toString()
 
-
-                lifecycleScope.launch {
-                    getDirections(startLocationStr, endLocationStr)
-                }
-                println("debug: directions = $directionsObject")
-
                 markerOptions.position(startLocation)
                 mMap.addMarker(markerOptions)
+
                 markerOptions.position(endLocation)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                mMap.addMarker(markerOptions)
+
+                //Util function for drawing route between two points
+
+                lifecycleScope.launch {
+                    try {
+                        ride = fetchDirections(startLocationStr, endLocationStr, mMap)
+                        println("debug: ride is $ride")
+                    }
+                    catch (e: Exception) { println("debug: could not get ride because $e")}
+                }
+
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(startLocation, 15f))
             }
             else {
@@ -131,37 +165,62 @@ class CreateRideActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private suspend fun getDirections(startCoordinates: String, endCoordinates: String) {
+    suspend fun fetchDirections(startCoordinates: String, endCoordinates: String, mMap: GoogleMap)
+            = suspendCoroutine<Ride> { continuation ->
 
-        val request = Request.Builder()
-            .url("https://maps.googleapis.com/maps/api/directions/json" +
+        val urlDirections = "https://maps.googleapis.com/maps/api/directions/json" +
 //                    "?destination=${startCoordinates.latitude}%${startCoordinates.longitude}" +
 //                    "&origin=${endCoordinates.latitude}%${endCoordinates.longitude}" +
-                    "?destination=$startCoordinates" +
-                    "&origin=$endCoordinates" +
-                    "&key=AIzaSyDFNc9XgXaO6iDFjP7fhDxX8FQVAmXFY0A")
-            .build()
+                "?destination=$startCoordinates" +
+                "&origin=$endCoordinates" +
+                "&key=AIzaSyBXEhzjnWPdvTk1CclmuYcKtUVSyPUjXL8"
 
-        var coroutine = CoroutineScope(IO).launch {
-            http.newCall(request).enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    e.printStackTrace()
-                }
+        val path: MutableList<List<LatLng>> = ArrayList()
+        val directionsRequest = object : StringRequest(Method.GET, urlDirections, Response.Listener<String> {
+                response ->
+            val jsonResponse = JSONObject(response)
+            // Get routes
+            val routes = jsonResponse.getJSONArray("routes")
+            val legs = routes.getJSONObject(0).getJSONArray("legs")
+            val steps = legs.getJSONObject(0).getJSONArray("steps")
+            val duration = legs.getJSONObject(0).getJSONObject("duration").get("text").toString()
+            val distance = legs.getJSONObject(0).getJSONObject("distance").get("text").toString()
 
-                override fun onResponse(call: Call, response: Response) {
-                    response.use {
-                        if (!response.isSuccessful) throw IOException("Unexpected code $response")
+            for (i in 0 until steps.length()) {
+                val points = steps.getJSONObject(i).getJSONObject("polyline").getString("points")
+                path.add(PolyUtil.decode(points))
+            }
+            for (i in 0 until path.size) {
+                mMap!!.addPolyline(PolylineOptions().addAll(path[i]).color(Color.RED))
+            }
 
-                        for ((name, value) in response.headers) {
-                            println("$name: $value")
-                        }
-
-                        directionsObject = response.body!!.string()
-                        println("debug: response = $directionsObject")
-                    }
-                }
-            })
-        }
-        coroutine.join()
+            continuation.resume(Ride(
+                duration = duration,
+                distance = distance,
+                start_location = startCoordinates,
+                end_location = endCoordinates)
+            )
+            //set data in viewmodel
+        }, Response.ErrorListener {
+            continuation.resumeWithException(it)
+        }){}
+        val requestQueue = Volley.newRequestQueue(this)
+        requestQueue.add(directionsRequest)
     }
+
+    private fun nextButtonListener() {
+        findViewById<Button>(R.id.nextBtn).setOnClickListener {
+            val rideDetailsFragment = RideDetailsFragment()
+
+            val bundle = Bundle()
+            bundle.putSerializable("ride", ride)
+            rideDetailsFragment.arguments = bundle
+
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.rideDetailsContainer, rideDetailsFragment)
+            transaction.setReorderingAllowed(true)
+            transaction.commit()
+        }
+    }
+
 }

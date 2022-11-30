@@ -5,24 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/waves"
-
+    android:background="@drawable/signupbackground"
     tools:context=".auth.VerifySignUpActivity">
 
     <TextView
         android:id="@+id/verify_email_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
+        android:layout_margin="20dp"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="137dp"
-        android:layout_marginEnd="1dp"
+        android:fontFamily="@font/poppins_medium"
         android:text="@string/verify_email_text"
-        android:textAlignment="center"
-        android:textColor="#0b786b"
+        android:textColor="@color/white"
         android:textSize="25sp"
         android:textStyle="bold" />
 
@@ -34,7 +29,9 @@
         android:layout_alignParentTop="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="0dp"
+        android:fontFamily="@font/poppins_medium"
         android:layout_marginTop="183dp"
+        android:textColor="@color/white"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -45,6 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:backgroundTint="#54585A"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="365dp"
@@ -62,7 +60,10 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="404dp"
         android:text="@string/resend_email_text"
-        android:textColor="#055d52"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/white"
         android:textStyle="bold" />
 
 </RelativeLayout>
+
+

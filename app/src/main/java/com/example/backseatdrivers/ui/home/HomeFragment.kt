@@ -27,10 +27,19 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+<<<<<<< HEAD
 
         val textView: TextView = binding.userGreeting
         homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
+=======
+        homeViewModel.update()
+        val textView: TextView = binding.textHome
+        homeViewModel.userSnapshot.observe(viewLifecycleOwner) {
+            for (snapshot in it){
+                println("fragment now ${snapshot.value}")
+            }
+>>>>>>> 3c9c91cb95db167399dd9690609e8ec6184f2b5f
         }
         return root
     }
