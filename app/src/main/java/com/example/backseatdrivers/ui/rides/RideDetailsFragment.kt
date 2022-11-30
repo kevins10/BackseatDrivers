@@ -2,6 +2,7 @@ package com.example.backseatdrivers.ui.rides
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.os.Handler
@@ -12,6 +13,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.DatePicker
+import android.widget.TimePicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.backseatdrivers.database.Ride
@@ -31,13 +33,9 @@ class RideDetailsFragment : Fragment() {
 
     private var visible: Boolean = false
 
-    private var postRideButton: Button? = null
-    private var backButton: Button? = null
     private var fullscreenContent: View? = null
 
-private var _binding: FragmentRideDetailsBinding? = null
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private var _binding: FragmentRideDetailsBinding? = null
     private val binding get() = _binding!!
 
 
@@ -45,12 +43,13 @@ private var _binding: FragmentRideDetailsBinding? = null
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-      _binding = FragmentRideDetailsBinding.inflate(inflater, container, false)
+    ): View {
+        _binding = FragmentRideDetailsBinding.inflate(inflater, container, false)
 
         val bundle = this.arguments?.getSerializable("ride")
         if(bundle != null) {
             ride = bundle as Ride
+            println("debug: details: ride is $ride")
         }
 
         val calendar = Calendar.getInstance()
@@ -70,26 +69,29 @@ private var _binding: FragmentRideDetailsBinding? = null
         binding.departureTimeEt.setOnClickListener {
             TimePickerDialog(requireActivity(), { view, hour, minute ->
                 //Display selected time in EditText
-                binding.departureTimeEt.setText("$hour:$minute")
+                calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(
+                    Calendar.DAY_OF_MONTH), hour, minute)
+                val timeInMillis = calendar.timeInMillis
+                val time = formatTimeDate(timeInMillis, "HH:mm:ss")
+                binding.departureTimeEt.setText("$time")
                 binding.departureTimeEt.error = null
             } , hourOfDay, minute, false).show()
         }
 
-      return binding.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         visible = true
-
         fullscreenContent = binding.fullScreenContent
-        postRideButton = binding.postRideBtn
-        backButton = binding.backBtn
 
-        postRideClickListener()
+        binding.postRideBtn.setOnClickListener {
+            postRide()
+        }
 
-        backButton!!.setOnClickListener {
+        binding.backBtn.setOnClickListener {
             requireActivity().finish()
         }
 
@@ -98,23 +100,23 @@ private var _binding: FragmentRideDetailsBinding? = null
         // while interacting with the UI.
     }
 
-    private fun postRideClickListener() {
-        val num_passengers = binding.numPassengersEt.text
-        val departure_date = binding.departureDateEt.text.toString()
-        val departure_time = binding.departureTimeEt.text.toString()
+    private fun postRide() {
+        val numPassengers = binding.numPassengersEt.text
+        val departureDate = binding.departureDateEt.text.toString()
+        val departureTime = binding.departureTimeEt.text.toString()
 
-        if(num_passengers.isEmpty()) {
+        if(numPassengers.isEmpty()) {
             binding.numPassengersEt.error = "Please enter available seats"
             return
         }
 
-        if(departure_time.isEmpty()) {
+        if(departureTime.isEmpty()) {
             binding.departureTimeEt.error = "Please enter a departure time"
             return
         }
-        ride.num_seats = num_passengers.toString().toInt()
-        ride.departure_time = departure_time
-        ride.departure_time = departure_date + ", " + departure_time
+        ride.num_seats = numPassengers.toString().toInt()
+        ride.departure_time = departureTime
+        ride.departure_time = "$departureDate, $departureTime"
 
         ridesViewModel.uploadRide(ride)
         Toast.makeText(requireActivity(), "Ride has been posted", Toast.LENGTH_SHORT)
@@ -123,13 +125,19 @@ private var _binding: FragmentRideDetailsBinding? = null
 
     override fun onDestroy() {
         super.onDestroy()
-        postRideButton = null
-        backButton = null
         fullscreenContent = null
     }
 
-override fun onDestroyView() {
+    override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+    private fun formatTimeDate(milliSeconds: Long, pattern: String?): String? {
+        val formatter = SimpleDateFormat(pattern)
+        val calendar: Calendar = Calendar.getInstance()
+        calendar.timeInMillis = milliSeconds
+        return formatter.format(calendar.time)
+    }
+
 }

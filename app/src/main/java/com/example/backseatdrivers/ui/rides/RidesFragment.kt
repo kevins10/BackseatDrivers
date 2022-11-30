@@ -76,14 +76,6 @@ class RidesFragment : Fragment() {
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         view.findViewById<Button>(R.id.createRideBtn).setOnClickListener {
             startCreateRideActivity()
-            database = Firebase.database.reference
-            var rideobj = Ride(
-                ride_id = UUID.randomUUID(), host_id = userViewModel.getUser()?.uid.toString(), null, 4, false,
-                "SFU SURREY", "SFU BURNABY", "Oct 21 4 pm", "10km",
-                "20 min", null, null)
-
-            database.child("Rides").child("${rideobj.ride_id}").setValue(rideobj)
-
         }
     }
 

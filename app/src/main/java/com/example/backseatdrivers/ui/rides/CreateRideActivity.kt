@@ -23,6 +23,8 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.google.maps.android.PolyUtil
 import kotlinx.coroutines.launch
 import org.json.JSONObject
@@ -40,52 +42,42 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
     private lateinit var polylines: ArrayList<Polyline>
     private lateinit var geocoder: Geocoder
 
-    private lateinit var usersRef: DatabaseReference
-
-    private lateinit var findRouteBtn: Button
-//    private lateinit var endLocationInput: EditText
-
-    private val ridesViewModel = RidesViewModel()
-    private val userViewModel = UserViewModel()
     private var user: User? = null
     private var ride: Ride? = null
+
+    // host
+    private lateinit var database: DatabaseReference
+    private lateinit var mAuth : FirebaseAuth
+    private lateinit var currentUser : DatabaseReference
+    private var hostId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateRideBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //set fragment for more details
-//        if (savedInstanceState == null) {
-//            supportFragmentManager.commit {
-//                setReorderingAllowed(true)
-//                add<RideDetailsFragment>(R.id.rideDetailsContainer)
-//            }
-//        }
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-        nextButtonListener()
 
-        //fetch user data from intent extras, and init ride object
-        val uid = FirebaseAuth.getInstance().currentUser?.uid
-        userViewModel.getUserObj()?.child(uid.toString())?.get()?.addOnSuccessListener {
-            user = it.value as User?
-            println("debug: user fetched as = $user")
+        // get user data
+        mAuth = FirebaseAuth.getInstance()
+        val user = mAuth.currentUser
+        database = Firebase.database.getReference("Users")
+        if (user != null){
+            currentUser = database.child(user.uid)
+            hostId = user.uid
+            println("debug: current user name: $hostId")
         }
 
-        //listener for updates to the current ride
-        ridesViewModel.ride.observe(this) {viewModelRide ->
-            if(viewModelRide != null) {
-                ride = viewModelRide
-            }
+        binding.findRouteBtn.setOnClickListener {
+            findRoute()
         }
 
-        //initialize UI variables
-        findRouteBtn = binding.findRouteBtn
-        findRouteClickListener()
+        binding.nextBtn.setOnClickListener {
+            next()
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -108,60 +100,57 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(startPoint, 15f))
     }
 
-    private fun findRouteClickListener() {
-        findRouteBtn.setOnClickListener {
-            mMap.clear()
+    private fun findRoute() {
+        mMap.clear()
 
-            val startLocationInput = binding.startLocationInput.text.toString()
-            val endLocationInput = binding.endLocationInput.text.toString()
+        val startLocationInput = binding.startLocationInput.text.toString()
+        val endLocationInput = binding.endLocationInput.text.toString()
 
-            if(startLocationInput.isEmpty()) {
-                binding.startLocationInput.error = "Please enter a start location"
-                return@setOnClickListener
-            }
-            if(endLocationInput.isEmpty()) {
-                binding.endLocationInput.error = "Please enter a destination"
-                return@setOnClickListener
-            }
+        if(startLocationInput.isEmpty()) {
+            binding.startLocationInput.error = "Please enter a start location"
+            return
+        }
+        if(endLocationInput.isEmpty()) {
+            binding.endLocationInput.error = "Please enter a destination"
+            return
+        }
 
+        val startAddressList = geocoder.getFromLocationName(startLocationInput, 1)
+        val endAddressList = geocoder.getFromLocationName(endLocationInput, 1)
 
-            val startAddressList = geocoder.getFromLocationName(startLocationInput, 1)
-            val endAddressList = geocoder.getFromLocationName(endLocationInput, 1)
+        if (startAddressList.size >= 1 && endAddressList.size >= 1) {
+            val startLocation = LatLng(startAddressList[0].latitude, startAddressList[0].longitude)
+            val endLocation = LatLng(endAddressList[0].latitude, endAddressList[0].longitude)
 
-            if (startAddressList.size >= 1 && endAddressList.size >= 1) {
-                val startLocation = LatLng(startAddressList[0].latitude, startAddressList[0].longitude)
-                val endLocation = LatLng(endAddressList[0].latitude, endAddressList[0].longitude)
+            val startLocationStr = startAddressList[0].latitude.toString() + "%20" + startAddressList[0].longitude.toString()
+            val endLocationStr = endAddressList[0].latitude.toString() + "%20" +  endAddressList[0].longitude.toString()
 
-                val startLocationStr = startAddressList[0].latitude.toString() + "%20" + startAddressList[0].longitude.toString()
-                val endLocationStr = endAddressList[0].latitude.toString() + "%20" +  endAddressList[0].longitude.toString()
+            markerOptions.position(startLocation)
+            mMap.addMarker(markerOptions)
 
-                markerOptions.position(startLocation)
-                mMap.addMarker(markerOptions)
+            markerOptions.position(endLocation)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+            mMap.addMarker(markerOptions)
 
-                markerOptions.position(endLocation)
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-                mMap.addMarker(markerOptions)
+            //Util function for drawing route between two points
 
-                //Util function for drawing route between two points
-
-                lifecycleScope.launch {
-                    try {
-                        ride = fetchDirections(startLocationStr, endLocationStr, mMap)
-                        println("debug: ride is $ride")
-                    }
-                    catch (e: Exception) { println("debug: could not get ride because $e")}
+            lifecycleScope.launch {
+                try {
+                    ride = fetchDirections(startLocationStr, endLocationStr, mMap)
+                    println("debug: ride is $ride")
                 }
+                catch (e: Exception) { println("debug: could not get ride because $e")}
+            }
 
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(startLocation, 15f))
-            }
-            else {
-                mMap.clear()
-                val vancouver = LatLng(49.2827, -123.1207)
-                markerOptions.position(vancouver)
-                mMap.addMarker(markerOptions)
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(vancouver, 15f))
-                Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show()
-            }
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(startLocation, 15f))
+        }
+        else {
+            mMap.clear()
+            val vancouver = LatLng(49.2827, -123.1207)
+            markerOptions.position(vancouver)
+            mMap.addMarker(markerOptions)
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(vancouver, 15f))
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -191,12 +180,14 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
                 path.add(PolyUtil.decode(points))
             }
             for (i in 0 until path.size) {
-                mMap!!.addPolyline(PolylineOptions().addAll(path[i]).color(Color.RED))
+                mMap.addPolyline(PolylineOptions().addAll(path[i]).color(Color.RED))
             }
 
             continuation.resume(Ride(
+                host_id = hostId,
                 duration = duration,
                 distance = distance,
+                is_full = false,
                 start_location = startCoordinates,
                 end_location = endCoordinates)
             )
@@ -208,19 +199,17 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
         requestQueue.add(directionsRequest)
     }
 
-    private fun nextButtonListener() {
-        findViewById<Button>(R.id.nextBtn).setOnClickListener {
-            val rideDetailsFragment = RideDetailsFragment()
+    private fun next() {
+        val rideDetailsFragment = RideDetailsFragment()
 
-            val bundle = Bundle()
-            bundle.putSerializable("ride", ride)
-            rideDetailsFragment.arguments = bundle
+        val bundle = Bundle()
+        println("debug: next: ride is $ride")
+        bundle.putSerializable("ride", ride)
+        rideDetailsFragment.arguments = bundle
 
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.rideDetailsContainer, rideDetailsFragment)
-            transaction.setReorderingAllowed(true)
-            transaction.commit()
-        }
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.rideDetailsContainer, rideDetailsFragment)
+        transaction.setReorderingAllowed(true)
+        transaction.commit()
     }
-
 }

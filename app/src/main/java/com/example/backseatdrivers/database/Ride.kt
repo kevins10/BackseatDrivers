@@ -21,4 +21,4 @@ data class Ride (
 
     //Array of passenger IDs
     var passengers: ArrayList<String>? = null
-    ) : Serializable
+) : Serializable
