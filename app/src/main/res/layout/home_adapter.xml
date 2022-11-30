@@ -7,16 +7,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id = "@+id/ra_date"
+        android:id = "@+id/hf_driver"
         android:text="Date"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id = "@+id/ra_dest"
+        android:id = "@+id/hf_time"
+        android:text="Time"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id = "@+id/hf_dest"
         android:text="Destination"/>
-
-
-
-
 </LinearLayout>

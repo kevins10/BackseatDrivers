@@ -1,4 +1,4 @@
-package com.example.backseatdrivers.ui.rides
+package com.example.backseatdrivers.ui.home
 
 import android.content.Context
 import android.view.View
@@ -9,7 +9,7 @@ import com.example.backseatdrivers.R
 import com.example.backseatdrivers.database.Ride
 import com.google.firebase.database.DataSnapshot
 
-class RidesAdapter(private val context: Context, private var list: ArrayList<Ride>): BaseAdapter() {
+class HomeAdapter(private val context: Context, private var list: ArrayList<DataSnapshot>): BaseAdapter() {
     override fun getCount(): Int {
         return list.size
     }
@@ -23,11 +23,8 @@ class RidesAdapter(private val context: Context, private var list: ArrayList<Rid
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view = View.inflate(context, R.layout.rides_adapter, null)
-        val date_tv = view.findViewById<TextView>(R.id.ra_date)
-        val dest_tv = view.findViewById<TextView>(R.id.ra_dest)
-        date_tv.text = list[position].departure_time
-        dest_tv.text = list[position].end_location
+        val view = View.inflate(context, R.layout.home_adapter, null)
+
         return view
 
     }

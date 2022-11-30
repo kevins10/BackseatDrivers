@@ -20,4 +20,5 @@ data class User(
 
     var driver_profile: DriverProfile? = null,
     var request_notifications: ArrayList<RequestNotification>? = null
+
 ) : Serializable
