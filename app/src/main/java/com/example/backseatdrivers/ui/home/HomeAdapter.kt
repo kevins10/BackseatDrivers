@@ -45,7 +45,7 @@ class HomeAdapter(private val context: Context, private var list: ArrayList<Data
         CoroutineScope(Dispatchers.Main).launch {
             val firstName = Queries().getFirstName(driver.toString())
             val lastName = Queries().getLastName(driver.toString())
-            dateTimeTextView.text = "Leave at: ${dateTime.toString()}"
+            dateTimeTextView.text = "Date: ${dateTime.toString()}"
             driverTextView.text = "Driver: $firstName $lastName"
             destTextView.text = "Desination: ${destination.toString()}"
         }
