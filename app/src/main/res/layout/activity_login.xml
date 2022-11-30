@@ -100,7 +100,7 @@
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Password"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textPassword"
                     android:maxLines="1"
                     android:paddingLeft="17dp"
                     android:paddingTop="15dp"
