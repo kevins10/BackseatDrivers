@@ -1,24 +1,23 @@
 package com.example.backseatdrivers.database
 
 import com.google.firebase.database.IgnoreExtraProperties
+import java.io.Serializable
 
 @IgnoreExtraProperties
-data class User (
+data class User(
 //    val user_id: String? = null,
     val email: String? = null,
     val password: String? = null,
 
     val first_name: String? = null,
     val last_name: String? = null,
-    val age: String? = null,
+    val gender: String? = null,
+    val age: Int? = null,
 
-    /*
-    TODO: add fields to signup
+    var date_of_birth: String? = null,
+    var phone_number: String? = null,
+    var home_address: String? = null,
 
-    var date_of_birth: String,
-    var phone_number: String,
-    var home_address: String,
-
-    var driver_profile: DriverProfile
-    */
-)
+    var driver_profile: DriverProfile? = null,
+    var request_notifications: ArrayList<RequestNotification>? = null
+) : Serializable

@@ -1,36 +1,61 @@
 package com.example.backseatdrivers
 
-import android.content.Intent
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.backseatdrivers.database.User
 import com.example.backseatdrivers.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var mAuth : FirebaseAuth
+//    private lateinit var mAuth : FirebaseAuth
+
+    private lateinit var usersRef: DatabaseReference
+    private var user: User? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mAuth = FirebaseAuth.getInstance()
+        //Create Listener for user data changes
 
-        val user = mAuth.currentUser
+        val usersListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                user = dataSnapshot.getValue<User>()
+                if(user != null) {
+                    println("listener object $user")
+                } else {
+                    println("user is null")
+                }
+            }
 
-        if (user != null) {
-            println("SIGNED IN AS: ${user.uid}")
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+            }
         }
-        val user2 : FirebaseUser? = intent.getParcelableExtra<FirebaseUser>("user");
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
 
-        if (user2 != null) {
-            println("signed in as: ${user2.uid}")
-        }
+        usersRef = Firebase.database.reference
+            .child("Users")
+            .child(uid.toString())
+        usersRef.addValueEventListener(usersListener)
+
 
 
         binding = ActivityMainBinding.inflate(layoutInflater)

@@ -14,25 +14,30 @@
     <string name="firstname_hint_text">First Name</string>
     <string name="lastname_hint_text">Last Name</string>
     <string name="age_hint_text">Age</string>
+    <string name="dob_hint_text">Date of Birth</string>
+    <string name="phone_hint_text">Phone Number</string>
+    <string name="address_hint_text">Address</string>
     <!--Gender-->
-    <string name="gender_hint_text">Gender</string>
-    <string-array name="gender_spinner_array">
-        <item>Male</item>
-        <item>Female</item>
-        <item>Other</item>
-    </string-array>
-    <!--License Type-->
-    <string name="license_hint_text">License Type</string>
-    <string-array name="license_type_array">
-        <item>Class 5</item>
-        <item>Class 7</item>
-        <item>idk what else</item>
-    </string-array>
+    <string name="male_text">Male</string>
+    <string name="female_text">Female</string>
+    <string name="other_text">Other</string>
     <string name="no_account_text">Don\'t have an account?</string>
     <string name="bad_email_pw_text">*The email or password is incorrect</string>
+    <string name="next_btn_text">Next</string>
+
+    <!--Driver Profile-->
+    <string name="driver_profile_text">Set Up Your Drive Profile</string>
+    <string name="license_hint_text">License Type</string>
+    <string name="vehicle_model_text">Vehicle model</string>
+    <string name="vehicle_color_text">Vehicle Color</string>
+    <string name="vehicle_rules_text">Vehicle Rules</string>
 
     <!--Email Verification-->
     <string name="verify_email_text">Verify your email</string>
     <string name="continue_btn_text">Continue</string>
     <string name="resend_email_text">Resend verification email</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_create_ride">CreateRideActivity</string>
+    <string name="title_activity_ride_view">RideView</string>
 </resources>
