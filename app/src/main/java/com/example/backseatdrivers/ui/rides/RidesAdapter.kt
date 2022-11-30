@@ -25,7 +25,6 @@ class RidesAdapter(private val context: Context, private var list: ArrayList<Rid
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view = View.inflate(context, R.layout.rides_adapter, null)
         val date_tv = view.findViewById<TextView>(R.id.ra_date)
-        val time_tv = view.findViewById<TextView>(R.id.ra_time)
         val dest_tv = view.findViewById<TextView>(R.id.ra_dest)
         date_tv.text = list[position].departure_time
         dest_tv.text = list[position].end_location
