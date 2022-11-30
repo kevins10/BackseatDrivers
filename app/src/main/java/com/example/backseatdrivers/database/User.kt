@@ -6,13 +6,13 @@ import java.io.Serializable
 @IgnoreExtraProperties
 data class User(
 //    val user_id: String? = null,
-    val email: String? = null,
-    val password: String? = null,
+    var email: String? = null,
+    var password: String? = null,
 
-    val first_name: String? = null,
-    val last_name: String? = null,
-    val gender: String? = null,
-    val age: Int? = null,
+    var first_name: String? = null,
+    var last_name: String? = null,
+    var gender: String? = null,
+    var age: Int? = null,
 
     var date_of_birth: String? = null,
     var phone_number: String? = null,

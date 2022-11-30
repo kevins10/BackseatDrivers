@@ -19,5 +19,4 @@ class SignUpActivity : AppCompatActivity() {
         transaction.replace(binding.fragmentContainer.id, userProfileSetUpFragment)
         transaction.commit()
     }
-
 }
