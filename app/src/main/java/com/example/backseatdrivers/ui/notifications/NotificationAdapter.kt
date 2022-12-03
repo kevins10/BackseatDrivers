@@ -9,7 +9,6 @@ import android.widget.TextView
 import com.example.backseatdrivers.R
 import com.example.backseatdrivers.database.Queries
 import com.example.backseatdrivers.database.Request
-import com.example.backseatdrivers.database.Ride
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -33,28 +32,44 @@ class NotificationAdapter(private val context: Context, private var list: ArrayL
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view = View.inflate(context, R.layout.notification_adapter, null)
 
-        val currentItem = list[position]
+        val currentNotification = list[position]
 
+        val rideId = currentNotification.ride_id
+        val passenger = currentNotification.passenger_id
         val date_tv = view.findViewById<TextView>(R.id.na_date)
         val passenger_tv = view.findViewById<TextView>(R.id.na_passenger)
         val location_tv = view.findViewById<TextView>(R.id.na_pickup)
         val acceptBtn = view.findViewById<Button>(R.id.na_accept)
         acceptBtn.setOnClickListener(){
-            var database : DatabaseReference = Firebase.database.getReference("Requests").child("${currentItem.request_id}")
+            // add passenger to ride
+            CoroutineScope(Dispatchers.Main).launch {
+                val passengers = rideId?.let { it1 ->
+                    Queries().getPassengerList(
+                        it1
+                    )
+                }
+                if (passenger != null) {
+                    if (rideId != null) {
+                        Queries().addPassengerToRide(rideId, passenger,
+                            passengers as ArrayList<String>?
+                        )
+                    }
+                }
+            }
+
+            val database : DatabaseReference = Firebase.database.getReference("Requests").child("${currentNotification.request_id}")
             database.removeValue()
         }
 
-        val passenger = currentItem.passenger_id
         CoroutineScope(Dispatchers.Main).launch {
             val firstName = Queries().getFirstName(passenger.toString())
             val lastName = Queries().getLastName(passenger.toString())
-            val date = Queries().getDateFromRideId(currentItem.ride_id.toString())
+            val date = Queries().getDateFromRideId(currentNotification.ride_id.toString())
             passenger_tv.text = "Request from: $firstName $lastName"
-            location_tv.text = "Pickup Location: ${currentItem.location}"
+            location_tv.text = "Pickup Location: ${currentNotification.location}"
             date_tv.text = "Date: $date"
         }
 
         return view
-
     }
 }
