@@ -28,15 +28,28 @@ class RidesAdapter(private val context: Context, private var list: ArrayList<Rid
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        val currentRide = list[position]
 
         val view = View.inflate(context, R.layout.rides_adapter, null)
         val date_tv = view.findViewById<TextView>(R.id.ra_date)
         val start_tv = view.findViewById<TextView>(R.id.ra_start)
         val dest_tv = view.findViewById<TextView>(R.id.ra_dest)
-        date_tv.text = list[position].departure_time
-        start_tv.text = "Start: ${list[position].start_address}"
-        dest_tv.text = "Destination: ${list[position].end_address}"
-        println("debug: dest: ${list[position].end_address}")
+        val seats_tv = view.findViewById<TextView>(R.id.ra_seats)
+        date_tv.text = currentRide.departure_time
+        start_tv.text = "Start: ${currentRide.start_address}"
+        dest_tv.text = "Destination: ${currentRide.end_address}"
+        println("debug: dest: ${currentRide.end_address}")
+        var numPassengers = currentRide.passengers?.size
+        var numSeats = currentRide.num_seats
+        if (numSeats == null) {
+            numSeats = 0
+        }
+        if (numPassengers == null) {
+            numPassengers = 0
+        }
+        val availableSeats = numSeats - numPassengers
+
+        seats_tv.text = "Available seats: $availableSeats/$numSeats"
 
         return view
     }

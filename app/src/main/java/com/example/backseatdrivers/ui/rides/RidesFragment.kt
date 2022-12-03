@@ -86,7 +86,7 @@ class RidesFragment : Fragment() {
                     ride.start_location = i.child("start_location").value.toString()
                     ride.end_address = i.child("end_address").value.toString()
                     ride.start_address = i.child("start_address").value.toString()
-                    ride.host_id = i.child("host_id").value.toString()
+                    ride.num_seats = i.child("num_seats").value.toString().toInt()
                     arrayList.add(ride)
                 }
                 LV.adapter = ridesAdapter

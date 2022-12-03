@@ -22,7 +22,11 @@
         android:id = "@+id/ra_dest"
         android:text="Destination"/>
 
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id = "@+id/ra_seats"
+        android:text="Seats"/>
 
 
 </LinearLayout>
