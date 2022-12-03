@@ -27,7 +27,7 @@ class RidesAdapter(private val context: Context, private var list: ArrayList<Rid
         return position.toLong()
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
         val currentRide = list[position]
 
         val view = View.inflate(context, R.layout.rides_adapter, null)
@@ -35,7 +35,10 @@ class RidesAdapter(private val context: Context, private var list: ArrayList<Rid
         val start_tv = view.findViewById<TextView>(R.id.ra_start)
         val dest_tv = view.findViewById<TextView>(R.id.ra_dest)
         val seats_tv = view.findViewById<TextView>(R.id.ra_seats)
-        val numPassengers = currentRide.passengers?.size
+        var numPassengers = currentRide.passengers?.size
+        if (numPassengers == null) {
+            numPassengers = 0
+        }
         val numSeats = currentRide.num_seats
 
         date_tv.text = currentRide.departure_time

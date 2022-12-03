@@ -87,8 +87,20 @@ class RidesFragment : Fragment() {
                     ride.end_address = i.child("end_address").value.toString()
                     ride.start_address = i.child("start_address").value.toString()
                     ride.num_seats = i.child("num_seats").value.toString().toInt()
-                    ride.passengers = i.child("passengers").value as ArrayList<String>
-                    arrayList.add(ride)
+                    val passengers = i.child("passengers").value
+
+                    // check if ride is full
+                    if (passengers != null) {
+                        ride.passengers = passengers as ArrayList<String>
+                        if (ride.passengers!!.size == ride.num_seats) {
+                            ride.is_full = true
+                        }
+                    }
+
+                    // add ride to array if ride not full
+                    if (ride.is_full != true) {
+                        arrayList.add(ride)
+                    }
                 }
                 LV.adapter = ridesAdapter
             }
