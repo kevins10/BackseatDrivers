@@ -35,21 +35,13 @@ class RidesAdapter(private val context: Context, private var list: ArrayList<Rid
         val start_tv = view.findViewById<TextView>(R.id.ra_start)
         val dest_tv = view.findViewById<TextView>(R.id.ra_dest)
         val seats_tv = view.findViewById<TextView>(R.id.ra_seats)
+        val numPassengers = currentRide.passengers?.size
+        val numSeats = currentRide.num_seats
+
         date_tv.text = currentRide.departure_time
         start_tv.text = "Start: ${currentRide.start_address}"
         dest_tv.text = "Destination: ${currentRide.end_address}"
-        println("debug: dest: ${currentRide.end_address}")
-        var numPassengers = currentRide.passengers?.size
-        var numSeats = currentRide.num_seats
-        if (numSeats == null) {
-            numSeats = 0
-        }
-        if (numPassengers == null) {
-            numPassengers = 0
-        }
-        val availableSeats = numSeats - numPassengers
-
-        seats_tv.text = "Available seats: $availableSeats/$numSeats"
+        seats_tv.text = "Seats: $numPassengers/$numSeats"
 
         return view
     }
