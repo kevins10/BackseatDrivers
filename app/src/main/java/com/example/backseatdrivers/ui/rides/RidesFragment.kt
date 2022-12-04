@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.backseatdrivers.R
 import com.example.backseatdrivers.UserViewModel
+import com.example.backseatdrivers.database.Passenger
 import com.example.backseatdrivers.database.Ride
 import com.example.backseatdrivers.database.User
 import com.example.backseatdrivers.databinding.FragmentRidesBinding
@@ -91,7 +92,7 @@ class RidesFragment : Fragment() {
 
                     // check if ride is full
                     if (passengers != null) {
-                        ride.passengers = passengers as ArrayList<String>
+                        ride.passengers = passengers as ArrayList<Passenger>
                         if (ride.passengers!!.size == ride.num_seats) {
                             ride.is_full = true
                         }

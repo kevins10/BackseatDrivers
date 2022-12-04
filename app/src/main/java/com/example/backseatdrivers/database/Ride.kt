@@ -20,5 +20,11 @@ data class Ride (
     var path: ArrayList<String>? = null, //ArrayList of LatLngs in string format (e.g "24.225213, 53.251522")
 
     //Array of passenger IDs
-    var passengers: ArrayList<String>? = null
+    var passengers: ArrayList<Passenger>? = null
 ) : Serializable
+
+class Passenger(
+    var id: String,
+    var pickup_location: String,
+//    var pickup_address: String
+)

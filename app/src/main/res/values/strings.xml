@@ -59,4 +59,5 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="time_of_day">time of day</string>
+    <string name="title_activity_driver_ride_view">DriverRideViewActivity</string>
 </resources>
