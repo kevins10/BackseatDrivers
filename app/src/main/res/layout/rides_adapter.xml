@@ -1,28 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingRight="20dp"
+    android:paddingTop="5dp"
+    android:background="@drawable/listbackground"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id = "@+id/ra_date"
-        android:text="Date"/>
 
-    <TextView
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id = "@+id/ra_start"
-        android:text="Start"/>
+        android:layout_height="wrap_content">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id = "@+id/ra_date"
+            android:layout_toRightOf="@+id/date_icon"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Date"/>
+
+        <ImageView
+            android:id="@+id/date_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="10.3dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="17dp"
+            android:src="@drawable/ic_baseline_calendar_today_24"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id = "@+id/ra_start"
+            android:layout_toRightOf="@+id/dest_icon1"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Start"/>
+
+        <ImageView
+            android:id="@+id/dest_icon1"
+            android:layout_width="wrap_content"
+            android:layout_height="10.3dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="17dp"
+            android:src="@drawable/ic_baseline_location_on_24"/>
+    </RelativeLayout>
+
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id = "@+id/ra_dest"
+        android:layout_toRightOf="@+id/dest_icon"
+        android:fontFamily="@font/poppins_regular"
         android:text="Destination"/>
 
-
-
+    <ImageView
+        android:id="@+id/dest_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="10.3dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="17dp"
+        android:src="@drawable/ic_baseline_location_on_24"/>
+</RelativeLayout>
 
 </LinearLayout>
