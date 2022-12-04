@@ -27,11 +27,12 @@ class RidesAdapter(private val context: Context, private var list: ArrayList<Rid
         return position.toLong()
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val currentRide = list[position]
 
         val view = View.inflate(context, R.layout.rides_adapter, null)
         val date_tv = view.findViewById<TextView>(R.id.ra_date)
+        val driver_tv = view.findViewById<TextView>(R.id.ra_driver)
         val start_tv = view.findViewById<TextView>(R.id.ra_start)
         val dest_tv = view.findViewById<TextView>(R.id.ra_dest)
         val seats_tv = view.findViewById<TextView>(R.id.ra_seats)
@@ -40,8 +41,14 @@ class RidesAdapter(private val context: Context, private var list: ArrayList<Rid
             numPassengers = 0
         }
         val numSeats = currentRide.num_seats
+        val driver = currentRide.host_id
 
-        date_tv.text = currentRide.departure_time
+        CoroutineScope(Dispatchers.Main).launch {
+            val firstName = Queries().getFirstName(driver.toString())
+            val lastName = Queries().getLastName(driver.toString())
+            driver_tv.text = "Posted By: $firstName $lastName"
+        }
+        date_tv.text = "Date: ${currentRide.departure_time}"
         start_tv.text = "Start: ${currentRide.start_address}"
         dest_tv.text = "Destination: ${currentRide.end_address}"
         seats_tv.text = "Seats: $numPassengers/$numSeats"

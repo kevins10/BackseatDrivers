@@ -5,7 +5,7 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_profile">Profile</string>
     <string name="title_chat">Chat</string>
-8    <!--Login/Signup-->
+    <!--Login/Signup-->
     <string name="signup_text">Sign Up</string>
     <string name="email_hint_text">SFU Email</string>
     <string name="password_hint_text">Password</string>
