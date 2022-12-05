@@ -37,7 +37,6 @@ class PassengerRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var polyLineOptions: PolylineOptions
     private lateinit var polylines: ArrayList<Polyline>
     private lateinit var userId: String
-    private var passengerKey: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,7 +95,10 @@ class PassengerRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
 
         binding.removeButton.setOnClickListener {
             // remove passenger from passengers list
-            val database : DatabaseReference = Firebase.database.getReference("Rides").child("${rideobj.ride_id}").child("passengers").child("$passengerKey")
+            val database : DatabaseReference = Firebase.database.getReference("Rides")
+                .child("${rideobj.ride_id}")
+                .child("passengers")
+                .child("$userId")
             database.removeValue()
 
             // send driver notification
