@@ -13,72 +13,44 @@
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
 
         <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/startLocationInput"
-                android:hint="enter start location"
-                android:backgroundTint="#979797"
-                android:textColor="@color/black"
-                />
+                android:background="@color/white">
+                <fragment
+                    android:id="@+id/autoComplete_fragment_start_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment" />
+                <fragment
+                    android:id="@+id/autoComplete_fragment_end_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment" />
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/endLocationInput"
-                android:hint="enter destination"
-                android:backgroundTint="#979797"
-                android:textColor="@color/black"
-                />
-
-    <!--        <com.google.android.material.textfield.TextInputLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:id="@+id/startLocationInput"-->
-    <!--            android:hint="enter start location">-->
-    <!--            <com.google.android.material.textfield.TextInputEditText-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                />-->
-    <!--        </com.google.android.material.textfield.TextInputLayout>-->
-
-
-    <!--        <com.google.android.material.textfield.TextInputLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:id="@+id/endLocationInput"-->
-    <!--            android:hint="enter destination">-->
-    <!--            <com.google.android.material.textfield.TextInputEditText-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                />-->
-    <!--        </com.google.android.material.textfield.TextInputLayout>-->
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:id="@+id/findRouteBtn"
-                android:text="Find Route"
-                />
+                android:text="Find Route" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:id="@+id/nextBtn"
-                android:text="Next"
-                />
+                android:text="Next" />
 
             <TextView
                 android:id="@+id/routeInfoTV"
@@ -92,9 +64,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            />
+            android:layout_height="match_parent" />
 
     </fragment>
 
