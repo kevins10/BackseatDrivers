@@ -93,16 +93,15 @@ class Queries {
         .await()
         .value
 
-    fun addPassengerToRide(rideId: String, passengerId: String, pickupLocation: String, passengers: ArrayList<Passenger>?): Boolean {
+    fun addPassengerToRide(rideId: String, passengerId: String, pickupLocation: String, passengers: HashMap<String, String>?): Boolean {
         var success = false
         try {
-            var newPassengers = ArrayList<Passenger>()
+            var newPassengers = HashMap<String, String>()
             // add passenger to list
             if (passengers != null) {
                 newPassengers = passengers
             }
-            val passenger = Passenger(passengerId, pickupLocation)
-            newPassengers.add(passenger)
+            newPassengers.put(passengerId, pickupLocation)
             // update passengers list
             Firebase.database.reference
                 .child("Rides")

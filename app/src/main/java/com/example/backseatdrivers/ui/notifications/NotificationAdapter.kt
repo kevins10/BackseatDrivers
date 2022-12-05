@@ -7,7 +7,6 @@ import android.widget.BaseAdapter
 import android.widget.Button
 import android.widget.TextView
 import com.example.backseatdrivers.R
-import com.example.backseatdrivers.database.Passenger
 import com.example.backseatdrivers.database.Queries
 import com.example.backseatdrivers.database.Request
 import com.google.firebase.database.DatabaseReference
@@ -54,7 +53,7 @@ class NotificationAdapter(private val context: Context, private var list: ArrayL
                     if (rideId != null) {
                         if (pickupLocation != null) {
                             Queries().addPassengerToRide(rideId, passenger, pickupLocation,
-                                passengers as ArrayList<Passenger>?
+                                passengers as HashMap<String, String>?
                             )
                         }
                     }

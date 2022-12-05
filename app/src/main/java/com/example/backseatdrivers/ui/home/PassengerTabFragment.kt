@@ -1,12 +1,12 @@
 package com.example.backseatdrivers.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.example.backseatdrivers.database.Passenger
 import com.example.backseatdrivers.database.Ride
 import com.example.backseatdrivers.databinding.FragmentPassengerTabBinding
 import com.example.backseatdrivers.ui.rides.RidesAdapter
@@ -49,14 +49,16 @@ class PassengerTabFragment : Fragment() {
 
         //set on click listener for create a ride button
         arrayList = arrayListOf()
-        val rideAdapter = RidesAdapter(requireActivity().applicationContext, arrayList)
+        val ridesAdapter = RidesAdapter(requireActivity().applicationContext, arrayList)
         val LV = binding.hfLv
-        LV.adapter = rideAdapter
+        LV.adapter = ridesAdapter
         if (LV != null) {
             LV.setOnItemClickListener { parent, view, position, id ->
 
                 // open dialog with ride info
-
+                val intent = Intent(requireActivity(), PassengerRideViewActivity::class.java)
+                intent.putExtra("data", ridesAdapter.getItem(position) as Ride)
+                startActivity(intent)
             }
         }
 
@@ -78,23 +80,20 @@ class PassengerTabFragment : Fragment() {
 
                     // check if user is in passenger list and add ride to array if by user is a passenger
                     if (passengers != null) {
-                        ride.passengers = passengers as ArrayList<Passenger>?
-                        println("debug1: ${ride.passengers}")
+                        ride.passengers = passengers as HashMap<String, String>?
+                        println("debug2: ${ride.passengers}")
+                        for (p in passengers) {
+                            val passengerId = p.key
+                            val pickup = p.value
+                            println("debug1: key: $passengerId value: $pickup")
 
-                        println("debug1: passengers size: ${passengers.size}")
-                        for (p in 0 until passengers.size) {
-                            println("debug1: p: $p")
-                            val map: HashMap<String, String> = i.child("passengers").child(p.toString()).value as HashMap<String, String>
-                            val id: String? = map.get("id")
-                            val pickup: String? = map.get("pickup_location")
-                            println("debug1: id: $id, pickup: $pickup")
-                            if (id == userId) {
+                            if (passengerId == userId) {
                                 arrayList.add(ride)
                             }
                         }
                     }
                 }
-                LV.adapter = rideAdapter
+                LV.adapter = ridesAdapter
             }
 
             override fun onCancelled(error: DatabaseError) {

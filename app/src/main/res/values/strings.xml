@@ -60,4 +60,6 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="time_of_day">time of day</string>
     <string name="title_activity_driver_ride_view">DriverRideViewActivity</string>
+    <string name="title_activity_passenger_ride_view">PassengerRideViewActivity</string>
+
 </resources>

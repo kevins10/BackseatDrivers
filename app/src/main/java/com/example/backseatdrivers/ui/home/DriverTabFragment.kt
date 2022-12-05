@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.example.backseatdrivers.database.Passenger
 import com.example.backseatdrivers.database.Ride
 import com.example.backseatdrivers.databinding.FragmentDriverTabBinding
 import com.example.backseatdrivers.ui.rides.RidesAdapter
@@ -82,7 +81,7 @@ class DriverTabFragment : Fragment() {
 
                     // check if ride is posted by current user
                     if (passengers != null) {
-                        ride.passengers = passengers as ArrayList<Passenger>
+                        ride.passengers = passengers as HashMap<String, String>?
                         if (ride.passengers!!.size == ride.num_seats) {
                             ride.is_full = true
                         }

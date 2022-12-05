@@ -38,6 +38,10 @@
             android:value="${MAPS_API_KEY}" />
 
         <activity
+            android:name=".ui.home.PassengerRideViewActivity"
+            android:exported="false"
+            android:label="@string/title_activity_passenger_ride_view" />
+        <activity
             android:name=".ui.home.DriverRideViewActivity"
             android:exported="false"
             android:label="@string/title_activity_driver_ride_view" />

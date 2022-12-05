@@ -1,9 +1,9 @@
 package com.example.backseatdrivers.ui.home
 
 import android.graphics.Color
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -11,12 +11,16 @@ import com.android.volley.toolbox.Volley
 import com.example.backseatdrivers.R
 import com.example.backseatdrivers.database.Queries
 import com.example.backseatdrivers.database.Ride
-import com.example.backseatdrivers.databinding.ActivityDriverRideViewBinding
+import com.example.backseatdrivers.databinding.ActivityPassengerRideViewBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.google.maps.android.PolyUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,20 +29,26 @@ import org.json.JSONObject
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-
-class DriverRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
+class PassengerRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
-    private lateinit var binding: ActivityDriverRideViewBinding
+    private lateinit var binding: ActivityPassengerRideViewBinding
     private lateinit var markerOptions: MarkerOptions
     private lateinit var polyLineOptions: PolylineOptions
     private lateinit var polylines: ArrayList<Polyline>
+    private lateinit var userId: String
+    private var passengerKey: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityDriverRideViewBinding.inflate(layoutInflater)
+        binding = ActivityPassengerRideViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null){
+            userId = user.uid
+        }
 
         val intent = intent
         var rideobj = intent.getSerializableExtra("data") as Ride
@@ -79,9 +89,19 @@ class DriverRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
 
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        binding.removeButton.setOnClickListener {
+            // remove passenger from passengers list
+            val database : DatabaseReference = Firebase.database.getReference("Rides").child("${rideobj.ride_id}").child("passengers").child("$passengerKey")
+            database.removeValue()
+
+            // send driver notification
+            finish()
+        }
     }
 
     /**
