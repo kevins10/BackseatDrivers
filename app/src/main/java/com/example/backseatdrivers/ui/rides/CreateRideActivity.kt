@@ -149,10 +149,10 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
                 println("debug4: Place: ${place.address}, ${place.latLng}")
                 if (fragmentId == R.id.autoComplete_fragment_start_location) {
                     startLocationLatLng = place.latLng
-                    startLocationAddress = place.address
+                    startLocationAddress = "${place.name}\n ${place.address}"
                 } else {
                     endLocationLatLng = place.latLng
-                    endLocationAddress = place.address
+                    endLocationAddress = "${place.name}\n ${place.address}"
                 }
 
             }

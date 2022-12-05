@@ -215,7 +215,7 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
             override fun onPlaceSelected(place: Place) {
                 println("debug4: Place: ${place.address}, ${place.latLng}")
                 pickupLocation = place.latLng
-                pickUpAddress = place.address
+                pickUpAddress = "${place.name}\n ${place.address}"
 
                 // add marker
                 markerName?.remove()
