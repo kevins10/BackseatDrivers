@@ -13,6 +13,9 @@ import com.example.backseatdrivers.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 
 class ChatActivity : AppCompatActivity() {
     private lateinit var firebaseUser: FirebaseUser
@@ -58,6 +61,11 @@ class ChatActivity : AppCompatActivity() {
         hashMap.put("senderId", senderId)
         hashMap.put("receiverId", receiverId)
         hashMap.put("message", message)
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
+        val formatted = current.format(formatter).toString()
+        hashMap.put("timestamp", formatted)
+        println(formatted)
         reference.child("Chat").push().setValue(hashMap)
     }
 
@@ -77,6 +85,7 @@ class ChatActivity : AppCompatActivity() {
                     chat.message = dataSnapshot.child("message").value.toString()
                     chat.receiverId = dataSnapshot.child("receiverId").value.toString()
                     chat.senderId = dataSnapshot.child("senderId").value.toString()
+                    chat.timestamp = dataSnapshot.child("timestamp").value.toString()
                     println("NOT INSIDE IF YET ${chat.senderId} == ${chat.receiverId}")
                     if(chat.senderId.equals(senderId) && chat.receiverId.equals(receiverId) || chat.senderId.equals(receiverId) && chat.receiverId.equals(senderId)){
                         println("WE R INSIDE IF YAY ${chat.senderId} == ${chat.receiverId}")
