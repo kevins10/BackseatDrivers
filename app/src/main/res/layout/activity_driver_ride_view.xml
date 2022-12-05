@@ -69,6 +69,14 @@
         android:layout_alignParentBottom="true">
 
         <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel Ride"
+            android:layout_margin="10dp"
+            android:layout_weight="1"/>
+
+        <Button
             android:id="@+id/save_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

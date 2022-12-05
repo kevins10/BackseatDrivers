@@ -4,6 +4,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -37,6 +38,7 @@ class PassengerRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var polyLineOptions: PolylineOptions
     private lateinit var polylines: ArrayList<Polyline>
     private lateinit var userId: String
+    private lateinit var builder: AlertDialog.Builder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,16 +95,29 @@ class PassengerRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        binding.removeButton.setOnClickListener {
-            // remove passenger from passengers list
-            val database : DatabaseReference = Firebase.database.getReference("Rides")
-                .child("${rideobj.ride_id}")
-                .child("passengers")
-                .child("$userId")
-            database.removeValue()
+        builder = AlertDialog.Builder(this)
 
-            // send driver notification
-            finish()
+        binding.removeButton.setOnClickListener {
+
+            // alert dialog to confirm drop out of ride
+            builder.setTitle("Drop out of this ride?")
+                .setMessage("Are you sure you want to drop out this ride?")
+                .setCancelable(true)
+                .setPositiveButton("Yes") { dialogInterface, it ->
+                    // remove passenger from passengers list
+                    val database : DatabaseReference = Firebase.database.getReference("Rides")
+                        .child("${rideobj.ride_id}")
+                        .child("passengers")
+                        .child("$userId")
+                    database.removeValue()
+
+                    // send driver notification
+                    finish()
+                }
+                .setNegativeButton("No") { dialogInterface, it ->
+                    dialogInterface.cancel()
+                }
+                .show()
         }
     }
 
