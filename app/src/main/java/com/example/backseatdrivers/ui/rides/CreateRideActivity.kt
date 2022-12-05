@@ -72,7 +72,7 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
         if (user != null){
             currentUser = database.child(user.uid)
             hostId = user.uid
-            println("debug: current user name: $hostId")
+            println("debug: current user id: $hostId")
         }
 
         binding.findRouteBtn.setOnClickListener {

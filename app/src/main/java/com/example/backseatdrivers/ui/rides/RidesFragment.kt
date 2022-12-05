@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.backseatdrivers.R
 import com.example.backseatdrivers.UserViewModel
+import com.example.backseatdrivers.database.RequestNotification
 import com.example.backseatdrivers.database.Ride
 import com.example.backseatdrivers.database.User
 import com.example.backseatdrivers.databinding.FragmentRidesBinding
@@ -120,12 +121,12 @@ class RidesFragment : Fragment() {
     private fun createNotificationListener() {
         val notificationListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val notification = dataSnapshot.getValue<ArrayList<Notification>>()
+                val notification = dataSnapshot.getValue<ArrayList<RequestNotification>>()
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
                 // Getting Post failed, log a message
-                Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
+                Log.w(ContentValues.TAG, "debug: notification listener encountered error: ", databaseError.toException())
             }
         }
         notificationsReference.addValueEventListener(notificationListener)
@@ -147,7 +148,6 @@ class RidesFragment : Fragment() {
 
     private fun startCreateRideActivity() {
         val intent = Intent(activity, CreateRideActivity::class.java)
-        intent.putExtra("user", User(first_name = "Bob", last_name = "Marley"))
         startActivity(intent)
     }
 

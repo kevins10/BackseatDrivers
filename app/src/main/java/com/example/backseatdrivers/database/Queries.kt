@@ -49,14 +49,6 @@ class Queries {
         }
     }
 
-    fun getUserData(user_id: String): Any? {
-        var user = database.child("Users").child(user_id).get().addOnCompleteListener {
-            it.result.value as User
-        }
-        println("user obj: $user")
-        return null
-    }
-
     fun getAllRides(): ArrayList<Ride> {
         return database.child("Rides").get() as ArrayList<Ride>
     }
