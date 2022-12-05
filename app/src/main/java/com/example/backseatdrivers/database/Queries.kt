@@ -3,6 +3,7 @@ package com.example.backseatdrivers.database
 import android.app.Notification
 import android.content.ContentValues.TAG
 import android.util.Log
+import com.example.backseatdrivers.ui.chat.ChatUser
 import com.google.firebase.FirebaseException
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -89,6 +90,14 @@ class Queries {
         .child("Rides")
         .child(rideId)
         .child("passengers")
+        .get()
+        .await()
+        .value
+
+    suspend fun getUserEmail(rideId: String) = Firebase.database.reference
+        .child("Users")
+        .child(rideId)
+        .child("email")
         .get()
         .await()
         .value
