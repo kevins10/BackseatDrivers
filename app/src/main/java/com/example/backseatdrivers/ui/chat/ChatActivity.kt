@@ -41,9 +41,7 @@ class ChatActivity : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {
                 //TODO("Not yet implemented")
             }
-
         })
-
         var sendBtn = findViewById<Button>(R.id.btnSendMessage)
         var et = findViewById<EditText>(R.id.etMessage)
         sendBtn.setOnClickListener{
@@ -52,7 +50,6 @@ class ChatActivity : AppCompatActivity() {
             et.setText("")
         }
         readMessage(firebaseUser!!.uid, chatUserID)
-
     }
 
     fun sendMessage(senderId: String, receiverId: String, message:String){
@@ -71,7 +68,6 @@ class ChatActivity : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {
                 //TODO("Not yet implemented")
             }
-
             override fun onDataChange(snapshot: DataSnapshot) {
                 println("SHOULD BE UPDATING2 ${chatList}")
                 println("this is snapshot? ${snapshot}")
@@ -89,9 +85,7 @@ class ChatActivity : AppCompatActivity() {
                 }
                 var chatAdapter = ChatActivtyAdapter(this@ChatActivity, chatList)
                 chatActivityRecyclerView.adapter = chatAdapter
-
             }
-
         })
 
     }
