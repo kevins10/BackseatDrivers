@@ -3,6 +3,7 @@ package com.example.backseatdrivers.ui.home
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.android.volley.Response
@@ -17,6 +18,9 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.google.maps.android.PolyUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -33,6 +37,7 @@ class DriverRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var markerOptions: MarkerOptions
     private lateinit var polyLineOptions: PolylineOptions
     private lateinit var polylines: ArrayList<Polyline>
+    private lateinit var builder: AlertDialog.Builder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,6 +87,27 @@ class DriverRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        builder = AlertDialog.Builder(this)
+
+        binding.cancelButton.setOnClickListener {
+            // alert dialog to confirm cancellation of ride
+            builder.setTitle("Cancel this ride?")
+                .setMessage("Are you sure you want to cancel this ride?")
+                .setCancelable(true)
+                .setPositiveButton("Yes") { dialogInterface, it ->
+                    // delete ride from database
+                    val database : DatabaseReference = Firebase.database.getReference("Rides").child("${rideobj.ride_id}")
+                    database.removeValue()
+
+                    // send passengers notification
+                    finish()
+                }
+                .setNegativeButton("No") { dialogInterface, it ->
+                    dialogInterface.cancel()
+                }
+                .show()
+        }
     }
 
     /**
