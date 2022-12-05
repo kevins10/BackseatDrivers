@@ -1,5 +1,6 @@
 package com.example.backseatdrivers.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -48,13 +49,16 @@ class DriverTabFragment : Fragment() {
 
         //set on click listener for create a ride button
         arrayList = arrayListOf()
-        val rideAdapter = RidesAdapter(requireActivity().applicationContext, arrayList)
+        val ridesAdapter = RidesAdapter(requireActivity().applicationContext, arrayList)
         val LV = binding.hfLv
-        LV.adapter = rideAdapter
+        LV.adapter = ridesAdapter
         if (LV != null) {
             LV.setOnItemClickListener { parent, view, position, id ->
 
                 // open dialog with ride info
+                val intent = Intent(requireActivity(), DriverRideViewActivity::class.java)
+                intent.putExtra("data", ridesAdapter.getItem(position) as Ride)
+                startActivity(intent)
 
             }
         }
@@ -77,7 +81,7 @@ class DriverTabFragment : Fragment() {
 
                     // check if ride is posted by current user
                     if (passengers != null) {
-                        ride.passengers = passengers as ArrayList<String>
+                        ride.passengers = passengers as HashMap<String, String>?
                         if (ride.passengers!!.size == ride.num_seats) {
                             ride.is_full = true
                         }
@@ -88,7 +92,7 @@ class DriverTabFragment : Fragment() {
                         arrayList.add(ride)
                     }
                 }
-                LV.adapter = rideAdapter
+                LV.adapter = ridesAdapter
             }
 
             override fun onCancelled(error: DatabaseError) {

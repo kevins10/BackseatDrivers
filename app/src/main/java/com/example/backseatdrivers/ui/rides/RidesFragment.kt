@@ -91,7 +91,7 @@ class RidesFragment : Fragment() {
 
                     // check if ride is full
                     if (passengers != null) {
-                        ride.passengers = passengers as ArrayList<String>
+                        ride.passengers = passengers as HashMap<String, String>?
                         if (ride.passengers!!.size == ride.num_seats) {
                             ride.is_full = true
                         }
