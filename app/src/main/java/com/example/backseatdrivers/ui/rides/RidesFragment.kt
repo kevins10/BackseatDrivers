@@ -1,6 +1,5 @@
 package com.example.backseatdrivers.ui.rides
 
-import android.app.Notification
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
@@ -16,7 +15,6 @@ import com.example.backseatdrivers.R
 import com.example.backseatdrivers.UserViewModel
 import com.example.backseatdrivers.database.RequestNotification
 import com.example.backseatdrivers.database.Ride
-import com.example.backseatdrivers.database.User
 import com.example.backseatdrivers.databinding.FragmentRidesBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -31,14 +29,13 @@ class RidesFragment : Fragment() {
 
     private var _binding: FragmentRidesBinding? = null
 
-    private val ridesReference: DatabaseReference = Firebase.database.reference.child("Rides")
     private val notificationsReference: DatabaseReference =
         Firebase.database.reference.child("Users").child("Notifications")
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private lateinit var arrayList: ArrayList<Ride>
+    private lateinit var ridesList: ArrayList<Ride>
     private lateinit var database: DatabaseReference
     private lateinit var rideDatabase : DatabaseReference
     private lateinit var userViewModel: UserViewModel
@@ -55,13 +52,9 @@ class RidesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        create listener for notifications
-//        -> each time a new ride is created, the database listener will trigger a notification to let the user know
-        createNotificationListener()
-
         //set on click listener for create a ride button
-        arrayList = arrayListOf()
-        var ridesAdapter = RidesAdapter(requireActivity().applicationContext, arrayList)
+        ridesList = arrayListOf()
+        var ridesAdapter = RidesAdapter(requireActivity().applicationContext, ridesList)
         var LV = view.findViewById<ListView>(R.id.rides_lv)
         LV.adapter = ridesAdapter
         if (LV != null) {
@@ -77,7 +70,7 @@ class RidesFragment : Fragment() {
         rideDatabase = Firebase.database.getReference("Rides")
         rideDatabase.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                arrayList.clear()
+                ridesList.clear()
                 for (i in snapshot.children){
                     var ride : Ride = Ride()
                     ride.ride_id = i.key
@@ -100,7 +93,7 @@ class RidesFragment : Fragment() {
 
                     // add ride to array if ride not full
                     if (ride.is_full != true) {
-                        arrayList.add(ride)
+                        ridesList.add(ride)
                     }
                 }
                 LV.adapter = ridesAdapter
