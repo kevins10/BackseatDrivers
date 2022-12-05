@@ -15,11 +15,17 @@ import com.example.backseatdrivers.database.Queries
 import com.example.backseatdrivers.database.Request
 import com.example.backseatdrivers.database.Ride
 import com.example.backseatdrivers.databinding.ActivityRideViewBinding
+import com.google.android.gms.common.api.Status
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.model.RectangularBounds
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.maps.android.PolyUtil
@@ -28,26 +34,31 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 
 class RideView : AppCompatActivity(), OnMapReadyCallback {
 
+    private lateinit var mapsApiKey: String
+
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityRideViewBinding
     private lateinit var markerOptions: MarkerOptions
     private lateinit var polyLineOptions: PolylineOptions
     private lateinit var polylines: ArrayList<Polyline>
+    private var markerName: Marker? = null
+
+    private var pickupLocation: LatLng? = null
+    private var pickUpAddress: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityRideViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val intent = intent
-        var rideobj = intent.getSerializableExtra("data") as Ride
+        val rideobj = intent.getSerializableExtra("data") as Ride
         binding.rvDate.text = rideobj.departure_time
         binding.rvStart.text = "Start: ${rideobj.start_address}"
         binding.rvDestination.text = "Destination: ${rideobj.end_address}"
@@ -58,27 +69,26 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
             binding.rvDriver.text = "Driver: $firstName $lastName"
         }
 
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.rv_map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+
+        // initialize Places
+        mapsApiKey = com.example.backseatdrivers.BuildConfig.MAPS_API_KEY
+        Places.initialize(applicationContext, mapsApiKey)
+
+        locationsAutoComplete(R.id.autoComplete_fragment_pickup_location)
+
         binding.sendReq.setOnClickListener(){
             onRequest()
         }
         binding.rvCancel.setOnClickListener(){
             finish()
         }
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.rv_map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
+
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         markerOptions = MarkerOptions()
@@ -90,9 +100,9 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
 
     private fun findRoute() {
         mMap.clear()
-        var rideobj = intent.getSerializableExtra("data") as Ride
-        var startAddressList = rideobj.start_location!!.split("%20")
-        var endAddressList = rideobj.end_location!!.split("%20")
+        val rideobj = intent.getSerializableExtra("data") as Ride
+        val startAddressList = rideobj.start_location!!.split("%20")
+        val endAddressList = rideobj.end_location!!.split("%20")
 
         val startLocation = LatLng(startAddressList[0].toDouble(), startAddressList[1].toDouble())
         val endLocation = LatLng(endAddressList[0].toDouble(), endAddressList[1].toDouble())
@@ -106,7 +116,7 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
         mMap.addMarker(markerOptions)
 
         markerOptions.position(endLocation)
-            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
         mMap.addMarker(markerOptions)
 
         //Util function for drawing route between two points
@@ -119,7 +129,7 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
             catch (e: Exception) { println("debug: could not get ride because $e")}
         }
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(startLocation, 15f))
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(endLocation, 15f))
 
 
     }
@@ -128,11 +138,9 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
             = suspendCoroutine<Ride> { continuation ->
 
         val urlDirections = "https://maps.googleapis.com/maps/api/directions/json" +
-//                    "?destination=${startCoordinates.latitude}%${startCoordinates.longitude}" +
-//                    "&origin=${endCoordinates.latitude}%${endCoordinates.longitude}" +
                 "?destination=$startCoordinates" +
                 "&origin=$endCoordinates" +
-                "&key=AIzaSyBcLYz938jT0MGAQGvnio2iV7bWBxrp_bM"
+                "&key=$mapsApiKey"
 
             val path: MutableList<List<LatLng>> = ArrayList()
             val directionsRequest = object : StringRequest(Method.GET, urlDirections, Response.Listener<String> {
@@ -162,24 +170,64 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
         requestQueue.add(directionsRequest)
     }
 
-    fun onRequest(){
-        var userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-        var rideobj = intent.getSerializableExtra("data") as Ride
-        var request = Request()
-        request.ride_id = rideobj.ride_id
-        request.request_id = UUID.randomUUID().toString()
-        request.host_id = rideobj.host_id
-        request.passenger_id = userViewModel.getUser()!!.uid
-        var pickupLocation = binding.pickupLocation.text
-        request.location = pickupLocation.toString()
-        val database = Firebase.database.getReference("Requests")
-        lifecycleScope.launch {
-            try {
-                database.child("${request.request_id}").setValue(request)
+    private fun onRequest(){
+        if (pickUpAddress != null) {
+            val userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+            val rideobj = intent.getSerializableExtra("data") as Ride
+            val request = Request()
+            request.ride_id = rideobj.ride_id
+            request.request_id = UUID.randomUUID().toString()
+            request.host_id = rideobj.host_id
+            request.passenger_id = userViewModel.getUser()!!.uid
+            request.location = pickUpAddress.toString()
+            val database = Firebase.database.getReference("Requests")
+            lifecycleScope.launch {
+                try {
+                    database.child("${request.request_id}").setValue(request)
+                }
+                catch (e: Exception) { println("debug: could not get ride because $e")}
             }
-            catch (e: Exception) { println("debug: could not get ride because $e")}
+            finish()
+        } else {
+            Toast.makeText(this, "Please enter pickup location", Toast.LENGTH_LONG).show()
         }
-        finish()
+    }
+
+    private fun locationsAutoComplete(fragmentId: Int) {
+
+        // Initialize the AutocompleteSupportFragment
+        val autocompleteFragment =
+            supportFragmentManager.findFragmentById(fragmentId)
+                    as AutocompleteSupportFragment
+
+        // Specify the types of place data to return
+        autocompleteFragment.setPlaceFields(listOf(Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG))
+            .setLocationBias(
+                RectangularBounds.newInstance(
+                    LatLng(49.2827, -123.1207),
+                    LatLng(49.3027, -123.1307)
+                )
+            )
+            .setCountries("CA")
+
+        // Set up a PlaceSelectionListener to handle the response
+        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
+            override fun onPlaceSelected(place: Place) {
+                println("debug4: Place: ${place.address}, ${place.latLng}")
+                pickupLocation = place.latLng
+                pickUpAddress = place.address
+
+                // add marker
+                markerName?.remove()
+                markerName = mMap.addMarker(MarkerOptions().position(pickupLocation!!)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)))
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pickupLocation!!, 15f))
+            }
+
+            override fun onError(status: Status) {
+                println("An error occurred: $status")
+            }
+        })
     }
 
 }

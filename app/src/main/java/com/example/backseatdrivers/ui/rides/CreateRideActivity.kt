@@ -174,7 +174,7 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
             mMap.addMarker(markerOptions)
 
             markerOptions.position(endLocationLatLng!!)
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
             mMap.addMarker(markerOptions)
 
             lifecycleScope.launch {
@@ -185,7 +185,7 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
                 catch (e: Exception) { println("debug: could not get ride because $e")}
             }
 
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(startLocationLatLng!!, 15f))
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(endLocationLatLng!!, 15f))
         }
         else {
             mMap.clear()
