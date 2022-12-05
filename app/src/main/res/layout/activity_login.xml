@@ -15,7 +15,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="273dp"
@@ -44,6 +43,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="#54585A"
@@ -81,7 +81,7 @@
                     android:layout_height="10.3dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="17dp"
-                    android:src="@drawable/email"/>
+                    android:src="@drawable/email" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -133,6 +133,7 @@
 
             <TextView
                 android:id="@+id/error_msg"
+                android:fontFamily="@font/poppins_medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#FF0000"/>
