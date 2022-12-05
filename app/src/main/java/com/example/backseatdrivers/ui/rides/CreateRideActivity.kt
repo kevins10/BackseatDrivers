@@ -3,7 +3,6 @@ package com.example.backseatdrivers.ui.rides
 import android.graphics.Color
 import android.location.Geocoder
 import android.os.Bundle
-import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
@@ -11,16 +10,22 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.backseatdrivers.R
-import com.example.backseatdrivers.UserViewModel
 import com.example.backseatdrivers.database.Ride
 import com.example.backseatdrivers.database.User
 import com.example.backseatdrivers.databinding.ActivityCreateRideBinding
-
+import com.google.android.gms.common.api.Status
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.model.RectangularBounds
+import com.google.android.libraries.places.api.model.TypeFilter
+import com.google.android.libraries.places.api.net.PlacesClient
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
@@ -28,13 +33,20 @@ import com.google.firebase.ktx.Firebase
 import com.google.maps.android.PolyUtil
 import kotlinx.coroutines.launch
 import org.json.JSONObject
+import java.io.File
+import java.io.FileInputStream
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
+
 class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
 
     private lateinit var binding: ActivityCreateRideBinding
+
+    private lateinit var mapsApiKey: String
 
     private lateinit var mMap: GoogleMap
     private lateinit var markerOptions: MarkerOptions
@@ -52,8 +64,11 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
     private var hostId: String? = null
 
     // location
-    private lateinit var startLocationInput: String
-    private lateinit var endLocationInput: String
+    private var startLocationAddress: String? = null
+    private var endLocationAddress: String? = null
+
+    private var startLocationLatLng: LatLng? = null
+    private var endLocationLatLng: LatLng? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +89,13 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
             hostId = user.uid
             println("debug: current user name: $hostId")
         }
+
+        // initialize Places
+        mapsApiKey = com.example.backseatdrivers.BuildConfig.MAPS_API_KEY
+        Places.initialize(applicationContext, mapsApiKey)
+
+        locationsAutoComplete(R.id.autoComplete_fragment_start_location)
+        locationsAutoComplete(R.id.autoComplete_fragment_end_location)
 
         binding.findRouteBtn.setOnClickListener {
             findRoute()
@@ -104,39 +126,56 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(startPoint, 15f))
     }
 
+    private fun locationsAutoComplete(fragmentId: Int) {
+
+        // Initialize the AutocompleteSupportFragment
+        val autocompleteFragment =
+            supportFragmentManager.findFragmentById(fragmentId)
+                    as AutocompleteSupportFragment
+
+        // Specify the types of place data to return
+        autocompleteFragment.setPlaceFields(listOf(Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG))
+            .setLocationBias(
+                RectangularBounds.newInstance(
+                    LatLng(49.2827, -123.1207),
+                    LatLng(49.3027, -123.1307)
+                )
+            )
+            .setCountries("CA")
+
+        // Set up a PlaceSelectionListener to handle the response
+        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
+            override fun onPlaceSelected(place: Place) {
+                println("debug4: Place: ${place.address}, ${place.latLng}")
+                if (fragmentId == R.id.autoComplete_fragment_start_location) {
+                    startLocationLatLng = place.latLng
+                    startLocationAddress = "${place.name}\n ${place.address}"
+                } else {
+                    endLocationLatLng = place.latLng
+                    endLocationAddress = "${place.name}\n ${place.address}"
+                }
+
+            }
+
+            override fun onError(status: Status) {
+                println("An error occurred: $status")
+            }
+        })
+    }
+
     private fun findRoute() {
         mMap.clear()
 
-        startLocationInput = binding.startLocationInput.text.toString()
-        endLocationInput = binding.endLocationInput.text.toString()
+        if (startLocationLatLng != null && endLocationLatLng != null) {
+            val startLocationStr = startLocationLatLng!!.latitude.toString() + "%20" + startLocationLatLng!!.longitude.toString()
+            val endLocationStr = endLocationLatLng!!.latitude.toString() + "%20" +  endLocationLatLng!!.longitude.toString()
 
-        if(startLocationInput.isEmpty()) {
-            binding.startLocationInput.error = "Please enter a start location"
-            return
-        }
-        if(endLocationInput.isEmpty()) {
-            binding.endLocationInput.error = "Please enter a destination"
-            return
-        }
-
-        val startAddressList = geocoder.getFromLocationName(startLocationInput, 1)
-        val endAddressList = geocoder.getFromLocationName(endLocationInput, 1)
-
-        if (startAddressList.size >= 1 && endAddressList.size >= 1) {
-            val startLocation = LatLng(startAddressList[0].latitude, startAddressList[0].longitude)
-            val endLocation = LatLng(endAddressList[0].latitude, endAddressList[0].longitude)
-
-            val startLocationStr = startAddressList[0].latitude.toString() + "%20" + startAddressList[0].longitude.toString()
-            val endLocationStr = endAddressList[0].latitude.toString() + "%20" +  endAddressList[0].longitude.toString()
-
-            markerOptions.position(startLocation)
+            markerOptions.position(startLocationLatLng!!)
             mMap.addMarker(markerOptions)
 
-            markerOptions.position(endLocation)
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+            markerOptions.position(endLocationLatLng!!)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
             mMap.addMarker(markerOptions)
-
-            //Util function for drawing route between two points
 
             lifecycleScope.launch {
                 try {
@@ -146,7 +185,7 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
                 catch (e: Exception) { println("debug: could not get ride because $e")}
             }
 
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(startLocation, 15f))
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(endLocationLatLng!!, 15f))
         }
         else {
             mMap.clear()
@@ -154,23 +193,21 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
             markerOptions.position(vancouver)
             mMap.addMarker(markerOptions)
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(vancouver, 15f))
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Something went wrong. Please enter start and end locations", Toast.LENGTH_LONG).show()
         }
     }
 
     suspend fun fetchDirections(startCoordinates: String, endCoordinates: String, mMap: GoogleMap)
             = suspendCoroutine<Ride> { continuation ->
 
+        println("debug4: startCoord: $startCoordinates, endCoords: $endCoordinates")
         val urlDirections = "https://maps.googleapis.com/maps/api/directions/json" +
-//                    "?destination=${startCoordinates.latitude}%${startCoordinates.longitude}" +
-//                    "&origin=${endCoordinates.latitude}%${endCoordinates.longitude}" +
-                "?destination=$startCoordinates" +
-                "&origin=$endCoordinates" +
-                "&key=AIzaSyBXEhzjnWPdvTk1CclmuYcKtUVSyPUjXL8"
+                "?destination=$endCoordinates" +
+                "&origin=$startCoordinates" +
+                "&key=$mapsApiKey"
 
         val path: MutableList<List<LatLng>> = ArrayList()
-        val directionsRequest = object : StringRequest(Method.GET, urlDirections, Response.Listener<String> {
-                response ->
+        val directionsRequest = object : StringRequest(Method.GET, urlDirections, Response.Listener { response ->
             val jsonResponse = JSONObject(response)
             // Get routes
             val routes = jsonResponse.getJSONArray("routes")
@@ -194,8 +231,8 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
                 is_full = false,
                 start_location = startCoordinates,
                 end_location = endCoordinates,
-                start_address = startLocationInput,
-                end_address = endLocationInput)
+                start_address = startLocationAddress,
+                end_address = endLocationAddress)
             )
             //set data in viewmodel
         }, Response.ErrorListener {

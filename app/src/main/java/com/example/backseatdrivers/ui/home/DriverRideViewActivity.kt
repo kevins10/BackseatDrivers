@@ -146,7 +146,7 @@ class DriverRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.addMarker(markerOptions)
 
         markerOptions.position(endLocation)
-            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
         mMap.addMarker(markerOptions)
 
         //Util function for drawing route between two points
