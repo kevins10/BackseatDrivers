@@ -21,10 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BackseatDrivers"
         tools:targetApi="31">
-        <activity
-            android:name=".ui.profile.EditProfileActivity"
-            android:exported="false"
-            android:label="@string/edit_profile_text" />
+
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -40,6 +37,18 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
 
+        <activity
+            android:name=".ui.home.PassengerRideViewActivity"
+            android:exported="false"
+            android:label="@string/title_activity_passenger_ride_view" />
+        <activity
+            android:name=".ui.home.DriverRideViewActivity"
+            android:exported="false"
+            android:label="@string/title_activity_driver_ride_view" />
+        <activity
+            android:name=".ui.profile.EditProfileActivity"
+            android:exported="false"
+            android:label="@string/edit_profile_text" />
         <activity
             android:name=".ui.rides.RideView"
             android:exported="true"
@@ -65,6 +74,9 @@
         </activity>
         <activity
             android:name=".MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.chat.ChatActivity"
             android:exported="true" />
     </application>
 

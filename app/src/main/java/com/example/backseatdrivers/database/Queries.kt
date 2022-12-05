@@ -12,7 +12,6 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
-import java.util.*
 import kotlin.collections.ArrayList
 
 class Queries {
@@ -94,15 +93,15 @@ class Queries {
         .await()
         .value
 
-    fun addPassengerToRide(rideId: String, passengerId: String, passengers: ArrayList<String>?): Boolean {
+    fun addPassengerToRide(rideId: String, passengerId: String, pickupLocation: String, passengers: HashMap<String, String>?): Boolean {
         var success = false
         try {
-            var newPassengers = ArrayList<String>()
+            var newPassengers = HashMap<String, String>()
             // add passenger to list
             if (passengers != null) {
                 newPassengers = passengers
             }
-            newPassengers.add(passengerId)
+            newPassengers.put(passengerId, pickupLocation)
             // update passengers list
             Firebase.database.reference
                 .child("Rides")
