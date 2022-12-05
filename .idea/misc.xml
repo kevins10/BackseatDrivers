@@ -5,6 +5,10 @@
       <map>
         <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/drawable-anydpi/profile_tab.xml" value="0.123" />
         <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.123" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/drawable/item_left_bg.xml" value="0.123" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/drawable/item_right_bg.xml" value="0.123" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_chat.xml" value="0.13489583333333333" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_chat_activty_adapter.xml" value="0.15625" />
         <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_chat_log.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_create_ride.xml" value="0.15572916666666667" />
         <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_login.xml" value="0.1" />
@@ -21,6 +25,9 @@
         <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_rides.xml" value="0.1" />
         <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_user_profile_set_up.xml" value="0.11927083333333334" />
         <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/home_adapter.xml" value="0.1546875" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/item_left.xml" value="0.2" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/item_right.xml" value="0.15520833333333334" />
+        <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/item_user.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/notification_adapter.xml" value="0.16145833333333334" />
         <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/rides_adapter.xml" value="0.1859375" />
         <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/user_row_new_message.xml" value="0.20677083333333332" />
