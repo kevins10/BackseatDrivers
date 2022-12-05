@@ -1,8 +1,6 @@
 package com.example.backseatdrivers.ui.profile
 
-import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -10,18 +8,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
-import com.example.backseatdrivers.R
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import com.example.backseatdrivers.auth.LoginActivity
-import com.example.backseatdrivers.databinding.FragmentDriverProfileSetUpBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.example.backseatdrivers.databinding.FragmentProfileBinding
+import com.example.backseatdrivers.ui.profile.myrequests.MyRequestsActivity
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.File
@@ -42,6 +37,8 @@ class ProfileFragment : Fragment() {
     private lateinit var mAuth : FirebaseAuth
     private lateinit var currentUser : DatabaseReference
     private lateinit var storageReference: StorageReference
+
+    private val mlist = arrayOf("My Requests")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,6 +66,18 @@ class ProfileFragment : Fragment() {
             binding.lastNameTv.text = "${lastName.toString()}"
             binding.ageTv.text = "($age)"
         }
+
+        val listView = binding.profileList
+        val arrayAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, mlist)
+        listView.adapter = arrayAdapter
+        listView.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                //TODO("Not yet implemented")
+                println("debug3: clicked")
+                val intent = Intent(requireActivity(), MyRequestsActivity::class.java)
+                startActivity(intent)
+
+            }
 
         binding.editBtn.setOnClickListener {
             val intent = Intent(requireActivity(), EditProfileActivity::class.java)
