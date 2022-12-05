@@ -173,6 +173,8 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
         var pickupLocation = binding.pickupLocation.text
         request.location = pickupLocation.toString()
         val database = Firebase.database.getReference("Requests")
+
+        //Create notification object
         lifecycleScope.launch {
             try {
                 database.child("${request.request_id}").setValue(request)
