@@ -130,8 +130,6 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
         }
 
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(endLocation, 15f))
-
-
     }
 
     suspend fun fetchDirections(startCoordinates: String, endCoordinates: String, mMap: GoogleMap)
