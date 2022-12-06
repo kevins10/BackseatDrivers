@@ -19,12 +19,12 @@ class MyRequestsActivity : AppCompatActivity() {
 
         myRequestsViewModel.update()
         myRequestsViewModel.update.observe(this) {
-            var rideRequests = myRequestsViewModel.getRequestArray()
-            var myRequestsAdapter = MyRequestsAdapter(this, rideRequests)
-            var LV = binding.notifLv
-            LV.adapter = myRequestsAdapter
+            val rideRequests = myRequestsViewModel.getRequestArray()
+            val myRequestsAdapter = MyRequestsAdapter(this, rideRequests)
+            val listView = binding.notifLv
+            listView.adapter = myRequestsAdapter
             myRequestsAdapter.notifyDataSetChanged()
-            LV.adapter = myRequestsAdapter
+            listView.adapter = myRequestsAdapter
         }
     }
 }
