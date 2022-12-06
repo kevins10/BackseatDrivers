@@ -62,10 +62,6 @@ class RidesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        create listener for notifications
-//        -> each time a new ride is created, the database listener will trigger a notification to let the user know
-        //createNotificationListener()
-
         //set on click listener for create a ride button
         arrayList = arrayListOf()
         var ridesAdapter = RidesAdapter(requireActivity().applicationContext, arrayList)
@@ -123,20 +119,6 @@ class RidesFragment : Fragment() {
             startCreateRideActivity()
         }
     }
-
-//    private fun createNotificationListener() {
-//        val notificationListener = object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                val notification = dataSnapshot.getValue<ArrayList<Notification>>()
-//            }
-//
-//            override fun onCancelled(databaseError: DatabaseError) {
-//                // Getting Post failed, log a message
-//                Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
-//            }
-//        }
-//        notificationsReference.addValueEventListener(notificationListener)
-//    }
 
     private fun ridesListener() {
         val notificationListener = object : ValueEventListener {
