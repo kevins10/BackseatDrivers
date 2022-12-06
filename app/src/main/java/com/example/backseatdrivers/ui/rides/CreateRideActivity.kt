@@ -99,12 +99,12 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
         locationsAutoComplete(R.id.autoComplete_fragment_start_location)
 
         geocoder2 = Geocoder(this)
-        var spinner = findViewById<Spinner>(R.id.destination_input)
+        val spinner = findViewById<Spinner>(R.id.destination_input)
         binding.findRouteBtn.setOnClickListener {
 
-            var location = spinner.selectedItem.toString()
-            var locationObj = geocoder2.getFromLocationName(location, 1)
-            var latLng: LatLng = LatLng(locationObj[0].latitude, locationObj[0].longitude)
+            val location = spinner.selectedItem.toString()
+            val locationObj = geocoder2.getFromLocationName(location, 1)
+            val latLng = LatLng(locationObj[0].latitude, locationObj[0].longitude)
             endLocationLatLng = latLng
             endLocationAddress = spinner.selectedItem.toString()
 
@@ -130,8 +130,6 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
         } else {
             LatLng(49.2827, -123.1207)
         }
-
-
 
         markerOptions.position(startPoint)
         mMap.addMarker(markerOptions)
@@ -161,12 +159,8 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
                 println("debug4: Place: ${place.address}, ${place.latLng}")
                 if (fragmentId == R.id.autoComplete_fragment_start_location) {
                     startLocationLatLng = place.latLng
-                    startLocationAddress = "${place.name}\n ${place.address}"
-                } else {
-                    endLocationLatLng = place.latLng
-                    endLocationAddress = "${place.name}\n ${place.address}"
+                    startLocationAddress = "${place.name}\n${place.address}"
                 }
-
             }
 
             override fun onError(status: Status) {
@@ -209,7 +203,7 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
         }
     }
 
-    suspend fun fetchDirections(startCoordinates: String, endCoordinates: String, mMap: GoogleMap)
+    private suspend fun fetchDirections(startCoordinates: String, endCoordinates: String, mMap: GoogleMap)
             = suspendCoroutine<Ride> { continuation ->
 
         println("debug4: startCoord: $startCoordinates, endCoords: $endCoordinates")
