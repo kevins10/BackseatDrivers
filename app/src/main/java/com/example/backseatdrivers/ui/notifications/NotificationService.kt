@@ -30,6 +30,7 @@ class NotificationService: Service() {
     private lateinit var notificationsRef: DatabaseReference
     private lateinit var broadcastReceiver: BroadcastReceiver
     private lateinit var notificationManager: NotificationManager
+    private lateinit var notificationEventListener: ChildEventListener
 //  private lateinit var myBinder: Binder
 //  private var msgHandler: Handler? = null
 
@@ -45,21 +46,7 @@ class NotificationService: Service() {
         val intentFilter = IntentFilter()
         intentFilter.addAction(STOP_ACTION)
 
-        notificationsRef = Firebase.database.getReference("Users").child(mAuth.currentUser!!.uid).child("notifications")
-
-//        broadcastReceiver = myBroadcastReceiver()
-//        registerReceiver(broadcastReceiver, intentFilter)
-    }
-
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        println("debug: notif service started")
-        newNotificationListener()
-
-        return START_STICKY
-    }
-
-    private fun newNotificationListener() {
-        notificationsRef.addChildEventListener(object: ChildEventListener{
+        notificationEventListener = object: ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val requestNotification = snapshot.getValue<RequestNotification>()
                 println("debug: new notification has been added = $requestNotification")
@@ -79,7 +66,14 @@ class NotificationService: Service() {
 
             override fun onCancelled(error: DatabaseError) {
             }
-        })
+        }
+        notificationsRef = Firebase.database.getReference("Users").child(mAuth.currentUser!!.uid).child("notifications")
+    }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        println("debug: notif service started")
+        notificationsRef.addChildEventListener(notificationEventListener) //detached in onDestroy()
+        return START_STICKY
     }
 
     private fun showRequestNotification(notification: RequestNotification) {
@@ -92,6 +86,7 @@ class NotificationService: Service() {
         )
 
         notificationBuilder
+            .setSmallIcon(com.example.backseatdrivers.R.drawable.ic_baseline_person_pin_16)
             .setContentTitle("New Request to join your ride!")
             .setContentText("$")
 
@@ -110,6 +105,11 @@ class NotificationService: Service() {
             notificationManager.cancel(NOTIFICATION_ID)
             unregisterReceiver(broadcastReceiver)
         }
+    }
+
+    override fun onDestroy() {
+        notificationsRef.removeEventListener(notificationEventListener)
+        super.onDestroy()
     }
 
 
