@@ -36,6 +36,7 @@ class MyRequestsAdapter(private val context: Context, private var list: ArrayLis
 
         val requestId = currentRequest.request_id
         val passenger = currentRequest.passenger_id
+        val driver = currentRequest.host_id
         val pickupLocation = currentRequest.location
         val date_tv = view.findViewById<TextView>(R.id.na_date)
         val driver_tv = view.findViewById<TextView>(R.id.na_driver)
@@ -48,8 +49,8 @@ class MyRequestsAdapter(private val context: Context, private var list: ArrayLis
         }
 
         CoroutineScope(Dispatchers.Main).launch {
-            val firstName = Queries().getFirstName(passenger.toString())
-            val lastName = Queries().getLastName(passenger.toString())
+            val firstName = Queries().getFirstName(driver.toString())
+            val lastName = Queries().getLastName(driver.toString())
             val date = Queries().getDateFromRideId(currentRequest.ride_id.toString())
             driver_tv.text = "Posted By: $firstName $lastName"
             location_tv.text = "Pickup Location: $pickupLocation"

@@ -33,7 +33,7 @@ class MyRequestsViewModel : ViewModel() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 userSnapshot.clear()
                 for (i in snapshot.children){
-                    if(i.child("host_id").value == mAuth.currentUser?.uid){
+                    if(i.child("passenger_id").value == mAuth.currentUser?.uid){
                         var request = Request()
                         request.request_id = i.child("request_id").value.toString()
                         request.ride_id = i.child("ride_id").value.toString()
