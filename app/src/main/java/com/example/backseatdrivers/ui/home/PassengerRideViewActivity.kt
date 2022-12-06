@@ -3,6 +3,9 @@ package com.example.backseatdrivers.ui.home
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
@@ -11,6 +14,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.backseatdrivers.R
 import com.example.backseatdrivers.database.Queries
+import com.example.backseatdrivers.database.Request
 import com.example.backseatdrivers.database.Ride
 import com.example.backseatdrivers.databinding.ActivityPassengerRideViewBinding
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -55,7 +59,136 @@ class PassengerRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         val intent = intent
+        val isMyRequest = intent.getBooleanExtra("isMyRequest", false)
+        val isViewRequest = intent.getBooleanExtra("isViewRequest", false)
         rideObj = intent.getSerializableExtra("data") as Ride
+        displayRideDetails()
+
+        println("debug6: ${rideObj.ride_id}")
+
+        builder = AlertDialog.Builder(this)
+
+        if (isMyRequest) {
+            val requestId = intent.getStringExtra("requestId")
+            val pickupLocation = intent.getStringExtra("pickupLocation")
+            if (pickupLocation != null) {
+                val pickupDetails = pickupLocation.split("%S")
+                val pickupLatLng = LatLng(pickupDetails[1].toDouble(), pickupDetails[2].toDouble())
+                pickupLocations.add(pickupLatLng)
+                binding.pickupLocationTv.text = "Requested Pickup Location:\n${pickupDetails[0]}"
+            }
+
+            binding.acceptButton.visibility = View.GONE
+            binding.removeButton.text = "Cancel Request"
+            binding.removeButton.setOnClickListener {
+
+                // alert dialog to confirm drop out of ride
+                builder.setTitle("Cancel request for this ride?")
+                    .setMessage("Are you sure you want to cancel your request for this ride?")
+                    .setCancelable(true)
+                    .setPositiveButton("Yes") { dialogInterface, it ->
+                        // remove passenger from ride request
+                        val database : DatabaseReference = Firebase.database.getReference("Requests").child("$requestId")
+                        database.removeValue()
+
+                        // send driver notification
+                        finish()
+                    }
+                    .setNegativeButton("No") { dialogInterface, it ->
+                        dialogInterface.cancel()
+                    }
+                    .show()
+            }
+        } else if (isViewRequest) {
+            val requestId = intent.getStringExtra("requestId")
+            val pickupLocation = intent.getStringExtra("pickupLocation")
+            val passengerId = intent.getStringExtra("passengerId")
+            val rideId = intent.getStringExtra("rideId")
+            if (pickupLocation != null) {
+                val pickupDetails = pickupLocation.split("%S")
+                val pickupLatLng = LatLng(pickupDetails[1].toDouble(), pickupDetails[2].toDouble())
+                pickupLocations.add(pickupLatLng)
+                binding.pickupLocationTv.text = "Requested Pickup Location:\n${pickupDetails[0]}"
+            }
+
+            binding.removeButton.text = "Deny Request"
+            binding.removeButton.setOnClickListener {
+
+                // alert dialog to confirm drop out of ride
+                builder.setTitle("Deny users Request?")
+                    .setCancelable(true)
+                    .setPositiveButton("Yes") { dialogInterface, it ->
+                        // remove passenger from ride request
+                        val database : DatabaseReference = Firebase.database.getReference("Requests").child("$requestId")
+                        database.removeValue()
+
+                        // send driver notification
+                        finish()
+                    }
+                    .setNegativeButton("No") { dialogInterface, it ->
+                        dialogInterface.cancel()
+                    }
+                    .show()
+            }
+            binding.acceptButton.visibility = View.VISIBLE
+            binding.acceptButton.setOnClickListener {
+                // add passenger to ride
+                CoroutineScope(Dispatchers.Main).launch {
+                    val passengers = rideId?.let { it1 ->
+                        Queries().getPassengerList(
+                            it1
+                        )
+                    }
+                    if (passengerId != null) {
+                        if (rideId != null) {
+                            if (pickupLocation != null) {
+                                Queries().addPassengerToRide(rideId, passengerId, pickupLocation,
+                                    passengers as HashMap<String, String>?
+                                )
+                            }
+                        }
+                    }
+                }
+
+                val database : DatabaseReference = Firebase.database.getReference("Requests").child("$requestId")
+                database.removeValue()
+                finish()
+            }
+
+        } else {
+            binding.acceptButton.visibility = View.GONE
+            binding.removeButton.setOnClickListener {
+
+                // alert dialog to confirm drop out of ride
+                builder.setTitle("Drop out of this ride?")
+                    .setMessage("Are you sure you want to drop out this ride?")
+                    .setCancelable(true)
+                    .setPositiveButton("Yes") { dialogInterface, it ->
+                        // remove passenger from passengers list
+                        val database : DatabaseReference = Firebase.database.getReference("Rides")
+                            .child("${rideObj.ride_id}")
+                            .child("passengers")
+                            .child("$userId")
+                        database.removeValue()
+
+                        // send driver notification
+                        finish()
+                    }
+                    .setNegativeButton("No") { dialogInterface, it ->
+                        dialogInterface.cancel()
+                    }
+                    .show()
+            }
+        }
+
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+
+    }
+
+    private fun displayRideDetails() {
         binding.rvDate.text = rideObj.departure_time
         binding.rvStart.text = "Start: ${rideObj.start_address}"
         binding.rvDestination.text = "Destination: ${rideObj.end_address}"
@@ -68,7 +201,7 @@ class PassengerRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         if (passengers != null) {
-            val myLinearLayout = binding.pickupLocation
+            val myLinearLayout = binding.passengers
 
             for (p in passengers) {
                 val passengerId = p.key
@@ -95,36 +228,6 @@ class PassengerRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
                 myLinearLayout.addView(nameTextView)
                 myLinearLayout.addView(pickupTextView)
             }
-        }
-
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
-
-        builder = AlertDialog.Builder(this)
-
-        binding.removeButton.setOnClickListener {
-
-            // alert dialog to confirm drop out of ride
-            builder.setTitle("Drop out of this ride?")
-                .setMessage("Are you sure you want to drop out this ride?")
-                .setCancelable(true)
-                .setPositiveButton("Yes") { dialogInterface, it ->
-                    // remove passenger from passengers list
-                    val database : DatabaseReference = Firebase.database.getReference("Rides")
-                        .child("${rideObj.ride_id}")
-                        .child("passengers")
-                        .child("$userId")
-                    database.removeValue()
-
-                    // send driver notification
-                    finish()
-                }
-                .setNegativeButton("No") { dialogInterface, it ->
-                    dialogInterface.cancel()
-                }
-                .show()
         }
     }
 
