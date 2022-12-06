@@ -29,7 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancel Request"
-            android:id="@+id/na_cancel">
+            android:id="@+id/na_cancel"
+            android:focusable="false">
         </Button>
     </LinearLayout>
 

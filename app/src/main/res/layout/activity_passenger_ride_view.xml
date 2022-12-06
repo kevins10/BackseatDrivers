@@ -50,12 +50,13 @@ android:layout_height="match_parent">
         android:layout_below="@+id/rv_destination" />
 
     <LinearLayout
-        android:id="@+id/pickup_location"
+        android:id="@+id/passengers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_below="@+id/map">
         <TextView
+            android:id="@+id/pickup_location_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Passengers" />
@@ -73,6 +74,14 @@ android:layout_height="match_parent">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Drop Out of Ride"
+            android:layout_margin="10dp"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/accept_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Accept Request"
             android:layout_margin="10dp"
             android:layout_weight="1"/>
     </LinearLayout>
