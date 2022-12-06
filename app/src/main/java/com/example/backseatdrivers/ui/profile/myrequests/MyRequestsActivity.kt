@@ -24,7 +24,6 @@ class MyRequestsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMyRequestsBinding
 
-    private lateinit var requestsDatabase : DatabaseReference
     private lateinit var arrayList: ArrayList<Request>
     private lateinit var database : DatabaseReference
     var mAuth : FirebaseAuth = FirebaseAuth.getInstance()
@@ -35,17 +34,6 @@ class MyRequestsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMyRequestsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-//        val myRequestsViewModel = ViewModelProvider(this).get(MyRequestsViewModel::class.java)
-//        myRequestsViewModel.update()
-//        myRequestsViewModel.update.observe(this) {
-//            val rideRequests = myRequestsViewModel.getRequestArray()
-//            val myRequestsAdapter = MyRequestsAdapter(this, rideRequests)
-//            val listView = binding.notifLv
-//            listView.adapter = myRequestsAdapter
-//            myRequestsAdapter.notifyDataSetChanged()
-//            listView.adapter = myRequestsAdapter
-//        }
 
         database = Firebase.database.reference.child("Requests")
         arrayList = arrayListOf()
