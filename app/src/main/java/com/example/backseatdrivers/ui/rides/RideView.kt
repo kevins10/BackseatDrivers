@@ -94,7 +94,6 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
         markerOptions = MarkerOptions()
         polyLineOptions = PolylineOptions()
         polylines = ArrayList()
-        // Add a marker in Sydney and move the camera
         findRoute()
     }
 
@@ -108,9 +107,7 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
         val endLocation = LatLng(endAddressList[0].toDouble(), endAddressList[1].toDouble())
 
         val startLocationStr = startAddressList[0] + "%20" + startAddressList[1]
-        println("THIS IS START ADRESS ${startLocationStr}")
         val endLocationStr = endAddressList[0] + "%20" +  endAddressList[1]
-        println("THIS IS END ADRESS ${endLocationStr}")
 
         markerOptions.position(startLocation)
         mMap.addMarker(markerOptions)
@@ -119,12 +116,9 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
         mMap.addMarker(markerOptions)
 
-        //Util function for drawing route between two points
-
         lifecycleScope.launch {
             try {
                 fetchDirections(startLocationStr, endLocationStr, mMap)
-
             }
             catch (e: Exception) { println("debug: could not get ride because $e")}
         }
@@ -132,7 +126,7 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(endLocation, 15f))
     }
 
-    suspend fun fetchDirections(startCoordinates: String, endCoordinates: String, mMap: GoogleMap)
+    private suspend fun fetchDirections(startCoordinates: String, endCoordinates: String, mMap: GoogleMap)
             = suspendCoroutine<Ride> { continuation ->
 
         val urlDirections = "https://maps.googleapis.com/maps/api/directions/json" +
@@ -159,8 +153,6 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
                 mMap.addPolyline(PolylineOptions().addAll(path[i]).color(Color.RED))
             }
 
-            //set data in viewmodel
-
         }, Response.ErrorListener {
             continuation.resumeWithException(it)
         }){}
@@ -177,7 +169,7 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
             request.request_id = UUID.randomUUID().toString()
             request.host_id = rideobj.host_id
             request.passenger_id = userViewModel.getUser()!!.uid
-            request.location = pickUpAddress.toString()
+            request.location = "${pickUpAddress.toString()}%S${pickupLocation?.latitude}%S${pickupLocation?.longitude}"
             val database = Firebase.database.getReference("Requests")
             lifecycleScope.launch {
                 try {

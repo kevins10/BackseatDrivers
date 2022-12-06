@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
 import com.example.backseatdrivers.database.Ride
 import com.example.backseatdrivers.databinding.FragmentDriverTabBinding
 import com.example.backseatdrivers.ui.rides.RidesAdapter
@@ -32,7 +31,6 @@ class DriverTabFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null){
@@ -47,13 +45,12 @@ class DriverTabFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //set on click listener for create a ride button
         arrayList = arrayListOf()
         val ridesAdapter = RidesAdapter(requireActivity().applicationContext, arrayList)
-        val LV = binding.hfLv
-        LV.adapter = ridesAdapter
-        if (LV != null) {
-            LV.setOnItemClickListener { parent, view, position, id ->
+        val listView = binding.hfLv
+        listView.adapter = ridesAdapter
+        if (listView != null) {
+            listView.setOnItemClickListener { parent, view, position, id ->
 
                 // open dialog with ride info
                 val intent = Intent(requireActivity(), DriverRideViewActivity::class.java)
@@ -68,7 +65,7 @@ class DriverTabFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 arrayList.clear()
                 for (i in snapshot.children){
-                    var ride : Ride = Ride()
+                    val ride = Ride()
                     ride.ride_id = i.key
                     ride.departure_time = i.child("departure_time").value.toString()
                     ride.host_id = i.child("host_id").value.toString()
@@ -92,7 +89,7 @@ class DriverTabFragment : Fragment() {
                         arrayList.add(ride)
                     }
                 }
-                LV.adapter = ridesAdapter
+                listView.adapter = ridesAdapter
             }
 
             override fun onCancelled(error: DatabaseError) {

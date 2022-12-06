@@ -32,6 +32,9 @@ import kotlin.coroutines.suspendCoroutine
 
 class PassengerRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
 
+    private lateinit var rideObj: Ride
+    private var pickupLocations: ArrayList<LatLng> = ArrayList()
+
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityPassengerRideViewBinding
     private lateinit var markerOptions: MarkerOptions
@@ -52,12 +55,12 @@ class PassengerRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         val intent = intent
-        var rideobj = intent.getSerializableExtra("data") as Ride
-        binding.rvDate.text = rideobj.departure_time
-        binding.rvStart.text = "Start: ${rideobj.start_address}"
-        binding.rvDestination.text = "Destination: ${rideobj.end_address}"
-        val hostId = rideobj.host_id
-        val passengers = rideobj.passengers
+        rideObj = intent.getSerializableExtra("data") as Ride
+        binding.rvDate.text = rideObj.departure_time
+        binding.rvStart.text = "Start: ${rideObj.start_address}"
+        binding.rvDestination.text = "Destination: ${rideObj.end_address}"
+        val hostId = rideObj.host_id
+        val passengers = rideObj.passengers
         CoroutineScope(Dispatchers.Main).launch {
             val firstName = Queries().getFirstName(hostId.toString())
             val lastName = Queries().getLastName(hostId.toString())
@@ -69,8 +72,12 @@ class PassengerRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
 
             for (p in passengers) {
                 val passengerId = p.key
-                val pickup = p.value
-                println("debug1: key: $passengerId value: $pickup")
+                val pickupLocation = p.value
+                val pickupDetails = pickupLocation.split("%S")
+                val pickupAddress = pickupDetails[0]
+                val pickupLatLng = LatLng(pickupDetails[1].toDouble(), pickupDetails[2].toDouble())
+                pickupLocations.add(pickupLatLng)
+                println("debug1: key: $passengerId value: $pickupAddress latLng: $pickupLatLng")
 
                 // create new textviews
                 val nameTextView = TextView(this)
@@ -81,7 +88,7 @@ class PassengerRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
                     val lastName = Queries().getLastName(passengerId)
                     // set some properties of nameTextView or something
                     nameTextView.text = "Name: $firstName $lastName"
-                    pickupTextView.text = "Pickup at: $pickup"
+                    pickupTextView.text = "Pickup at: $pickupAddress"
                 }
 
                 // add the textview to the linearlayout
@@ -106,7 +113,7 @@ class PassengerRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
                 .setPositiveButton("Yes") { dialogInterface, it ->
                     // remove passenger from passengers list
                     val database : DatabaseReference = Firebase.database.getReference("Rides")
-                        .child("${rideobj.ride_id}")
+                        .child("${rideObj.ride_id}")
                         .child("passengers")
                         .child("$userId")
                     database.removeValue()
@@ -121,37 +128,31 @@ class PassengerRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         markerOptions = MarkerOptions()
         polyLineOptions = PolylineOptions()
         polylines = ArrayList()
-        // Add a marker in Sydney and move the camera
         findRoute()
+
+        for (location in pickupLocations) {
+            markerOptions.position(location)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET))
+            mMap.addMarker(markerOptions)
+        }
     }
 
     private fun findRoute() {
         mMap.clear()
-        var rideobj = intent.getSerializableExtra("data") as Ride
-        var startAddressList = rideobj.start_location!!.split("%20")
-        var endAddressList = rideobj.end_location!!.split("%20")
+        val rideObj = intent.getSerializableExtra("data") as Ride
+        val startAddressList = rideObj.start_location!!.split("%20")
+        val endAddressList = rideObj.end_location!!.split("%20")
 
         val startLocation = LatLng(startAddressList[0].toDouble(), startAddressList[1].toDouble())
         val endLocation = LatLng(endAddressList[0].toDouble(), endAddressList[1].toDouble())
 
         val startLocationStr = startAddressList[0] + "%20" + startAddressList[1]
-        println("THIS IS START ADRESS ${startLocationStr}")
         val endLocationStr = endAddressList[0] + "%20" +  endAddressList[1]
-        println("THIS IS END ADRESS ${endLocationStr}")
 
         markerOptions.position(startLocation)
         mMap.addMarker(markerOptions)
@@ -160,27 +161,20 @@ class PassengerRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
         mMap.addMarker(markerOptions)
 
-        //Util function for drawing route between two points
-
         lifecycleScope.launch {
             try {
                 fetchDirections(startLocationStr, endLocationStr, mMap)
-
             }
             catch (e: Exception) { println("debug: could not get ride because $e")}
         }
 
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(startLocation, 15f))
-
-
     }
 
-    suspend fun fetchDirections(startCoordinates: String, endCoordinates: String, mMap: GoogleMap)
+    private suspend fun fetchDirections(startCoordinates: String, endCoordinates: String, mMap: GoogleMap)
             = suspendCoroutine<Ride> { continuation ->
 
         val urlDirections = "https://maps.googleapis.com/maps/api/directions/json" +
-//                    "?destination=${startCoordinates.latitude}%${startCoordinates.longitude}" +
-//                    "&origin=${endCoordinates.latitude}%${endCoordinates.longitude}" +
                 "?destination=$startCoordinates" +
                 "&origin=$endCoordinates" +
                 "&key=AIzaSyBcLYz938jT0MGAQGvnio2iV7bWBxrp_bM"
@@ -203,8 +197,6 @@ class PassengerRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
             for (i in 0 until path.size) {
                 mMap.addPolyline(PolylineOptions().addAll(path[i]).color(Color.RED))
             }
-
-            //set data in viewmodel
 
         }, Response.ErrorListener {
             continuation.resumeWithException(it)
