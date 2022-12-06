@@ -1,38 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="5dp"
+    android:layout_marginLeft="5dp"
+    android:background="@drawable/list_filled_in"
     android:orientation="vertical">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id = "@+id/ra_date"
-        android:text="Date"/>
+        android:layout_height="wrap_content">
 
-    <TextView
+        <TextView
+            android:id="@+id/ra_date"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/date_icon"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Date" />
+
+        <ImageView
+            android:layout_margin="5dp"
+            android:id="@+id/date_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="10.3dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_baseline_calendar_today_24" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id = "@+id/ra_driver"
-        android:text="Driver"/>
+        android:layout_height="wrap_content">
 
-    <TextView
+        <TextView
+            android:id="@+id/ra_driver"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/driver_icon"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Driver" />
+
+        <ImageView
+            android:layout_margin="5dp"
+            android:id="@+id/driver_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="10.3dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_baseline_person_24" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id = "@+id/ra_start"
-        android:text="Start"/>
+        android:layout_height="wrap_content">
 
-    <TextView
+        <TextView
+            android:id="@+id/ra_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toRightOf="@+id/dest_icon1"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Start" />
+
+        <ImageView
+            android:layout_margin="5dp"
+            android:id="@+id/dest_icon1"
+            android:layout_width="wrap_content"
+            android:layout_height="10.3dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_baseline_location_on_24" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id = "@+id/ra_dest"
-        android:text="Destination"/>
+        android:layout_height="wrap_content">
 
-    <TextView
+        <TextView
+            android:id="@+id/ra_dest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toRightOf="@+id/dest_icon"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Destination" />
+
+        <ImageView
+            android:layout_margin="5dp"
+            android:id="@+id/dest_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="10.3dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_baseline_location_on_24" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id = "@+id/ra_seats"
-        android:text="Seats"/>
+        android:layout_height="wrap_content">
 
+        <TextView
+            android:id="@+id/ra_seats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toRightOf="@+id/seat_icon"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Seats" />
+
+        <ImageView
+            android:layout_margin="5dp"
+            android:id="@+id/seat_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="10.3dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_baseline_event_seat_24" />
+    </RelativeLayout>
 
 </LinearLayout>

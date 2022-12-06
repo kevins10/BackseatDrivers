@@ -1,80 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:theme="@style/ThemeOverlay.BackseatDrivers.FullscreenContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.rides.RideDetailsFragment">
 
-    <!-- The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc. -->
-    <LinearLayout
-        android:id="@+id/full_screen_content"
-        android:layout_margin="50dp"
-        android:layout_marginTop="100dp"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/ride_details_title"
-            android:textSize="30sp" />
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/num_passengers_et"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/available_seats"
-            android:inputType="numberSigned"
-            android:minHeight="48dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="#CC0633"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center"
+                android:text="Enter Ride Details Below"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="35sp" />
 
-        <EditText
-            android:id="@+id/departure_date_et"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="false"
-            android:cursorVisible="false"
-            android:focusable="false"
-            android:hint="@string/departure_time"
-            android:inputType="datetime"
-            android:minHeight="48dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@drawable/ic_wave__4_" />
 
-        <EditText
-            android:id="@+id/departure_time_et"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="false"
-            android:cursorVisible="false"
-            android:focusable="false"
-            android:hint="@string/time_of_day"
-            android:inputType="datetime"
-            android:minHeight="48dp" />
-
-<!--        <FrameLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:fitsSystemWindows="true">-->
-
-            <Button
-                android:id="@+id/post_ride_btn"
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="clip_horizontal"
-                android:text="@string/post_ride" />
+                android:layout_marginLeft="62dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="62dp"
+                android:background="@drawable/blue_border_rounded_cornwe">
 
-            <Button
-                android:id="@+id/back_btn"
+                <EditText
+                    android:id="@+id/num_passengers_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/person_icon"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="@string/available_seats"
+                    android:inputType="numberSigned"
+                    android:maxLines="1"
+                    android:paddingLeft="17dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:id="@+id/person_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="17dp"
+                    android:src="@drawable/ic_baseline_event_seat_24" />
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="clip_horizontal"
-                android:text="@string/back" />
-<!--        </FrameLayout>-->
+                android:layout_marginLeft="62dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="62dp"
+                android:background="@drawable/blue_border_rounded_cornwe">
 
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/departure_date_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/calendar_icon"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="@string/departure_time"
+                    android:inputType="datetime"
+                    android:focusable="false"
+                    android:cursorVisible="false"
+                    android:maxLines="1"
+                    android:paddingLeft="17dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:textSize="12sp" />
 
-</FrameLayout>
+                <ImageView
+                    android:id="@+id/calendar_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="17dp"
+                    android:src="@drawable/ic_baseline_calendar_today_24" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="62dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="62dp"
+                android:background="@drawable/blue_border_rounded_cornwe">
+
+                <EditText
+                    android:id="@+id/departure_time_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/clock_icon"
+                    android:background="@android:color/transparent"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="@string/departure_time"
+                    android:inputType="datetime"
+                    android:maxLines="1"
+                    android:paddingLeft="17dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:id="@+id/clock_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="17dp"
+                    android:src="@drawable/ic_baseline_watch_later_24" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/post_ride_btn"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:background="@drawable/red_fill__rounded_color"
+                    android:layout_margin="10dp"
+                    android:text="@string/post_ride" />
+
+                <Button
+                    android:id="@+id/back_btn"
+                    android:background="@drawable/red_fill__rounded_color"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_margin="10dp"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/back" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+
+</ScrollView>
+
+
+
+
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:theme="@style/ThemeOverlay.BackseatDrivers.FullscreenContainer"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".ui.rides.RideDetailsFragment">-->
+
+<!--    &lt;!&ndash; The primary full-screen view. This can be replaced with whatever view-->
+<!--         is needed to present your content, e.g. VideoView, SurfaceView,-->
+<!--         TextureView, etc. &ndash;&gt;-->
+<!--    <LinearLayout-->
+<!--        android:id="@+id/full_screen_content"-->
+<!--        android:layout_margin="50dp"-->
+<!--        android:layout_marginTop="100dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical">-->
+
+
+
+
+
+
+
+
+
+<!--&lt;!&ndash;        </FrameLayout>&ndash;&gt;-->
+
+<!--    </LinearLayout>-->
+
+<!--</FrameLayout>-->

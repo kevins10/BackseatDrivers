@@ -52,13 +52,13 @@
 
     <!--Ride Details Page-->
     <string name="ride_details_title">Enter details below</string>
-    <string name="departure_time">departure time</string>
+    <string name="departure_time">Departure Date</string>
     <string name="post_ride">Post Ride</string>
-    <string name="available_seats">available seats</string>
+    <string name="available_seats">Available Seats</string>
     <string name="back">Back</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="time_of_day">time of day</string>
+    <string name="time_of_day">Time of Day</string>
     <string name="title_activity_driver_ride_view">DriverRideViewActivity</string>
     <string name="title_activity_passenger_ride_view">PassengerRideViewActivity</string>
     <string name="title_activity_my_requests">My Requests</string>

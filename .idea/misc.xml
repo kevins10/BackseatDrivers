@@ -5,10 +5,30 @@
       <map>
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/drawable/blue_border_rounded_cornwe.xml" value="0.166" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/drawable/signupbackground.xml" value="0.166" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_chat.xml" value="0.25" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_chat_activty_adapter.xml" value="0.25" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_driver_ride_view.xml" value="0.25" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_edit_profile.xml" value="0.25" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_my_requests.xml" value="0.25" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_notifications.xml" value="0.25" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_passenger_ride_view.xml" value="0.25" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_ride_view.xml" value="0.25" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_verify_sign_up.xml" value="0.25" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/dialog_wait.xml" value="0.25" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_chat.xml" value="0.25" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_driver_profile_set_up.xml" value="0.25" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_driver_tab.xml" value="0.25" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_notifications.xml" value="0.25" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_ride_details.xml" value="0.264" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_rides.xml" value="0.25" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_user_profile_set_up.xml" value="0.264" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/notification_adapter.xml" value="0.4" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/rides_adapter.xml" value="0.536" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
         <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/drawable-anydpi/profile_tab.xml" value="0.123" />
         <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.123" />
         <entry key="..\:/Users/kevin/AndroidStudioProjects/BackseatDrivers/app/src/main/res/drawable/item_left_bg.xml" value="0.123" />

@@ -1,45 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="5dp"
+    android:layout_marginLeft="5dp"
+    android:background="@drawable/list_filled_in"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id = "@+id/na_date"
-        android:text="Date"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id = "@+id/na_pickup"
-        android:text="Pickup Location"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id = "@+id/na_passenger"
-        android:text="Passenger"/>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <Button
+
+        <TextView
+            android:id="@+id/na_date"
+            android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Deny"
-            android:id="@+id/na_deny"
-            android:focusable="false">
-        </Button>
-        <Button
+            android:layout_toRightOf="@+id/dest_icon1"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Date" />
+
+        <ImageView
+            android:layout_margin="5dp"
+            android:id="@+id/dest_icon1"
+            android:layout_width="wrap_content"
+            android:layout_height="10.3dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_baseline_calendar_today_24" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id = "@+id/na_pickup"
+            android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/date_icon"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Pickup Location" />
+
+        <ImageView
+            android:layout_margin="5dp"
+            android:id="@+id/date_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="10.3dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_baseline_location_on_24"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id = "@+id/na_passenger"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/driver_icon"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Passenger" />
+
+        <ImageView
+            android:layout_margin="5dp"
+            android:id="@+id/driver_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="10.3dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_baseline_person_24"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_toRightOf="@+id/notif"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <Button
+            android:background="@drawable/red_fill__rounded_color"
+            android:layout_margin="8dp"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:fontFamily="@font/poppins_regular"
             android:text="Accept"
             android:id="@+id/na_accept"
             android:focusable="false">
         </Button>
 
+        <Button
+            android:background="@drawable/red_fill__rounded_color"
+            android:layout_margin="8dp"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Deny"
+            android:id="@+id/na_deny"
+            android:focusable="false">
+        </Button>
     </LinearLayout>
+
 
 
 
