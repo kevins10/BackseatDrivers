@@ -47,8 +47,8 @@ class NotificationService: Service() {
 
         notificationsRef = Firebase.database.getReference("Users").child(mAuth.currentUser!!.uid).child("notifications")
 
-        broadcastReceiver = myBroadcastReceiver()
-        registerReceiver(broadcastReceiver, intentFilter)
+//        broadcastReceiver = myBroadcastReceiver()
+//        registerReceiver(broadcastReceiver, intentFilter)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
