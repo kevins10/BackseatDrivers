@@ -94,9 +94,8 @@ class NotificationService: Service() {
 
     private fun showRequestNotification(notification: RequestNotification) {
         val intent = Intent(applicationContext, MainActivity::class.java)
-        val flag = if (Build.VERSION.SDK_INT > 31) {PendingIntent.FLAG_IMMUTABLE} else {PendingIntent.FLAG_ONE_SHOT}
         val pendingIntent = PendingIntent.getActivity(
-            this, REQUEST_CODE, intent, flag
+            this, REQUEST_CODE, intent, PendingIntent.FLAG_IMMUTABLE
         )
         val notificationBuilder: NotificationCompat.Builder = NotificationCompat.Builder(
             this, CHANNEL_ID
