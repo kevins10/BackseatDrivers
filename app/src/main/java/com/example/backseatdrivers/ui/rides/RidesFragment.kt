@@ -16,9 +16,7 @@ import com.example.backseatdrivers.UserViewModel
 import com.example.backseatdrivers.database.Ride
 import com.example.backseatdrivers.databinding.FragmentRidesBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.time.LocalDateTime
@@ -33,7 +31,7 @@ class RidesFragment : Fragment() {
 
     private lateinit var arrayList: ArrayList<Ride>
     private lateinit var userViewModel: UserViewModel
-    var rideDatabase = Firebase.database.getReference("Rides").orderByChild("departure_time_milli")
+    private lateinit var rideDatabase : Query
     private lateinit var userId: String
     private lateinit var filterSpinner: Spinner
     private lateinit var listView : ListView
@@ -59,7 +57,8 @@ class RidesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         filterSpinner = view.findViewById(R.id.rides_filter)
-
+        var longTime: Double = System.currentTimeMillis().toDouble()
+        rideDatabase = Firebase.database.getReference("Rides").orderByChild("departure_time_milli").startAfter(longTime)
         arrayList = arrayListOf()
         ridesAdapter = RidesAdapter(requireActivity().applicationContext, arrayList)
         listView = view.findViewById(R.id.rides_lv)
@@ -73,7 +72,7 @@ class RidesFragment : Fragment() {
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
         val formatted = current.format(formatter).toString()
-        var longTime: Double = System.currentTimeMillis().toDouble()
+
         update()
 
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
@@ -85,7 +84,7 @@ class RidesFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 if (parent != null) {
                     if(parent.getItemAtPosition(position) as String != "None"){
-                        Firebase.database.reference.child("Rides").orderByChild("departure_time_milli").get()
+                        Firebase.database.reference.child("Rides").orderByChild("departure_time_milli").startAfter(longTime).get()
                             .addOnSuccessListener { it ->
                                 arrayList.clear()
                                 for (i in it.children) {
@@ -148,6 +147,7 @@ class RidesFragment : Fragment() {
         rideDatabase.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 arrayList.clear()
+                filterSpinner.setSelection(0)
                 for (i in snapshot.children) {
                     val ride = Ride()
                     ride.ride_id = i.key
@@ -175,7 +175,15 @@ class RidesFragment : Fragment() {
 
                     // add ride to array if ride not full
                     if (ride.is_full != true && ride.host_id != userId) {
-                        arrayList.add(ride)
+                        if (passengers == null){
+                            arrayList.add(ride)
+                        }
+                        else if (ride.passengers != null){
+                            if (!(ride.passengers!!.containsKey(userId))){
+                                arrayList.add(ride)
+                            }
+                        }
+
                     }
                 }
                 listView.adapter = ridesAdapter
