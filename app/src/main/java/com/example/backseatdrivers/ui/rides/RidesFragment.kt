@@ -17,6 +17,7 @@ import com.example.backseatdrivers.UserViewModel
 import com.example.backseatdrivers.database.Ride
 import com.example.backseatdrivers.database.User
 import com.example.backseatdrivers.databinding.FragmentRidesBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -34,13 +35,14 @@ class RidesFragment : Fragment() {
     private val notificationsReference: DatabaseReference =
         Firebase.database.reference.child("Users").child("Notifications")
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
     private lateinit var arrayList: ArrayList<Ride>
     private lateinit var database: DatabaseReference
     private lateinit var rideDatabase : DatabaseReference
     private lateinit var userViewModel: UserViewModel
+
+    private lateinit var userId: String
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,6 +50,12 @@ class RidesFragment : Fragment() {
     ): View {
 
         _binding = FragmentRidesBinding.inflate(inflater, container, false)
+
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null){
+            userId = user.uid
+        }
+
         return binding.root
     }
 
@@ -98,7 +106,7 @@ class RidesFragment : Fragment() {
                     }
 
                     // add ride to array if ride not full
-                    if (ride.is_full != true) {
+                    if (ride.is_full != true && ride.host_id != userId) {
                         arrayList.add(ride)
                     }
                 }
@@ -108,7 +116,6 @@ class RidesFragment : Fragment() {
             override fun onCancelled(error: DatabaseError) {
                 //TODO("Not yet implemented")
             }
-
 
         })
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
