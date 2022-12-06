@@ -98,7 +98,6 @@ class NotificationService: Service() {
         val pendingIntent = PendingIntent.getActivity(
             this, REQUEST_CODE, intent, flag
         )
-
         val notificationBuilder: NotificationCompat.Builder = NotificationCompat.Builder(
             this, CHANNEL_ID
         )

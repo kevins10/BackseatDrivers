@@ -40,8 +40,7 @@
     <ListView
         android:id="@+id/rides_lv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="70dp">
+        android:layout_height="wrap_content" >
     </ListView>
 
 </LinearLayout>
