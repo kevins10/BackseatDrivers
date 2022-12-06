@@ -12,10 +12,13 @@ import com.example.backseatdrivers.R
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.backseatdrivers.database.Queries
 import com.example.backseatdrivers.databinding.FragmentChatBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.*
 
 class ChatFragment : Fragment() {
 
@@ -24,6 +27,7 @@ class ChatFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private lateinit var userAdapter: ChatAdapter;
+    private lateinit var userShow: List<String>
 //    private val binding get() = _binding!!
     var userlist = ArrayList<ChatUser>()
     override fun onCreateView(
@@ -43,7 +47,12 @@ class ChatFragment : Fragment() {
 
         chatRecyclerView = view.findViewById<RecyclerView>(R.id.chatRecyclerView)
         chatRecyclerView.layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.VERTICAL, false)
-        getUsersList()
+        userShow = listOf()
+
+
+        updateAssociatedUsers()
+
+
         if(userAdapter != null){
             userAdapter.onListItemClick = {it ->
                 val intent = Intent(requireActivity(), ChatActivity::class.java)
@@ -53,38 +62,50 @@ class ChatFragment : Fragment() {
         }
     }
 
-    fun getUsersList(){
-        var firebase: FirebaseUser? = FirebaseAuth.getInstance().currentUser
-        var databaseReference:DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
-        databaseReference.addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                userlist.clear()
-                for (dataSnapshot:DataSnapshot in snapshot.children){
-                    var chatUser = ChatUser()
-                    chatUser.userID = dataSnapshot.key.toString()
-                    println("THIS IS ID" + chatUser.userID)
-                    chatUser.userEmail = dataSnapshot.child("email").value.toString()
-                    chatUser.userName = dataSnapshot.child("first_name").value.toString()
 
+    fun updateAssociatedUsers(){
+        var firebase: FirebaseUser? = FirebaseAuth.getInstance().currentUser
+        var ridesDatabaseReference = FirebaseDatabase.getInstance().getReference("Rides")
+        ridesDatabaseReference.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var hs = HashSet<String>()
+                var a = listOf<String>()
+                for (i in snapshot.children){
                     if (firebase != null) {
-                        if (!(chatUser.userID.equals(firebase.uid.toString()))){
-                            println("FOR SOME REASON INSIDE IF ${chatUser.userID} same as ${firebase.uid}??")
-                            userlist.add(chatUser)
+                        if (i.child("host_id").value.toString() == firebase.uid){
+                            for (x in i.child("passengers").children){
+                                hs.add(x.key!!)
+                            }
+                        } else if (i.hasChild("passengers")){
+                            if (firebase != null) {
+                                if ((i.child("passengers").value as HashMap<String, String>).containsKey(firebase.uid)){
+                                    hs.add(i.child("host_id").value.toString())
+                                }
+                            }
                         }
                     }
                 }
+                a = hs.toList()
+                for (i in a){
+                    runBlocking {
+                        var chatUser = ChatUser()
+                        chatUser.userName = Queries().getFirstName(i).toString()
+                        chatUser.userEmail = Queries().getUserEmail(i).toString()
+                        chatUser.userID = i
+                        userlist.add(chatUser)
+                    }
+                }
                 chatRecyclerView.adapter = userAdapter
-
-
             }
 
             override fun onCancelled(error: DatabaseError) {
-
+                //TODO("Not yet implemented")
             }
 
 
         })
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

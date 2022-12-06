@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.notifications.NotificationsFragment">
-
+    tools:context=".ui.profile.myrequests.MyRequestsActivity">
 
     <ListView
-        android:id="@+id/nf_lv"
+        android:id="@+id/notif_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
     </ListView>
+
 </LinearLayout>

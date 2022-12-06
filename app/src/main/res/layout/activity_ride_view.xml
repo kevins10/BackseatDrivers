@@ -52,14 +52,20 @@
             android:layout_height="300dp"
             tools:context=".ui.rides.RideView" />
 
-        <EditText
-            android:id="@+id/pickup_location"
-            android:gravity="center_horizontal"
-            android:layout_height="wrap_content"
+        <TextView
             android:layout_width="match_parent"
-            android:hint="Enter Pickup Location"
+            android:layout_height="wrap_content"
+            android:text="Enter Pickup Location"
+            android:layout_marginTop="16dp" />
+
+        <fragment
+            android:id="@+id/autoComplete_fragment_pickup_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
             android:layout_marginBottom="16dp"
             android:layout_marginTop="16dp" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

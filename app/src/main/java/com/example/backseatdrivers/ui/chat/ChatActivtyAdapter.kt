@@ -35,6 +35,7 @@ class ChatActivtyAdapter(private val context: Context, private val chatList: Arr
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val chat = chatList[position]
         holder.tvMessage.text = chat.message
+        holder.tvTimestamp.text = chat.timestamp
 
     }
 
@@ -54,6 +55,7 @@ class ChatActivtyAdapter(private val context: Context, private val chatList: Arr
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         var tvMessage = view.findViewById<TextView>(R.id.tvMessage)
+        var tvTimestamp = view.findViewById<TextView>(R.id.tvTimestamp)
     }
 
 
