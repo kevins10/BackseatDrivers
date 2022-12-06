@@ -28,13 +28,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Deny"
-            android:id="@+id/na_deny">
+            android:id="@+id/na_deny"
+            android:focusable="false">
         </Button>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Accept"
-            android:id="@+id/na_accept">
+            android:id="@+id/na_accept"
+            android:focusable="false">
         </Button>
 
     </LinearLayout>
