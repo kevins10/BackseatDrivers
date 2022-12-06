@@ -59,12 +59,13 @@ class ProfileFragment : Fragment() {
         viewModel.update()
         viewModel.userSnapshot.observe(viewLifecycleOwner){
             val age = it.child("age").value
-            val email = it.child("email").value
-            val firstName = it.child("first_name").value
-            val lastName = it.child("last_name").value
-            binding.firstNameTv.text = "${firstName.toString()}"
-            binding.lastNameTv.text = "${lastName.toString()}"
+            val email = it.child("email").value.toString()
+            val firstName = it.child("first_name").value.toString()
+            val lastName = it.child("last_name").value.toString()
+            binding.firstNameTv.text = firstName
+            binding.lastNameTv.text = lastName
             binding.ageTv.text = "($age)"
+            binding.emailTv.text = email
         }
 
         val listView = binding.profileList
@@ -72,11 +73,9 @@ class ProfileFragment : Fragment() {
         listView.adapter = arrayAdapter
         listView.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
-                //TODO("Not yet implemented")
                 println("debug3: clicked")
                 val intent = Intent(requireActivity(), MyRequestsActivity::class.java)
                 startActivity(intent)
-
             }
 
         binding.editBtn.setOnClickListener {
