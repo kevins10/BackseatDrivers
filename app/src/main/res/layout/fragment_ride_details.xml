@@ -2,12 +2,14 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:theme="@style/ThemeOverlay.BackseatDrivers.FullscreenContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.rides.RideDetailsFragment">
 
     <RelativeLayout
+        android:id="@+id/fullScreenContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -167,41 +169,3 @@
     </RelativeLayout>
 
 </ScrollView>
-
-
-
-
-
-
-    <!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:theme="@style/ThemeOverlay.BackseatDrivers.FullscreenContainer"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    tools:context=".ui.rides.RideDetailsFragment">-->
-
-<!--    &lt;!&ndash; The primary full-screen view. This can be replaced with whatever view-->
-<!--         is needed to present your content, e.g. VideoView, SurfaceView,-->
-<!--         TextureView, etc. &ndash;&gt;-->
-<!--    <LinearLayout-->
-<!--        android:id="@+id/full_screen_content"-->
-<!--        android:layout_margin="50dp"-->
-<!--        android:layout_marginTop="100dp"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="vertical">-->
-
-
-
-
-
-
-
-
-
-<!--&lt;!&ndash;        </FrameLayout>&ndash;&gt;-->
-
-<!--    </LinearLayout>-->
-
-<!--</FrameLayout>-->
