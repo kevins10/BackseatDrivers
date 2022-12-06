@@ -18,6 +18,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.backseatdrivers.database.Ride
 import com.example.backseatdrivers.databinding.FragmentRideDetailsBinding
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 /**
  * An example full-screen fragment that shows and hides the system UI (i.e.
@@ -59,7 +62,13 @@ class RideDetailsFragment : Fragment() {
         binding.departureDateEt.setOnClickListener {
             DatePickerDialog(requireActivity(), { view, year, monthOfYear, dayOfMonth ->
                 // Display Selected date in EditText
-                binding.departureDateEt.setText("${(monthOfYear + 1)}/$dayOfMonth/$year")
+                var formatDayOfMonth = dayOfMonth.toString()
+                if (dayOfMonth < 10){
+                    formatDayOfMonth = "0$dayOfMonth"
+                }
+                var date = "${(monthOfYear + 1)}-$formatDayOfMonth-$year"
+                var localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("MM-dd-yyyy"))
+                binding.departureDateEt.setText("${localDate}")
                 binding.departureDateEt.error = null
             }, year, month, day).show()
         }
@@ -117,7 +126,8 @@ class RideDetailsFragment : Fragment() {
         ride.num_seats = numPassengers.toString().toInt()
         ride.departure_time = departureTime
         ride.departure_time = "$departureDate, $departureTime"
-
+        var localDate = LocalDate.parse(departureDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+        ride.departure_time_milli = localDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
         ridesViewModel.uploadRide(ride)
         Toast.makeText(requireActivity(), "Ride has been posted", Toast.LENGTH_SHORT)
         requireActivity().finish()

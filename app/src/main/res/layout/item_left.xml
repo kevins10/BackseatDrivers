@@ -19,7 +19,8 @@
             android:textSize="16sp"
             android:text="hi"
             android:id="@+id/tvMessage"
-            android:background="@drawable/item_left_bg">
+            android:background="@drawable/item_left_bg"
+            android:layout_marginLeft="5dp">
         </TextView>
         <TextView
             android:layout_width="wrap_content"

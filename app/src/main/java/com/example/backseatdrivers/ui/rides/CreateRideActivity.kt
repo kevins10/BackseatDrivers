@@ -3,6 +3,7 @@ package com.example.backseatdrivers.ui.rides
 import android.graphics.Color
 import android.location.Geocoder
 import android.os.Bundle
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
@@ -53,6 +54,7 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
     private lateinit var polyLineOptions: PolylineOptions
     private lateinit var polylines: ArrayList<Polyline>
     private lateinit var geocoder: Geocoder
+    private lateinit var geocoder2: Geocoder
 
     private var user: User? = null
     private var ride: Ride? = null
@@ -95,9 +97,17 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
         Places.initialize(applicationContext, mapsApiKey)
 
         locationsAutoComplete(R.id.autoComplete_fragment_start_location)
-        locationsAutoComplete(R.id.autoComplete_fragment_end_location)
 
+        geocoder2 = Geocoder(this)
+        var spinner = findViewById<Spinner>(R.id.destination_input)
         binding.findRouteBtn.setOnClickListener {
+
+            var location = spinner.selectedItem.toString()
+            var locationObj = geocoder2.getFromLocationName(location, 1)
+            var latLng: LatLng = LatLng(locationObj[0].latitude, locationObj[0].longitude)
+            endLocationLatLng = latLng
+            endLocationAddress = spinner.selectedItem.toString()
+
             findRoute()
         }
 
@@ -120,6 +130,8 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
         } else {
             LatLng(49.2827, -123.1207)
         }
+
+
 
         markerOptions.position(startPoint)
         mMap.addMarker(markerOptions)

@@ -29,13 +29,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment" />
-                <fragment
-                    android:id="@+id/autoComplete_fragment_end_location"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment" />
-
             </com.google.android.material.textfield.TextInputLayout>
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/destination_input"
+                android:entries="@array/destination_spinner">
+            </Spinner>
 
             <Button
                 android:layout_width="wrap_content"

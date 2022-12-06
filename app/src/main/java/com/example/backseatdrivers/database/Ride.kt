@@ -13,6 +13,7 @@ data class Ride (
     var start_address: String? = null,
     var end_address: String? = null,
     var departure_time: String? = null,
+    var departure_time_milli: Long? = 0,
 
     //fields from map
     var distance: String? = null,
