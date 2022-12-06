@@ -19,6 +19,6 @@ data class User(
     var home_address: String? = null,
 
     var driver_profile: DriverProfile? = null,
-    var request_notifications: ArrayList<RequestNotification>? = null
+    var notifications: ArrayList<RequestNotification>? = null
 
 ) : Serializable
