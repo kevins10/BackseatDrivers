@@ -12,6 +12,7 @@ import com.example.backseatdrivers.R
 import com.example.backseatdrivers.database.Request
 import com.example.backseatdrivers.database.Ride
 import com.example.backseatdrivers.databinding.FragmentNotificationsBinding
+import com.example.backseatdrivers.ui.home.PassengerRideViewActivity
 import com.example.backseatdrivers.ui.rides.RideView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -26,7 +27,6 @@ class NotificationsFragment : Fragment() {
     private var _binding: FragmentNotificationsBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var requestsDatabase : DatabaseReference
     private lateinit var arrayList: ArrayList<Request>
     private lateinit var database : DatabaseReference
     var mAuth : FirebaseAuth = FirebaseAuth.getInstance()
@@ -37,7 +37,6 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel = ViewModelProvider(this).get(NotificationsViewModel::class.java)
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
         database = Firebase.database.reference.child("Requests")
@@ -46,22 +45,33 @@ class NotificationsFragment : Fragment() {
         listView = binding.nfLv
         updateNotifications()
 
-//        notificationsViewModel.update()
-//        notificationsViewModel.update.observe(viewLifecycleOwner) {
-//            var rideRequests = notificationsViewModel.getRequestArray()
-//            val notificationAdapter = NotificationAdapter(requireActivity(), rideRequests)
-//            val listView = binding.nfLv
-//            listView.adapter = notificationAdapter
-//            rideRequests = notificationsViewModel.getRequestArray()
-//            notificationAdapter.notifyDataSetChanged()
-//            listView.adapter = notificationAdapter
-//        }
-
         if (listView != null){
             listView.setOnItemClickListener { parent, view, position, id ->
-                val intent = Intent(activity, NotificationsActivity::class.java)
-                //intent.putExtra("data", ridesAdapter.getItem(position) as Ride)
-                startActivity(intent)
+                val request = notificationAdapter.getItem(position) as Request
+                val rideId = request.ride_id
+                val passengerId = request.passenger_id
+                val pickupLocation = request.location
+                val ridesDatabase = Firebase.database.getReference("Rides").child("$rideId")
+                val rideObj = Ride()
+                ridesDatabase.get().addOnSuccessListener { it ->
+                    rideObj.ride_id = rideId
+                    rideObj.departure_time = it.child("departure_time").value.toString()
+                    rideObj.host_id = it.child("host_id").value.toString()
+                    rideObj.start_location = it.child("start_location").value.toString()
+                    rideObj.end_location = it.child("end_location").value.toString()
+                    rideObj.start_address = it.child("start_address").value.toString()
+                    rideObj.end_address = it.child("end_address").value.toString()
+                    rideObj.passengers = it.child("passengers").value as HashMap<String, String>?
+
+                    val intent = Intent(requireActivity(), PassengerRideViewActivity::class.java)
+                    intent.putExtra("data", rideObj)
+                    intent.putExtra("isViewRequest", true)
+                    intent.putExtra("requestId", "${request.request_id}")
+                    intent.putExtra("pickupLocation", pickupLocation)
+                    intent.putExtra("passengerId", passengerId)
+                    intent.putExtra("rideId", rideId)
+                    startActivity(intent)
+                }
             }
         }
         return root
