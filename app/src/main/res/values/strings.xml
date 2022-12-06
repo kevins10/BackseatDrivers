@@ -62,5 +62,16 @@
     <string name="title_activity_driver_ride_view">DriverRideViewActivity</string>
     <string name="title_activity_passenger_ride_view">PassengerRideViewActivity</string>
     <string name="title_activity_my_requests">My Requests</string>
+    <string-array name="destination_spinner">
+        <item>SFU Burnaby Campus</item>
+        <item>SFU Surrey Campus</item>
+        <item>SFU Vancouver Campus</item>
+    </string-array>
+    <string-array name="ride_filter">
+        <item>None</item>
+        <item>Burnaby Campus</item>
+        <item>Surrey Campus</item>
+        <item>Vancouver Campus</item>
+    </string-array>
 
 </resources>
