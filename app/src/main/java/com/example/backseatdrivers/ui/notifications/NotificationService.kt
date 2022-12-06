@@ -12,6 +12,7 @@ import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.example.backseatdrivers.MainActivity
+import com.example.backseatdrivers.database.Request
 import com.example.backseatdrivers.database.RequestNotification
 import com.example.backseatdrivers.database.User
 import com.google.firebase.auth.FirebaseAuth
@@ -31,6 +32,8 @@ class NotificationService: Service() {
     private lateinit var broadcastReceiver: BroadcastReceiver
     private lateinit var notificationManager: NotificationManager
     private lateinit var notificationEventListener: ChildEventListener
+
+    private var notificationSnapshot = HashMap<String, RequestNotification>()
 //  private lateinit var myBinder: Binder
 //  private var msgHandler: Handler? = null
 
@@ -41,18 +44,32 @@ class NotificationService: Service() {
     override fun onCreate() {
         super.onCreate()
 
-        notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-
         val intentFilter = IntentFilter()
         intentFilter.addAction(STOP_ACTION)
+
+        notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        notificationsRef = Firebase.database.getReference("Users").child(mAuth.currentUser!!.uid).child("notifications")
+
+        //get existing notifications from database on create
+        notificationsRef.get().addOnSuccessListener { snapshot ->
+            for(i in snapshot.children) {
+                val notification = i.getValue<RequestNotification>()
+                if (notification != null) {
+                    notificationSnapshot.set(i.key.toString(), notification)
+                }
+            }
+            println("debug: notification snapshot saved as $notificationSnapshot")
+        }.addOnFailureListener {
+            println("debug: failed to fetch initial notification snapshot")
+        }
 
         notificationEventListener = object: ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val requestNotification = snapshot.getValue<RequestNotification>()
-                println("debug: new notification has been added = $requestNotification")
-                if (requestNotification != null) {
+                println("debug: new notification has been added\nid=${snapshot.key}\nrequest notification = $requestNotification")
+                if (requestNotification != null)
                     showRequestNotification(requestNotification)
-                }
+
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
@@ -67,7 +84,6 @@ class NotificationService: Service() {
             override fun onCancelled(error: DatabaseError) {
             }
         }
-        notificationsRef = Firebase.database.getReference("Users").child(mAuth.currentUser!!.uid).child("notifications")
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -78,8 +94,9 @@ class NotificationService: Service() {
 
     private fun showRequestNotification(notification: RequestNotification) {
         val intent = Intent(applicationContext, MainActivity::class.java)
+        val flag = if (Build.VERSION.SDK_INT > 31) {PendingIntent.FLAG_IMMUTABLE} else {PendingIntent.FLAG_ONE_SHOT}
         val pendingIntent = PendingIntent.getActivity(
-            this, REQUEST_CODE, intent, PendingIntent.FLAG_IMMUTABLE
+            this, REQUEST_CODE, intent, flag
         )
         val notificationBuilder: NotificationCompat.Builder = NotificationCompat.Builder(
             this, CHANNEL_ID
@@ -90,6 +107,7 @@ class NotificationService: Service() {
             .setContentTitle("New Request!")
             .setContentText("${notification.passenger_name} has requested to join your ride!")
             .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
 
         val notification = notificationBuilder.build()
         if(Build.VERSION.SDK_INT > 26) {
