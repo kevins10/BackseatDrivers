@@ -87,8 +87,9 @@ class NotificationService: Service() {
 
         notificationBuilder
             .setSmallIcon(com.example.backseatdrivers.R.drawable.ic_baseline_person_pin_16)
-            .setContentTitle("New Request to join your ride!")
+            .setContentTitle("New Request!")
             .setContentText("${notification.passenger_name} has requested to join your ride!")
+            .setContentIntent(pendingIntent)
 
         val notification = notificationBuilder.build()
         if(Build.VERSION.SDK_INT > 26) {
