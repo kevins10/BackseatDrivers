@@ -56,7 +56,7 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
     private var pickupLocation: LatLng? = null
     private var pickUpAddress: String? = null
 
-    private var userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+    private lateinit var userViewModel: UserViewModel
     private lateinit var userName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +64,8 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
 
         binding = ActivityRideViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         val intent = intent
         val rideobj = intent.getSerializableExtra("data") as Ride
         binding.rvDate.text = rideobj.departure_time
@@ -191,7 +193,7 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
                 passenger_name = userName,
                 post_time = currentTime
             )
-            val notificationsRef = Firebase.database.getReference("Users").child(rideobj.host_id!!)
+            val notificationsRef = Firebase.database.getReference("Users").child(rideobj.host_id!!).child("notifications")
 
             //create new request, and also new notification in driver's notification array
             lifecycleScope.launch {

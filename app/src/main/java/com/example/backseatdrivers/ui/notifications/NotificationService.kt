@@ -27,8 +27,6 @@ class NotificationService: Service() {
 
     private val mAuth = FirebaseAuth.getInstance()
 
-    private lateinit var notificationSnapshot: ArrayList<RequestNotification>
-
     private lateinit var notificationsRef: DatabaseReference
     private lateinit var broadcastReceiver: BroadcastReceiver
     private lateinit var notificationManager: NotificationManager
@@ -53,9 +51,11 @@ class NotificationService: Service() {
         registerReceiver(broadcastReceiver, intentFilter)
     }
 
-    override fun onBind(intent: Intent?): IBinder? {
-        TODO("Not yet implemented")
-        return null
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        println("debug: notif service started")
+        newNotificationListener()
+
+        return START_STICKY
     }
 
     private fun newNotificationListener() {
@@ -110,5 +110,10 @@ class NotificationService: Service() {
             notificationManager.cancel(NOTIFICATION_ID)
             unregisterReceiver(broadcastReceiver)
         }
+    }
+
+
+    override fun onBind(intent: Intent?): IBinder? {
+        return null
     }
 }
