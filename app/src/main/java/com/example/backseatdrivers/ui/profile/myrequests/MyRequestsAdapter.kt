@@ -39,7 +39,8 @@ class MyRequestsAdapter(private val context: Context, private var list: ArrayLis
         val driver = currentRequest.host_id
         val pickupLocation = currentRequest.location
         val pickupDetails = pickupLocation?.split("%S")
-        val address = pickupDetails?.get(0)
+        val pickupAddress = pickupDetails?.get(0)?.split("\n")
+        val pickupAddressName = pickupAddress?.get(0)
         val date_tv = view.findViewById<TextView>(R.id.na_date)
         val driver_tv = view.findViewById<TextView>(R.id.na_driver)
         val location_tv = view.findViewById<TextView>(R.id.na_pickup)
@@ -55,7 +56,7 @@ class MyRequestsAdapter(private val context: Context, private var list: ArrayLis
             val lastName = Queries().getLastName(driver.toString())
             val date = Queries().getDateFromRideId(currentRequest.ride_id.toString())
             driver_tv.text = "Posted By: $firstName $lastName"
-            location_tv.text = "Pickup Location: $address"
+            location_tv.text = "Pickup Location: $pickupAddressName"
             date_tv.text = "Date: $date"
         }
 

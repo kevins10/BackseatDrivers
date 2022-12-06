@@ -43,13 +43,16 @@ class RidesAdapter(private val context: Context, private var list: ArrayList<Rid
         val numSeats = currentRide.num_seats
         val driver = currentRide.host_id
 
+        val startAddress = currentRide.start_address?.split("\n")
+        val startAddressName = startAddress?.get(0)
+
         CoroutineScope(Dispatchers.Main).launch {
             val firstName = Queries().getFirstName(driver.toString())
             val lastName = Queries().getLastName(driver.toString())
             driver_tv.text = "Posted By: $firstName $lastName"
         }
         date_tv.text = "Date: ${currentRide.departure_time}"
-        start_tv.text = "Start: ${currentRide.start_address}"
+        start_tv.text = "Start: $startAddressName"
         dest_tv.text = "Destination: ${currentRide.end_address}"
         seats_tv.text = "Seats: $numPassengers/$numSeats"
 

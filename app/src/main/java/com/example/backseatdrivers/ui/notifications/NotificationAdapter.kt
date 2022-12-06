@@ -38,12 +38,13 @@ class NotificationAdapter(private val context: Context, private var list: ArrayL
         val passenger = currentNotification.passenger_id
         val pickupLocation = currentNotification.location
         val pickupDetails = pickupLocation?.split("%S")
-        val address = pickupDetails?.get(0)
+        val pickupAddress = pickupDetails?.get(0)?.split("\n")
+        val pickupAddressName = pickupAddress?.get(0)
         val date_tv = view.findViewById<TextView>(R.id.na_date)
         val passenger_tv = view.findViewById<TextView>(R.id.na_passenger)
         val location_tv = view.findViewById<TextView>(R.id.na_pickup)
         val acceptBtn = view.findViewById<Button>(R.id.na_accept)
-        acceptBtn.setOnClickListener(){
+        acceptBtn.setOnClickListener {
             // add passenger to ride
             CoroutineScope(Dispatchers.Main).launch {
                 val passengers = rideId?.let { it1 ->
@@ -71,7 +72,7 @@ class NotificationAdapter(private val context: Context, private var list: ArrayL
             val lastName = Queries().getLastName(passenger.toString())
             val date = Queries().getDateFromRideId(currentNotification.ride_id.toString())
             passenger_tv.text = "Request from: $firstName $lastName"
-            location_tv.text = "Pickup Location: $address"
+            location_tv.text = "Pickup Location: $pickupAddressName"
             date_tv.text = "Date: $date"
         }
 
