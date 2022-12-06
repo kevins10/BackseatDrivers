@@ -13,6 +13,7 @@ import com.example.backseatdrivers.R
 import com.example.backseatdrivers.UserViewModel
 import com.example.backseatdrivers.database.Queries
 import com.example.backseatdrivers.database.Request
+import com.example.backseatdrivers.database.RequestNotification
 import com.example.backseatdrivers.database.Ride
 import com.example.backseatdrivers.databinding.ActivityRideViewBinding
 import com.google.android.gms.common.api.Status
@@ -26,6 +27,7 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.model.RectangularBounds
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.maps.android.PolyUtil
@@ -33,6 +35,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONObject
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -52,11 +56,16 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
     private var pickupLocation: LatLng? = null
     private var pickUpAddress: String? = null
 
+    private lateinit var userViewModel: UserViewModel
+    private lateinit var userName: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityRideViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         val intent = intent
         val rideobj = intent.getSerializableExtra("data") as Ride
         binding.rvDate.text = rideobj.departure_time
@@ -67,6 +76,11 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
             val firstName = Queries().getFirstName(hostId.toString())
             val lastName = Queries().getLastName(hostId.toString())
             binding.rvDriver.text = "Driver: $firstName $lastName"
+
+            val user_id = userViewModel.getUser()!!.uid
+            userName =
+                Queries().getFirstName(user_id).toString() + " " +
+                        Queries().getLastName(user_id).toString()
         }
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -162,7 +176,6 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
 
     private fun onRequest(){
         if (pickUpAddress != null) {
-            val userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
             val rideobj = intent.getSerializableExtra("data") as Ride
             val request = Request()
             request.ride_id = rideobj.ride_id
@@ -171,11 +184,28 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
             request.passenger_id = userViewModel.getUser()!!.uid
             request.location = "${pickUpAddress.toString()}%S${pickupLocation?.latitude}%S${pickupLocation?.longitude}"
             val database = Firebase.database.getReference("Requests")
+
+            val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+            val currentTime = LocalDateTime.now().format(dateFormatter)
+            val newNotification = RequestNotification(
+                ride_id = rideobj.ride_id,
+                passenger_id = userViewModel.getUser()!!.uid,
+                passenger_name = userName,
+                post_time = currentTime
+            )
+            val notificationsRef = Firebase.database.getReference("Users").child(rideobj.host_id!!).child("notifications")
+
+            //create new request, and also new notification in driver's notification array
             lifecycleScope.launch {
                 try {
                     database.child("${request.request_id}").setValue(request)
                 }
                 catch (e: Exception) { println("debug: could not get ride because $e")}
+
+                try {
+                    notificationsRef.child(UUID.randomUUID().toString()).setValue(newNotification)
+                }
+                catch (e: Exception) { println("debug: error in creating notification = $e")}
             }
             finish()
         } else {

@@ -79,6 +79,8 @@
         <activity
             android:name=".ui.notifications.NotificationsActivity"
             android:exported="false" />
+        <service android:name=".ui.notifications.NotificationService"/>
+
     </application>
 
 </manifest>
