@@ -44,6 +44,7 @@ class NotificationAdapter(private val context: Context, private var list: ArrayL
         val passenger_tv = view.findViewById<TextView>(R.id.na_passenger)
         val location_tv = view.findViewById<TextView>(R.id.na_pickup)
         val acceptBtn = view.findViewById<Button>(R.id.na_accept)
+        val cancelBtn = view.findViewById<Button>(R.id.na_deny)
         acceptBtn.setOnClickListener {
             // add passenger to ride
             CoroutineScope(Dispatchers.Main).launch {
@@ -63,6 +64,11 @@ class NotificationAdapter(private val context: Context, private var list: ArrayL
                 }
             }
 
+            val database : DatabaseReference = Firebase.database.getReference("Requests").child("${currentNotification.request_id}")
+            database.removeValue()
+        }
+
+        cancelBtn.setOnClickListener {
             val database : DatabaseReference = Firebase.database.getReference("Requests").child("${currentNotification.request_id}")
             database.removeValue()
         }
