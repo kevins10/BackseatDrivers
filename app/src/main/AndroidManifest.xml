@@ -57,12 +57,15 @@
             android:label="@string/title_activity_create_ride" />
         <activity
             android:name=".auth.VerifySignUpActivity"
+            android:theme = "@style/Theme.Design.Light.NoActionBar"
             android:exported="false" />
         <activity
             android:name=".auth.SignUpActivity"
+            android:theme = "@style/Theme.Design.Light.NoActionBar"
             android:exported="false" />
         <activity
             android:name=".auth.LoginActivity"
+            android:theme = "@style/Theme.Design.Light.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

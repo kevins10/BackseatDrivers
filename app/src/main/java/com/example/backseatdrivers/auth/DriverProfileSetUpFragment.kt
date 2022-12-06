@@ -27,7 +27,7 @@ class DriverProfileSetUpFragment : Fragment() {
         val licenseTypes: List<String> = arrayListOf(
             "Class 5",
             "Class 7",
-            "idk what else"
+            "N"
         )
     }
 
