@@ -29,8 +29,7 @@ class RidesFragment : Fragment() {
 
     private var _binding: FragmentRidesBinding? = null
 
-    private val notificationsReference: DatabaseReference =
-        Firebase.database.reference.child("Users").child("Notifications")
+    private val ridesReference: DatabaseReference = Firebase.database.reference.child("Rides")
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -109,34 +108,6 @@ class RidesFragment : Fragment() {
         view.findViewById<Button>(R.id.createRideBtn).setOnClickListener {
             startCreateRideActivity()
         }
-    }
-
-    private fun createNotificationListener() {
-        val notificationListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val notification = dataSnapshot.getValue<ArrayList<RequestNotification>>()
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
-                Log.w(ContentValues.TAG, "debug: notification listener encountered error: ", databaseError.toException())
-            }
-        }
-        notificationsReference.addValueEventListener(notificationListener)
-    }
-
-    private fun ridesListener() {
-        val notificationListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val ride = dataSnapshot.getValue<ArrayList<Ride>>()
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
-                Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
-            }
-        }
-        notificationsReference.addValueEventListener(notificationListener)
     }
 
     private fun startCreateRideActivity() {
