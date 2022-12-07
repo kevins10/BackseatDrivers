@@ -192,7 +192,8 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
                 ride_id = rideobj.ride_id,
                 passenger_id = userViewModel.getUser()!!.uid,
                 passenger_name = userName,
-                post_time = currentTime
+                post_time = currentTime,
+                request_type = "ride_request"
             )
             val notificationsRef = Firebase.database.getReference("Users").child(rideobj.host_id!!).child("notifications")
 

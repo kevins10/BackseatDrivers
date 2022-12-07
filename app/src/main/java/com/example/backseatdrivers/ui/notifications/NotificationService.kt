@@ -51,17 +51,17 @@ class NotificationService: Service() {
         notificationsRef = Firebase.database.getReference("Users").child(mAuth.currentUser!!.uid).child("notifications")
 
         //get existing notifications from database on create
-        notificationsRef.get().addOnSuccessListener { snapshot ->
-            for(i in snapshot.children) {
-                val notification = i.getValue<RequestNotification>()
-                if (notification != null) {
-                    notificationSnapshot.set(i.key.toString(), notification)
-                }
-            }
-            println("debug: notification snapshot saved as $notificationSnapshot")
-        }.addOnFailureListener {
-            println("debug: failed to fetch initial notification snapshot")
-        }
+//        notificationsRef.get().addOnSuccessListener { snapshot ->
+//            for(i in snapshot.children) {
+//                val notification = i.getValue<RequestNotification>()
+//                if (notification != null) {
+//                    notificationSnapshot.set(i.key.toString(), notification)
+//                }
+//            }
+//            println("debug: notification snapshot saved as $notificationSnapshot")
+//        }.addOnFailureListener {
+//            println("debug: failed to fetch initial notification snapshot")
+//        }
 
         notificationEventListener = object: ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
@@ -100,13 +100,38 @@ class NotificationService: Service() {
         val notificationBuilder: NotificationCompat.Builder = NotificationCompat.Builder(
             this, CHANNEL_ID
         )
+//        when (notification.request_type){
+//            "ride_request" -> notificationBuilder
+//                                .setSmallIcon(com.example.backseatdrivers.R.drawable.ic_baseline_person_pin_16)
+//                                .setContentTitle("New Request!")
+//                                .setContentText("${notification.passenger_name} has requested to join your ride!")
+//                                .setContentIntent(pendingIntent)
+//                                .setAutoCancel(true)
+//            "ride_start" -> notificationBuilder
+//                                .setSmallIcon(com.example.backseatdrivers.R.drawable.ic_baseline_person_pin_16)
+//                                .setContentTitle("Ride Started")
+//                                .setContentText("Ride started at ${notification.post_time}")
+//                                .setContentIntent(pendingIntent)
+//                                .setAutoCancel(true)
+//        }
 
-        notificationBuilder
-            .setSmallIcon(com.example.backseatdrivers.R.drawable.ic_baseline_person_pin_16)
-            .setContentTitle("New Request!")
-            .setContentText("${notification.passenger_name} has requested to join your ride!")
-            .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
+        if(notification.request_type == "ride_request"){
+            notificationBuilder
+                .setSmallIcon(com.example.backseatdrivers.R.drawable.ic_baseline_person_pin_16)
+                .setContentTitle("New Request!")
+                .setContentText("${notification.passenger_name} has requested to join your ride!")
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+        }
+        else{
+            notificationBuilder
+                .setSmallIcon(com.example.backseatdrivers.R.drawable.ic_baseline_person_pin_16)
+                .setContentTitle("New Request!")
+                .setContentText("${notification.passenger_name} has requested to join your ride!")
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+        }
+
 
         val notification = notificationBuilder.build()
         if(Build.VERSION.SDK_INT > 26) {
