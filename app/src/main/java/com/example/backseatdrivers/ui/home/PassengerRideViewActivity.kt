@@ -15,6 +15,7 @@ import com.android.volley.toolbox.Volley
 import com.example.backseatdrivers.R
 import com.example.backseatdrivers.database.Queries
 import com.example.backseatdrivers.database.Request
+import com.example.backseatdrivers.database.RequestNotification
 import com.example.backseatdrivers.database.Ride
 import com.example.backseatdrivers.databinding.ActivityPassengerRideViewBinding
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -31,6 +32,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONObject
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
@@ -88,6 +94,8 @@ class PassengerRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
                     .setMessage("Are you sure you want to cancel your request for this ride?")
                     .setCancelable(true)
                     .setPositiveButton("Yes") { dialogInterface, it ->
+
+
                         // remove passenger from ride request
                         val database : DatabaseReference = Firebase.database.getReference("Requests").child("$requestId")
                         database.removeValue()
@@ -166,6 +174,28 @@ class PassengerRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
                     .setCancelable(true)
                     .setPositiveButton("Yes") { dialogInterface, it ->
                         // remove passenger from passengers list
+                        println("INSIDE DIALOG")
+                        CoroutineScope(Dispatchers.Main).launch {
+                            println("INSIDE COROUTINE")
+                            val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+                            val currentTime = LocalDateTime.now().format(dateFormatter)
+                            val notificationsRef = Firebase.database.getReference("Users").child(rideObj.host_id!!).child("notifications")
+                            var notification = RequestNotification(
+                                host_id = rideObj.host_id,
+                                ride_id = rideObj.ride_id,
+                                passenger_id = userId,
+                                passenger_name = Queries().getFirstName(userId).toString(),
+                                post_time = currentTime,
+                                request_type = "ride_dropped"
+                            )
+                            try {
+                                println("SENT NOTIF")
+                                notificationsRef.child(UUID.randomUUID().toString()).setValue(notification)
+                            }
+                            catch (e: Exception) { println("debug: error in creating notification = $e")
+                            }
+
+                        }
                         val database : DatabaseReference = Firebase.database.getReference("Rides")
                             .child("${rideObj.ride_id}")
                             .child("passengers")

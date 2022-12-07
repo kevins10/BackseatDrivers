@@ -11,6 +11,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.backseatdrivers.R
 import com.example.backseatdrivers.database.Queries
+import com.example.backseatdrivers.database.RequestNotification
 import com.example.backseatdrivers.database.Ride
 import com.example.backseatdrivers.databinding.ActivityDriverRideViewBinding
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -26,6 +27,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONObject
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
@@ -104,6 +109,29 @@ class DriverRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
                 .setMessage("Are you sure you want to cancel this ride?")
                 .setCancelable(true)
                 .setPositiveButton("Yes") { dialogInterface, it ->
+                    if (rideObj.passengers != null){
+                        CoroutineScope(Dispatchers.Main).launch {
+                            for (key in rideObj.passengers!!.keys){
+                                println("THESE R THE KEYS $key")
+                                val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+                                val currentTime = LocalDateTime.now().format(dateFormatter)
+                                val notificationsRef = Firebase.database.getReference("Users").child(key).child("notifications")
+                                var notification = RequestNotification(
+                                    host_id = rideObj.host_id,
+                                    ride_id = rideObj.ride_id,
+                                    passenger_id = key,
+                                    passenger_name = Queries().getFirstName(key).toString(),
+                                    post_time = currentTime,
+                                    request_type = "ride_cancel"
+                                )
+                                try {
+                                    println("SENT LOL")
+                                    notificationsRef.child(UUID.randomUUID().toString()).setValue(notification)
+                                }
+                                catch (e: Exception) { println("debug: error in creating notification = $e")}
+                            }
+                        }
+                    }
                     // delete ride from database
                     val database : DatabaseReference = Firebase.database.getReference("Rides").child("${rideObj.ride_id}")
                     database.removeValue()
@@ -115,6 +143,34 @@ class DriverRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
                     dialogInterface.cancel()
                 }
                 .show()
+        }
+
+        binding.saveButton.setOnClickListener{
+            if (rideObj.passengers != null){
+                CoroutineScope(Dispatchers.Main).launch {
+                    for (key in rideObj.passengers!!.keys){
+                        println("THESE R THE KEYS $key")
+                        val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+                        val currentTime = LocalDateTime.now().format(dateFormatter)
+                        val notificationsRef = Firebase.database.getReference("Users").child(key).child("notifications")
+                        var notification = RequestNotification(
+                            host_id = rideObj.host_id,
+                            ride_id = rideObj.ride_id,
+                            passenger_id = key,
+                            passenger_name = Queries().getFirstName(key).toString(),
+                            post_time = currentTime,
+                            request_type = "ride_start"
+                        )
+                        try {
+                            println("SENT LOL")
+                            notificationsRef.child(UUID.randomUUID().toString()).setValue(notification)
+                        }
+                        catch (e: Exception) { println("debug: error in creating notification = $e")}
+                    }
+                }
+                finish()
+            }
+
         }
     }
 
