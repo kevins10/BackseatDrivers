@@ -76,9 +76,6 @@
         <activity
             android:name=".ui.chat.ChatActivity"
             android:exported="true" />
-        <activity
-            android:name=".ui.notifications.NotificationsActivity"
-            android:exported="false" />
         <service android:name=".ui.notifications.NotificationService"/>
 
     </application>

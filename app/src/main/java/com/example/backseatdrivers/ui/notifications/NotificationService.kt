@@ -107,20 +107,6 @@ class NotificationService: Service() {
         val notificationBuilder: NotificationCompat.Builder = NotificationCompat.Builder(
             this, CHANNEL_ID
         )
-//        when (notification.request_type){
-//            "ride_request" -> notificationBuilder
-//                                .setSmallIcon(com.example.backseatdrivers.R.drawable.ic_baseline_person_pin_16)
-//                                .setContentTitle("New Request!")
-//                                .setContentText("${notification.passenger_name} has requested to join your ride!")
-//                                .setContentIntent(pendingIntent)
-//                                .setAutoCancel(true)
-//            "ride_start" -> notificationBuilder
-//                                .setSmallIcon(com.example.backseatdrivers.R.drawable.ic_baseline_person_pin_16)
-//                                .setContentTitle("Ride Started")
-//                                .setContentText("Ride started at ${notification.post_time}")
-//                                .setContentIntent(pendingIntent)
-//                                .setAutoCancel(true)
-//        }
 
         if(notification.request_type == "ride_request"){
             notificationBuilder

@@ -10,10 +10,7 @@ import com.example.backseatdrivers.database.Ride
 import com.example.backseatdrivers.databinding.FragmentDriverTabBinding
 import com.example.backseatdrivers.ui.rides.RidesAdapter
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -74,6 +71,7 @@ class DriverTabFragment : Fragment() {
                     ride.end_address = i.child("end_address").value.toString()
                     ride.start_address = i.child("start_address").value.toString()
                     ride.num_seats = i.child("num_seats").value.toString().toInt()
+                    ride.in_progress = i.child("in_progress").value.toString()
                     val passengers = i.child("passengers").value
 
                     // check if ride is posted by current user
@@ -97,6 +95,30 @@ class DriverTabFragment : Fragment() {
             }
 
         })
+
+//        var rideDatabase2 = Firebase.database.getReference("Rides")
+//        rideDatabase2.addChildEventListener(object : ChildEventListener{
+//            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+//                //TODO("Not yet implemented")
+//            }
+//
+//            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+//                listView.adapter = ridesAdapter
+//            }
+//
+//            override fun onChildRemoved(snapshot: DataSnapshot) {
+//                //TODO("Not yet implemented")
+//            }
+//
+//            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+//                //TODO("Not yet implemented")
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                //TODO("Not yet implemented")
+//            }
+//
+//        })
     }
 
     override fun onDestroyView() {
