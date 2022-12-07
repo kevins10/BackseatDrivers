@@ -22,8 +22,8 @@
         android:id="@+id/chatActivityRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/l1"
-        android:layout_above="@+id/r1">
+        android:layout_above="@+id/r1"
+        android:layout_below="@id/l1">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -40,19 +40,21 @@
             android:orientation="horizontal">
             <EditText
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/teal_700"
+                android:layout_height="50dp"
+                android:layout_weight="0.95"
+                android:background="@color/quantum_grey400"
                 android:hint="Type Message"
                 android:padding="12dp"
                 android:id="@+id/etMessage">
             </EditText>
-            <Button
+
+            <ImageButton
+                android:id="@+id/btnSendMessage"
                 android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:text="Send"
-                android:id="@+id/btnSendMessage">
-            </Button>
+                android:layout_height="50dp"
+                android:layout_weight="0.05"
+                android:background="#CC0633"
+                android:src="@android:drawable/ic_menu_send" />
         </LinearLayout>
     </RelativeLayout>
 

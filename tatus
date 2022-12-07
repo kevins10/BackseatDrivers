@@ -1,0 +1,1275 @@
+[33mcommit 7b34995371bb98463119eb269e99f1b6a54d1748[m[33m ([m[1;36mHEAD -> [m[1;32mremoveToolbar[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Merge: fc7d9b1 faedb36
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Tue Dec 6 17:59:39 2022 -0800
+
+    Merge pull request #56 from kevins10/styling5
+    
+    Styling5
+
+[33mcommit faedb36a2f1bc520f9a7ff78a9c7f6812639f3b4[m[33m ([m[1;31morigin/styling5[m[33m, [m[1;32mstyling5[m[33m)[m
+Author: David <davidrobertlowe@gmail.com>
+Date:   Tue Dec 6 17:37:23 2022 -0800
+
+    list changes
+
+[33mcommit 0906e80d37741828aa5a7f188c8133f46f3167c3[m
+Author: David <davidrobertlowe@gmail.com>
+Date:   Tue Dec 6 17:28:11 2022 -0800
+
+    changes
+
+[33mcommit 874db464a1879947c2d0d8bbd1c705ac5fec8738[m
+Author: David <davidrobertlowe@gmail.com>
+Date:   Tue Dec 6 16:46:18 2022 -0800
+
+    list changes
+
+[33mcommit 2f27c18c065667e71f3e00ac837f6f83f1d9cf0d[m
+Author: David <davidrobertlowe@gmail.com>
+Date:   Tue Dec 6 16:40:45 2022 -0800
+
+    rides
+
+[33mcommit cc42c56e4a03fb421c6eb8bc6c64242ded14de20[m
+Author: David <davidrobertlowe@gmail.com>
+Date:   Tue Dec 6 16:01:58 2022 -0800
+
+    adjustments
+
+[33mcommit 0d114b46a0e02e66535f70c1f587157eb5312d6e[m
+Author: David <davidrobertlowe@gmail.com>
+Date:   Tue Dec 6 15:46:44 2022 -0800
+
+    save changes
+
+[33mcommit 4659e104c14c1bb7eb1e0554355aa80babbcd7ef[m
+Author: David <davidrobertlowe@gmail.com>
+Date:   Tue Dec 6 15:35:19 2022 -0800
+
+    saving changes
+
+[33mcommit fa294c812425612da4a32dd6bf7ef45ef79738bf[m
+Author: David <davidrobertlowe@gmail.com>
+Date:   Tue Dec 6 13:00:40 2022 -0800
+
+    list changes
+
+[33mcommit 6d778400094de9646b4e5776db9ae6e8c521034c[m
+Author: David <davidrobertlowe@gmail.com>
+Date:   Tue Dec 6 12:08:07 2022 -0800
+
+    login pages styled
+
+[33mcommit fc7d9b17522cd61142fc58977c9fd19ba9495131[m
+Merge: e97de09 b4be5d1
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Tue Dec 6 16:16:57 2022 -0800
+
+    Merge pull request #55 from kevins10/checkNext
+    
+    check that route is found
+
+[33mcommit b4be5d195b90bbb855df464d4e1d03fc6724ab72[m[33m ([m[1;31morigin/checkNext[m[33m, [m[1;32mcheckNext[m[33m)[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Tue Dec 6 16:16:19 2022 -0800
+
+    check that route is found
+
+[33mcommit e97de092555df0503093f149384066752133a9eb[m
+Merge: ca8bac4 ccbf61a
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Tue Dec 6 16:08:58 2022 -0800
+
+    Merge pull request #54 from kevins10/rides_filter
+    
+    add profile pic to chat list
+
+[33mcommit ccbf61a7102b8ab267ed06f50ed223c031ec4c82[m[33m ([m[1;31morigin/rides_filter[m[33m, [m[1;32mrides_filter[m[33m)[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Tue Dec 6 13:15:26 2022 -0800
+
+    add profile pic to chat list
+
+[33mcommit ca8bac4c90044d781968626f54f7a5c47411ea2e[m
+Merge: f58a68c e8433ac
+Author: kevins10 <79349218+kevins10@users.noreply.github.com>
+Date:   Tue Dec 6 15:19:01 2022 -0800
+
+    Merge pull request #53 from kevins10/test
+    
+    Test
+
+[33mcommit e8433ac4eec7a82601d6a8347f2fc253bf8200c1[m[33m ([m[1;31morigin/test[m[33m, [m[1;32mtest[m[33m)[m
+Merge: b950400 f58a68c
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Tue Dec 6 14:58:39 2022 -0800
+
+    Merge branch 'main' of https://github.com/kevins10/BackseatDrivers into test
+
+[33mcommit b95040055bce199a4f5c4bdc3a9ac624c0547b30[m
+Merge: 5b1118a c69a28b
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Tue Dec 6 14:51:46 2022 -0800
+
+    Merge branch 'notificationservice' of https://github.com/kevins10/BackseatDrivers into notificationservice
+
+[33mcommit 5b1118aa37890570cd97fb78e92ff9e683abcb62[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Tue Dec 6 14:51:43 2022 -0800
+
+    conflict
+
+[33mcommit 3349c13facd40082463a59423944c95442d87e93[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Tue Dec 6 14:50:56 2022 -0800
+
+    merge
+
+[33mcommit c69a28b8cb3a5383bc21d0ebc9221134c751136c[m[33m ([m[1;31morigin/notificationservice[m[33m)[m
+Author: ChristopherFong604 <ccffoonngg@gmail.com>
+Date:   Tue Dec 6 14:44:37 2022 -0800
+
+    hardcoded intent flag
+
+[33mcommit 40149856197963b234b345a1bed8847e5df2d6ee[m
+Author: ChristopherFong604 <ccffoonngg@gmail.com>
+Date:   Tue Dec 6 14:41:18 2022 -0800
+
+    readded intent
+
+[33mcommit f58a68cc81ea84445ac40ad4ac55f24f8cf2650f[m
+Merge: ce32710 56bacd9
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Tue Dec 6 14:13:21 2022 -0800
+
+    Merge pull request #52 from kevins10/viewRequests
+    
+    ride request views
+
+[33mcommit 56bacd9d36991d8661ab36c628841d321eb1f42f[m[33m ([m[1;31morigin/viewRequests[m[33m, [m[1;32mviewRequests[m[33m)[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Tue Dec 6 14:12:08 2022 -0800
+
+    ride request views
+
+[33mcommit deed9653fae99e2bf34d9ee0d5b981d89b77433c[m[33m ([m[1;32mnotificationservice[m[33m)[m
+Author: ChristopherFong604 <ccffoonngg@gmail.com>
+Date:   Tue Dec 6 13:29:01 2022 -0800
+
+    changed notif message
+
+[33mcommit 2296f476d7e156d4b660496a27c333534289af52[m
+Author: ChristopherFong604 <ccffoonngg@gmail.com>
+Date:   Tue Dec 6 13:16:45 2022 -0800
+
+    added notif setup
+
+[33mcommit 969ea116ca361530869c25693fec700c4b29f0b2[m
+Author: ChristopherFong604 <ccffoonngg@gmail.com>
+Date:   Tue Dec 6 13:05:12 2022 -0800
+
+    added ondestroy
+
+[33mcommit d4521c82ea3c159d83994a8089d8c7faa00e01d9[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Tue Dec 6 12:53:53 2022 -0800
+
+    added service to manifest
+
+[33mcommit bb746c2e86a649c7cb1a73b34e99538e579876ff[m
+Merge: 7c1a20b ce32710
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Tue Dec 6 12:46:33 2022 -0800
+
+    Merge branch 'main' of https://github.com/kevins10/BackseatDrivers into notificationservice
+
+[33mcommit ce3271027514062a1718bed2ebc0bc95dec71ca8[m
+Merge: ff9abd1 039bc46
+Author: kevins10 <79349218+kevins10@users.noreply.github.com>
+Date:   Tue Dec 6 12:41:01 2022 -0800
+
+    Merge pull request #50 from kevins10/rides_filter
+    
+    Rides filter
+
+[33mcommit 039bc46913c08dab23d4a2b321b5d03089075c13[m
+Merge: 55ddfb0 ff9abd1
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Tue Dec 6 12:39:47 2022 -0800
+
+    Merge branch 'main' of https://github.com/kevins10/BackseatDrivers into rides_filter
+
+[33mcommit 55ddfb0e70dc0a226b5210b9befdfb7155684983[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Tue Dec 6 12:39:34 2022 -0800
+
+    doesn't show old rides anymore
+
+[33mcommit 7c1a20b5cda42b2285fcea9a6ea2aa4972cbef8a[m
+Author: ChristopherFong604 <ccffoonngg@gmail.com>
+Date:   Tue Dec 6 12:39:06 2022 -0800
+
+    created init service logic
+
+[33mcommit 377995bd2de91410394287bd7f64335350488ecc[m
+Author: ChristopherFong604 <ccffoonngg@gmail.com>
+Date:   Tue Dec 6 11:42:13 2022 -0800
+
+    added notification create on request made
+
+[33mcommit ff9abd11d57f5cb80435948465f931aadd99e837[m
+Merge: 959bb7a da1e785
+Author: kevins10 <79349218+kevins10@users.noreply.github.com>
+Date:   Tue Dec 6 03:54:05 2022 -0800
+
+    Merge pull request #49 from kevins10/rides_filter
+    
+    made notif lv clickable
+
+[33mcommit da1e785756d0a5a38db0c4eddc805894b783916a[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Tue Dec 6 03:53:40 2022 -0800
+
+    made notif lv clickable
+
+[33mcommit 959bb7a8353520279ab1504ab8c85e1cde3af7f0[m[33m ([m[1;32mnotifDetailView[m[33m)[m
+Merge: a811669 5e09518
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Tue Dec 6 03:24:11 2022 -0800
+
+    Merge pull request #48 from kevins10/notifDetailView
+    
+    implement request deny
+
+[33mcommit 5e0951839bdbea6e7b09579a750f72f52c2ea3aa[m[33m ([m[1;31morigin/notifDetailView[m[33m)[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Tue Dec 6 03:23:13 2022 -0800
+
+    implement request deny
+
+[33mcommit a81166998e34e8371c726961dd4cc42e4f4af869[m
+Merge: 7172fb8 a4e2251
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Tue Dec 6 02:58:34 2022 -0800
+
+    Merge pull request #47 from kevins10/startRide
+    
+    Start ride
+
+[33mcommit a4e225159b26da39babd15f42bacc8fe1e1c824c[m[33m ([m[1;31morigin/startRide[m[33m)[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Tue Dec 6 02:57:56 2022 -0800
+
+    fix display details
+
+[33mcommit 434852aeb113983c5dae267c39aa10ed65a9aa85[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Tue Dec 6 02:36:48 2022 -0800
+
+    add markers to pickup locations
+
+[33mcommit 7172fb8d513cae07d4c6227b04d9b5cd32015a66[m
+Merge: 6dfe482 09eeb9c
+Author: kevins10 <79349218+kevins10@users.noreply.github.com>
+Date:   Tue Dec 6 01:40:00 2022 -0800
+
+    Merge pull request #46 from kevins10/rides_filter
+    
+    added filtering and limit to 3 destinations
+
+[33mcommit 09eeb9c25d15f01252a35d26493de3be96c3f111[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Tue Dec 6 01:38:53 2022 -0800
+
+    added filtering and limit to 3 destinations
+
+[33mcommit 6dfe482bf944301f3b4d5a3ca0a5506a39409083[m
+Merge: ef2673c 11b6d02
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Mon Dec 5 20:15:36 2022 -0800
+
+    Merge pull request #45 from kevins10/profile
+    
+    add email to profile
+
+[33mcommit 11b6d024466f7f93855047b79435019f80a4a850[m[33m ([m[1;31morigin/profile[m[33m)[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Mon Dec 5 20:15:02 2022 -0800
+
+    add email to profile
+
+[33mcommit ef2673c755054a4f311ea10024b76337221dfea1[m
+Merge: a6ff1b4 b725d9c
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Mon Dec 5 16:13:07 2022 -0800
+
+    Merge pull request #44 from kevins10/myRequests
+    
+    fix myRequests bug
+
+[33mcommit b725d9c8c9cba2d152917e22d3dccdfa0a60c9d5[m[33m ([m[1;31morigin/myRequests[m[33m)[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Mon Dec 5 16:12:01 2022 -0800
+
+    fix myRequests bug
+
+[33mcommit a6ff1b471326437cb84dab0b59ac3c16900d4d43[m
+Merge: e070681 ad70643
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Mon Dec 5 16:03:43 2022 -0800
+
+    Merge pull request #43 from kevins10/sam/rides
+    
+    dont list drivers own rides on rides page
+
+[33mcommit ad70643831040d528a9784c54a2ffb64f6cdcdb9[m[33m ([m[1;31morigin/sam/rides[m[33m)[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Mon Dec 5 16:02:42 2022 -0800
+
+    dont list drivers own rides on rides page
+
+[33mcommit e07068188e6788865a8f7024a2397aba48a6d7d0[m
+Merge: 7fdf31f 03199b3
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Mon Dec 5 15:29:05 2022 -0800
+
+    Merge pull request #42 from kevins10/autocompleteLocations
+    
+    Autocomplete locations
+
+[33mcommit 03199b3fefb2b19acef0d331eec022af4691e9d2[m[33m ([m[1;31morigin/autocompleteLocations[m[33m)[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Mon Dec 5 15:28:26 2022 -0800
+
+    fix address details
+
+[33mcommit 0c4f5516493bd916399a86365c103873abb50cbc[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Mon Dec 5 15:20:01 2022 -0800
+
+    add place autocomplete for ride request
+
+[33mcommit 3d02cf81cccb64bddac316a7bd44fd87a649729e[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Mon Dec 5 14:35:05 2022 -0800
+
+    add place autocomplete for createRide
+
+[33mcommit 7fdf31f029e02777c0a20ffb7871c08c434c27cf[m
+Merge: a326428 84c93d6
+Author: kevins10 <79349218+kevins10@users.noreply.github.com>
+Date:   Mon Dec 5 13:15:35 2022 -0800
+
+    Merge pull request #41 from kevins10/test
+    
+    Test
+
+[33mcommit 84c93d68a6f84fd7d085375e2ffc3d02a21d738d[m
+Merge: 8fe0189 a326428
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Mon Dec 5 13:12:41 2022 -0800
+
+    fixed merge
+
+[33mcommit 8fe0189b8b8d6b2368b90e58414163d7b2705ac3[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Mon Dec 5 13:08:10 2022 -0800
+
+    added timestamp
+
+[33mcommit 424874c4cbb884ff75fd86c72f8677e078aa1560[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Mon Dec 5 11:37:49 2022 -0800
+
+    added who shows up on chat fragment
+
+[33mcommit a326428a0c1800ee370d3c45fc2ab5219aef1c3d[m
+Merge: dfe62c9 1d5ce96
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Mon Dec 5 09:09:01 2022 -0800
+
+    Merge pull request #40 from kevins10/cancelRequest
+    
+    allow passengers to cancel their requests
+
+[33mcommit 1d5ce96bb2c56e8881d3f49d9c60b3f78cb14cd4[m[33m ([m[1;31morigin/cancelRequest[m[33m)[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Mon Dec 5 09:07:35 2022 -0800
+
+    allow passengers to cancel their requests
+
+[33mcommit dfe62c9b28facad8addad2d47b288678fbebb692[m
+Merge: 73bc264 76824f3
+Author: kevins10 <79349218+kevins10@users.noreply.github.com>
+Date:   Sun Dec 4 19:06:09 2022 -0800
+
+    Merge pull request #39 from kevins10/kevin_chat2
+    
+    Kevin chat2
+
+[33mcommit 76824f3181ea6ace3f75b88598cba743d149a952[m[33m ([m[1;31morigin/kevin_chat2[m[33m)[m
+Merge: a3f41bb 73bc264
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Sun Dec 4 19:05:24 2022 -0800
+
+    added chat feature
+
+[33mcommit a3f41bb1a02385193be5fc1d195ea7b8f2b4860e[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Sun Dec 4 18:55:33 2022 -0800
+
+    merge conflict
+
+[33mcommit 73bc264dbf594599fe1e63cc38f408ff060bb3ea[m
+Merge: 8cbce7c 0706590
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Sun Dec 4 18:23:48 2022 -0800
+
+    Merge pull request #38 from kevins10/driverCancelRide
+    
+    Driver cancel ride
+
+[33mcommit 07065903eac86ff2a2e6f8fb67813ce3e53c6555[m[33m ([m[1;31morigin/driverCancelRide[m[33m)[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Sun Dec 4 18:22:33 2022 -0800
+
+    add alert dialog to confirm passenger drop out
+
+[33mcommit 534299c587f398bf7825a3479e3765d831db9120[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Sun Dec 4 18:21:52 2022 -0800
+
+    allow driver to cancel their ride
+
+[33mcommit 8cbce7c2f4abbc2d6df8fdd24b6e3750a7440e62[m
+Merge: 6504cce 4d7d9ac
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Sun Dec 4 17:47:40 2022 -0800
+
+    Merge pull request #37 from kevins10/removeFromRide
+    
+    allow passengers to remove themselves from ride
+
+[33mcommit 4d7d9acbba1fa34b81d6edd85fc73f178dbcfbb9[m[33m ([m[1;31morigin/removeFromRide[m[33m)[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Sun Dec 4 17:45:16 2022 -0800
+
+    allow passenger to remove themself from ride
+
+[33mcommit 6504cceb1721221aa3a779ad4f4b311d525d2117[m
+Merge: 81f4033 f7d8105
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Sun Dec 4 17:30:38 2022 -0800
+
+    Merge pull request #36 from kevins10/home
+    
+    Home
+
+[33mcommit f7d8105176c971dc3c42cb0aff6c5aed6e93d1da[m[33m ([m[1;31morigin/home[m[33m)[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Sun Dec 4 17:20:56 2022 -0800
+
+    init as passenger view
+
+[33mcommit 5f0e5f4248053d26b908aa04cafed128f1a6550e[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Sun Dec 4 11:24:06 2022 -0800
+
+    init as driver view
+
+[33mcommit 97052b8643ad539e1e12f93b4ca56c6af091a917[m
+Merge: 7e8278a 81f4033
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Sun Dec 4 17:03:11 2022 -0800
+
+    Merge branch 'main' of https://github.com/kevins10/BackseatDrivers into kevin_chat
+
+[33mcommit 81f40338f74e79d73c5718f03d84e5aaeb673f83[m
+Merge: e7a8596 d649503
+Author: David Lowe <76568284+davidrobertlowe@users.noreply.github.com>
+Date:   Sun Dec 4 16:30:12 2022 -0800
+
+    Merge pull request #35 from kevins10/styling4
+    
+    revert change
+
+[33mcommit d649503649426363f675240e8419a0c08f6f49af[m
+Author: David <davidrobertlowe@gmail.com>
+Date:   Sun Dec 4 16:28:51 2022 -0800
+
+    revert change
+
+[33mcommit e7a85961e89120906c4468f8b4da67446ea6fb4e[m
+Merge: 1fe8874 83b9e64
+Author: David Lowe <76568284+davidrobertlowe@users.noreply.github.com>
+Date:   Sun Dec 4 16:10:20 2022 -0800
+
+    Merge pull request #34 from kevins10/styling4
+    
+    remove action bar
+
+[33mcommit 83b9e647773b9a3be6652db1a0a5ca2b8053390e[m
+Author: David <davidrobertlowe@gmail.com>
+Date:   Sun Dec 4 16:04:55 2022 -0800
+
+    remove action bar
+
+[33mcommit 7e8278a4510f76d0a4484e1275d5d303f3774e2d[m[33m ([m[1;31morigin/kevin_chat[m[33m)[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Sun Dec 4 15:25:34 2022 -0800
+
+    added chat function
+
+[33mcommit 1fe887473e173d63e9c037342079deda5febf3fd[m
+Merge: 22367ad d5ce9ad
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Sun Dec 4 00:40:55 2022 -0800
+
+    Merge pull request #33 from kevins10/home
+    
+    add tab layout to home page
+
+[33mcommit d5ce9aded7038ee13fd6788eaf449a5d8903ebf6[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Sun Dec 4 00:39:47 2022 -0800
+
+    add tab layout to home page
+
+[33mcommit 22367ad9630f0aaf712ded4bdfc68afc53b21a2a[m
+Merge: 39f0b8c ed8d13f
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Sat Dec 3 19:07:52 2022 -0800
+
+    Merge pull request #32 from kevins10/home
+    
+    fix spacing and home fragment
+
+[33mcommit ed8d13feba67ae9db02fbf6b2be7cd09d6f1d6a2[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Sat Dec 3 15:54:29 2022 -0800
+
+    fix spacing and home fragment
+
+[33mcommit 39f0b8c5b09a50e773c76b4e08dd0c6db6a1c961[m
+Merge: 18d73bc 6f57e6e
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Sat Dec 3 13:37:06 2022 -0800
+
+    Merge pull request #31 from kevins10/addPassengerToRide
+    
+    Add passenger to ride
+
+[33mcommit 6f57e6e0bcdf28de2fafafd16ef3095bfa9083ac[m[33m ([m[1;31morigin/addPassengerToRide[m[33m)[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Sat Dec 3 13:07:22 2022 -0800
+
+    only display rides on Rides page that have empty seats
+
+[33mcommit 3c2d994058ce62d1dcd1dc04d458cd74fd463a43[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Sat Dec 3 12:29:07 2022 -0800
+
+    change seats details
+
+[33mcommit 007346a61deace48988fe39788a041b0f6ded37c[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Sat Dec 3 11:43:59 2022 -0800
+
+    add passenger to ride
+
+[33mcommit 3a4fa00703d5a02efa53b72e0011c53999ec2c90[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Fri Dec 2 21:42:41 2022 -0800
+
+    add available seats details to rides page
+
+[33mcommit 18d73bcc62830f0ba04a14f90d04986a3865b07e[m
+Merge: f49271a 98dddc6
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Wed Nov 30 09:23:18 2022 -0800
+
+    Merge pull request #30 from kevins10/sam/notif
+    
+    fix notification text displays
+
+[33mcommit 98dddc61957d590d429c4b6acb73e0a01fdb60b6[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Wed Nov 30 09:22:07 2022 -0800
+
+    fix notification text displays
+
+[33mcommit f49271a876ff03ab42a8bb09c3998769c3992cf8[m
+Merge: 0640cf3 50e7082
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Wed Nov 30 09:03:05 2022 -0800
+
+    Merge pull request #29 from kevins10/sam/rides
+    
+    ride display
+
+[33mcommit 50e70827b31c3b7794527c80361d33a64a1b15be[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Wed Nov 30 09:01:29 2022 -0800
+
+    ride display
+
+[33mcommit 0640cf3155bbe4dd32ee71bbf058b111660bf958[m
+Merge: c07c9f5 c513acd
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Wed Nov 30 08:57:40 2022 -0800
+
+    Merge pull request #28 from kevins10/sam/rides
+    
+    fix ride display values
+
+[33mcommit c513acd39559dfc16e617005abf1fb3525272f06[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Wed Nov 30 08:55:02 2022 -0800
+
+    fix ride display values
+
+[33mcommit c07c9f556507c8ef40e21a45a25cbcc1e89cfa0b[m
+Merge: 10e74dd 559dec7
+Author: David Lowe <76568284+davidrobertlowe@users.noreply.github.com>
+Date:   Wed Nov 30 08:48:45 2022 -0800
+
+    Merge pull request #27 from kevins10/styling2
+    
+    sign in styling
+
+[33mcommit 559dec759189735004a7700139b66eed51cff1b5[m
+Author: David <davidrobertlowe@gmail.com>
+Date:   Wed Nov 30 08:48:18 2022 -0800
+
+    sign in styling
+
+[33mcommit 10e74dd1ad36dc9ec960ea828e54869d2c56b2ac[m
+Merge: 2660eb4 01d7fbe
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Wed Nov 30 08:23:37 2022 -0800
+
+    Merge pull request #26 from kevins10/home
+    
+    display upcoming rides
+
+[33mcommit 01d7fbe71f597c73562df811f309a9e5c8dd28a2[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Wed Nov 30 08:14:48 2022 -0800
+
+    display upcoming rides
+
+[33mcommit 2660eb415f8d337be2177408b30239c76ef76222[m
+Merge: f268961 ffe44cb
+Author: kevins10 <79349218+kevins10@users.noreply.github.com>
+Date:   Wed Nov 30 08:22:13 2022 -0800
+
+    Merge pull request #25 from kevins10/ghrn_fragment
+    
+    minor fix
+
+[33mcommit ffe44cb281c2599a8ff6bf53ddccf1a3602dc09a[m[33m ([m[1;31morigin/ghrn_fragment[m[33m)[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Wed Nov 30 08:19:09 2022 -0800
+
+    minor fix
+
+[33mcommit f26896121f817e8486f3692ef6cef40610064728[m
+Merge: a52d8e2 33d0ee4
+Author: kevins10 <79349218+kevins10@users.noreply.github.com>
+Date:   Wed Nov 30 08:14:09 2022 -0800
+
+    Merge pull request #24 from kevins10/ghrn_fragment
+    
+    set up notification fragment
+
+[33mcommit 33d0ee4f07c00166bab5f3bbf76868d808741be0[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Wed Nov 30 08:13:17 2022 -0800
+
+    set up notification fragment
+
+[33mcommit a52d8e22ff45fc57611d36567dc9c58c9476e4f5[m
+Merge: c194687 7162d49
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Wed Nov 30 06:41:25 2022 -0800
+
+    Merge pull request #23 from kevins10/home
+    
+    fix list display
+
+[33mcommit 7162d49a29508bc807b69c9b89766309834fe4e3[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Wed Nov 30 06:27:20 2022 -0800
+
+    fix list display
+
+[33mcommit c1946877eed8de833316dd354f136092b82ec494[m
+Merge: 1a838f6 754bab5
+Author: kevins10 <79349218+kevins10@users.noreply.github.com>
+Date:   Wed Nov 30 06:37:53 2022 -0800
+
+    Merge pull request #22 from kevins10/ghrn_fragment
+    
+    Ghrn fragment
+
+[33mcommit 754bab5fb8fb1f9abcbf424be0ee025acd76a873[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Wed Nov 30 06:36:52 2022 -0800
+
+    individual ride view and send requests
+
+[33mcommit f18f2420afe69ed3f0db8dee0306e7c53107e909[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Wed Nov 30 06:24:59 2022 -0800
+
+    added functionality to send request button
+
+[33mcommit 1a838f6b58ab0ee4eeba939856397582ada8d5eb[m
+Merge: 27cdf3d d0e3cd5
+Author: kevins10 <79349218+kevins10@users.noreply.github.com>
+Date:   Wed Nov 30 04:35:19 2022 -0800
+
+    Merge pull request #21 from kevins10/ghrn_fragment
+    
+    Ghrn fragment
+
+[33mcommit d0e3cd57b5d172529f6cbaf1c84534c645fa67e5[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Wed Nov 30 04:30:42 2022 -0800
+
+    fixed merge
+
+[33mcommit 4669bf84ee6629a50e442cbe490690a40a7a4523[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Wed Nov 30 04:29:49 2022 -0800
+
+    added adapter for rides (live data)
+
+[33mcommit 27cdf3dac9166786c4307afb7decaf83c273a938[m
+Merge: 3c9c91c 73264d1
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Wed Nov 30 04:18:07 2022 -0800
+
+    Merge pull request #20 from kevins10/postRide
+    
+    insert ride to database
+
+[33mcommit 73264d138f06677385265520fe1a02ef7ab18731[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Wed Nov 30 04:17:12 2022 -0800
+
+    insert ride to database
+
+[33mcommit 9e7d34da06243828931d5c59adc9a1ae31630614[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Wed Nov 30 01:13:03 2022 -0800
+
+    added adapter for home fragment
+
+[33mcommit 3c9c91cb95db167399dd9690609e8ec6184f2b5f[m
+Merge: c8846fe 55a9ae3
+Author: David Lowe <76568284+davidrobertlowe@users.noreply.github.com>
+Date:   Wed Nov 30 01:07:23 2022 -0800
+
+    Merge pull request #19 from kevins10/styling2
+    
+    center verify
+
+[33mcommit 55a9ae3bdc2675373ed49a1e510db0671763cd33[m
+Author: David <davidrobertlowe@gmail.com>
+Date:   Wed Nov 30 01:06:08 2022 -0800
+
+    center verify
+
+[33mcommit c8846fe402fcb082f34219a0fc1b53f465e43bca[m
+Merge: 1a1a65b dc06479
+Author: David Lowe <76568284+davidrobertlowe@users.noreply.github.com>
+Date:   Wed Nov 30 01:00:16 2022 -0800
+
+    Merge pull request #18 from kevins10/styling2
+    
+    sign up page
+
+[33mcommit dc06479245dba35130dccabfc7bf32f95dfddbef[m
+Author: David <davidrobertlowe@gmail.com>
+Date:   Wed Nov 30 00:59:42 2022 -0800
+
+    sign up page
+
+[33mcommit 1a1a65bd19d2232ebd250e59c1a1859c512f4698[m
+Merge: 9ec02e9 37318ff
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Tue Nov 29 22:31:37 2022 -0800
+
+    Merge pull request #17 from kevins10/fix
+    
+    add chat icon and hide login password
+
+[33mcommit 37318ff5bf3402a78e0854e8796a7d49bd6aa9b8[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Tue Nov 29 22:26:13 2022 -0800
+
+    add chat icon and hide login password
+
+[33mcommit 9ec02e93b1dec900e51a889324cb51e7206d546e[m
+Author: ChristopherFong604 <76576876+ChrisFong604@users.noreply.github.com>
+Date:   Tue Nov 29 22:19:58 2022 -0800
+
+    Added extra details fragment (#16)
+
+[33mcommit cd5667a470b4426b08c643b823b5d7ea713d8417[m
+Merge: 717409e 7921ec0
+Author: kevins10 <79349218+kevins10@users.noreply.github.com>
+Date:   Tue Nov 29 22:13:48 2022 -0800
+
+    Merge pull request #15 from kevins10/hrn_fragment
+    
+    home-rides-notification fragment
+
+[33mcommit 7921ec02fbbf99d99b389bc1461e9f338ca9a608[m
+Merge: 1fb4fdb 717409e
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Tue Nov 29 21:41:27 2022 -0800
+
+    Merge branch 'main' of https://github.com/kevins10/BackseatDrivers into test
+
+[33mcommit 1fb4fdb67447b9138bf0e793e5bb1903b6572424[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Tue Nov 29 21:40:59 2022 -0800
+
+    pull from main
+
+[33mcommit 717409e5d7e75990d265aab23a32332026fab47a[m
+Merge: 021381c 867adc6
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Tue Nov 29 21:37:07 2022 -0800
+
+    Merge pull request #14 from kevins10/sam/profile
+    
+    Sam/profile
+
+[33mcommit 867adc679ce9ef8d848aa34aef7e9d1da5744c2f[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Tue Nov 29 21:04:09 2022 -0800
+
+    upload profile image from gallery
+
+[33mcommit 7a2b96174d8af44e88475f70629140ea07824533[m
+Merge: ab079e6 e0d2e95
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Tue Nov 29 20:31:09 2022 -0800
+
+    Merge branch 'main' of https://github.com/kevins10/BackseatDrivers into ridesfragment
+
+[33mcommit ab079e63f42517f2af1d74177de8983bd3c87189[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Tue Nov 29 20:31:01 2022 -0800
+
+    added new fragment for chat
+
+[33mcommit e0d2e95f298009d4fd0028b469479789526a0565[m
+Merge: 021381c 1d6cf9f
+Author: David Lowe <76568284+davidrobertlowe@users.noreply.github.com>
+Date:   Tue Nov 29 20:07:31 2022 -0800
+
+    Merge pull request #13 from kevins10/styling
+    
+    Styling
+
+[33mcommit 1d6cf9f48c63640fcdd8e43a93edb8f506dc4c5d[m
+Merge: b73a954 021381c
+Author: David Lowe <76568284+davidrobertlowe@users.noreply.github.com>
+Date:   Tue Nov 29 20:07:17 2022 -0800
+
+    Merge branch 'main' into styling
+
+[33mcommit b73a95430a4edb3b1d7165cffdffef965c1a8461[m
+Author: David <davidrobertlowe@gmail.com>
+Date:   Tue Nov 29 19:58:49 2022 -0800
+
+    verfiy page
+
+[33mcommit 1215033e5cf1976573e681ffeb9530a049a648a3[m
+Author: David <davidrobertlowe@gmail.com>
+Date:   Tue Nov 29 19:39:01 2022 -0800
+
+    adding styling changes
+
+[33mcommit 47b45b28d6551c97831801980a371a1f27141904[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Tue Nov 29 15:20:22 2022 -0800
+
+    add edit profile
+
+[33mcommit 021381c2306b46d03b9406e61cabc7cf6e6131bd[m
+Merge: a10b9d4 b85e3e0
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Tue Nov 29 02:30:34 2022 -0800
+
+    Merge pull request #12 from kevins10/signup
+    
+    add more user attributes and driver profile setup
+
+[33mcommit b85e3e0feb4303808703167d24a8988ce43128f6[m
+Author: Samantha <samttsee@gmail.com>
+Date:   Tue Nov 29 02:26:09 2022 -0800
+
+    add more user attributes and driver profile setup
+
+[33mcommit a10b9d4353fe4cdfd89f978662afc6ccf56c2154[m
+Merge: dec2124 269942e
+Author: kevins10 <79349218+kevins10@users.noreply.github.com>
+Date:   Tue Nov 29 02:15:31 2022 -0800
+
+    Merge pull request #11 from kevins10/ridesfragment
+    
+    Ridesfragment
+
+[33mcommit 269942eab6bc6620fda4d70714287e50bf6fd533[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Tue Nov 29 02:14:53 2022 -0800
+
+    updated ride fragment, added listview and click functionality, added host id to ride class
+
+[33mcommit c3013c0aef33956ff9b75f5225900e161462d757[m
+Merge: 7e7d916 dec2124
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Tue Nov 29 00:20:29 2022 -0800
+
+    Merge branch 'main' of https://github.com/kevins10/BackseatDrivers into ridesfragment
+
+[33mcommit dec21241919d8823068142e2fd87f1960082e13a[m
+Merge: 91864a9 2cf3b10
+Author: kevins10 <79349218+kevins10@users.noreply.github.com>
+Date:   Mon Nov 28 23:46:21 2022 -0800
+
+    Merge pull request #10 from kevins10/viewmodel2
+    
+    Viewmodel2
+
+[33mcommit 2cf3b10546c153e519e62f1825470e6b21be2f68[m
+Merge: 2fd159f 91864a9
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Mon Nov 28 23:46:05 2022 -0800
+
+    fixed conflicts
+
+[33mcommit 7e7d916d13b57576d4f5d8c9f947af1aecaf6cf5[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Mon Nov 28 23:32:48 2022 -0800
+
+    created adapter
+
+[33mcommit 2fd159f1fc6a81a7ecc841153bf54839fcf50bc4[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Mon Nov 28 22:32:42 2022 -0800
+
+    moved some stuff to viewmodel
+
+[33mcommit 91864a9368f8741048244eb330135bdaff1552db[m
+Merge: 0e286b3 32253c6
+Author: ChristopherFong604 <76576876+ChrisFong604@users.noreply.github.com>
+Date:   Mon Nov 28 21:56:09 2022 -0800
+
+    Merge pull request #9 from kevins10/rides
+    
+    Rides
+
+[33mcommit 32253c66528deea7d9da2954bc96d4e31f97d755[m
+Author: ChrisFong604 <ccffoonngg@gmail.com>
+Date:   Mon Nov 28 21:54:03 2022 -0800
+
+    removed utils
+
+[33mcommit 5d78b8d17814adef8567eccee9815fd632b01530[m
+Author: ChrisFong604 <ccffoonngg@gmail.com>
+Date:   Mon Nov 28 21:52:54 2022 -0800
+
+    added proper async network call to fetch directions
+
+[33mcommit 4ad512eea723f683edf2a24d3e87bb3754e61b44[m
+Author: ChrisFong604 <ccffoonngg@gmail.com>
+Date:   Mon Nov 28 20:37:47 2022 -0800
+
+    changed http library to Volley, added working draw-route function!
+
+[33mcommit 0be6748faa262f8a1550f1b752698b3de7c6f577[m
+Author: chris <ccffoonngg@gmail.com>
+Date:   Mon Nov 28 03:35:08 2022 -0800
+
+    added dataparser
+
+[33mcommit 8507fa6433e6b6f799417ed9d91948fd0f750157[m
+Author: ChrisFong604 <ccffoonngg@gmail.com>
+Date:   Sat Nov 26 02:39:12 2022 -0800
+
+    api call working
+
+[33mcommit f7a5b5b9889dcf8a9aaa3afb6b116fbacac1947f[m
+Author: ChrisFong604 <ccffoonngg@gmail.com>
+Date:   Fri Nov 25 17:28:09 2022 -0800
+
+    added initial API call setup
+
+[33mcommit 4c398daeb6f444726d0df9b3767199ee6d3e7c42[m
+Author: ChrisFong604 <ccffoonngg@gmail.com>
+Date:   Fri Nov 25 17:18:42 2022 -0800
+
+    added HTTP library for API calls
+
+[33mcommit 2b6018dd54300e950602d36f350979337040cd5d[m
+Author: ChrisFong604 <ccffoonngg@gmail.com>
+Date:   Fri Nov 25 17:12:24 2022 -0800
+
+    added find route logic; need to get directions api
+
+[33mcommit 7a9ca931e7e275c229d7cbca3a2a1be027fe447e[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Thu Nov 24 21:21:29 2022 -0800
+
+    added user viewmodel, moved some db operations to profile vm
+
+[33mcommit db1c82f5a9453106cf8eb02c62db264414471480[m
+Author: ChrisFong604 <ccffoonngg@gmail.com>
+Date:   Thu Nov 24 20:45:15 2022 -0800
+
+    added createride map activity
+
+[33mcommit cad1f16158662e71d3142d28d75576cef54202e1[m
+Merge: 1ecf6be 0e286b3
+Author: ChrisFong604 <ccffoonngg@gmail.com>
+Date:   Thu Nov 24 15:16:17 2022 -0800
+
+    Merge branch 'main' of https://github.com/kevins10/BackseatDrivers into rides
+
+[33mcommit 1ecf6be015f7981dae0f937f77e17a1098e0b5d6[m
+Author: ChrisFong604 <ccffoonngg@gmail.com>
+Date:   Wed Nov 16 18:41:59 2022 -0800
+
+    fetched user data
+
+[33mcommit bb1682e8678b8fbb032ba02d355fb07d69182531[m
+Author: ChrisFong604 <ccffoonngg@gmail.com>
+Date:   Wed Nov 16 03:02:00 2022 -0800
+
+    added listener to deserialize db objects
+
+[33mcommit 0e286b3860b1370809e87045c281e389da0e794a[m
+Merge: 12245ee 0a0a68e
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Tue Nov 15 22:50:30 2022 -0800
+
+    Merge pull request #8 from kevins10/auth
+    
+    Auth
+
+[33mcommit 12245eed62da7a1e3e2e9b075c9d2a51c8f3b962[m
+Author: David Lowe <76568284+davidrobertlowe@users.noreply.github.com>
+Date:   Tue Nov 15 22:48:53 2022 -0800
+
+    Update README.md
+
+[33mcommit 0a0a68ea52603ef249fa5a5aff5cc1ed4628867e[m
+Author: Samantha Tse <samttsee@gmail.com>
+Date:   Tue Nov 15 21:57:49 2022 -0800
+
+    auth input validation and user feedback
+
+[33mcommit 9d8476e00615f2467a3f59bc23a39341924216e2[m
+Author: Samantha Tse <samttsee@gmail.com>
+Date:   Tue Nov 15 21:44:42 2022 -0800
+
+    signup only with sfu email
+
+[33mcommit d274d2e40cf9d75775e5abdf86a5d553cbb2127b[m
+Author: David Lowe <76568284+davidrobertlowe@users.noreply.github.com>
+Date:   Tue Nov 15 20:54:37 2022 -0800
+
+    Create README.md
+
+[33mcommit 20d6c8d7b17f37cef7f8a9a87fd120f4d3ff439a[m
+Merge: 34d36ed 2f0fc5f
+Author: kevins10 <79349218+kevins10@users.noreply.github.com>
+Date:   Tue Nov 15 20:37:26 2022 -0800
+
+    Merge pull request #7 from kevins10/profile
+    
+    Profile
+
+[33mcommit 2f0fc5fd6c37882e16917515f8de047769a6abae[m
+Merge: 77b6021 34d36ed
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Tue Nov 15 20:35:56 2022 -0800
+
+    fix merge conflicts
+
+[33mcommit 34d36eda87b7416b36d52bc9d52249eface2bf74[m
+Merge: ec12b20 78527e4
+Author: ChristopherFong604 <76576876+ChrisFong604@users.noreply.github.com>
+Date:   Tue Nov 15 20:29:02 2022 -0800
+
+    Merge pull request #6 from kevins10/notifications
+    
+    Notifications
+
+[33mcommit 77b602123c04c77cfcebad8236bb79d082505e70[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Tue Nov 15 20:18:54 2022 -0800
+
+    reads and writes to database, listens on live data
+
+[33mcommit 78527e4e9a01313fd89f4b7db4cf5f9bca476eb4[m[33m ([m[1;31morigin/notifications[m[33m)[m
+Author: ChrisFong604 <ccffoonngg@gmail.com>
+Date:   Tue Nov 15 20:02:39 2022 -0800
+
+    added proper icons to bottom nav
+
+[33mcommit a13327b798945f0ecc5b9d8023a43e57b7ee99a3[m
+Author: psaghafi <psaghafi@sfu.ca>
+Date:   Tue Nov 15 17:52:07 2022 -0800
+
+    changed verify email page
+
+[33mcommit 07b849ed017ef80e8d2cbbf41686f1b50d5ae29f[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Tue Nov 15 16:49:29 2022 -0800
+
+    added profile tab and icon
+
+[33mcommit c145add521cb3aa25a2705b9a37b347afc334e06[m
+Author: psaghafi <psaghafi@sfu.ca>
+Date:   Tue Nov 15 16:25:57 2022 -0800
+
+    added textview to login page
+
+[33mcommit 35953697f0c730f8b4bfab5199a26ee3fef39d32[m
+Author: psaghafi <psaghafi@sfu.ca>
+Date:   Tue Nov 15 16:00:50 2022 -0800
+
+    sign up page completed
+
+[33mcommit f4ed8e447a4aca9dccad3a57b1e34080f91a24ba[m
+Merge: 9b1c9db ec12b20
+Author: psaghafi <psaghafi@sfu.ca>
+Date:   Tue Nov 15 15:19:10 2022 -0800
+
+    pulled code from main
+
+[33mcommit 9b1c9db8a6816e33a578966fd64b3f7957c87310[m
+Author: psaghafi <psaghafi@sfu.ca>
+Date:   Tue Nov 15 14:56:05 2022 -0800
+
+    Login page design done
+
+[33mcommit ec12b20689be33236b1f19f7016bc511ed0e8d95[m
+Merge: d2d0fe3 4f9c427
+Author: samtsee <78242721+samtsee@users.noreply.github.com>
+Date:   Tue Nov 15 11:05:20 2022 -0800
+
+    Merge pull request #5 from kevins10/auth
+    
+    Auth
+
+[33mcommit 4f9c427ba0e3a134b6b79980f2338894c810f49c[m
+Author: Samantha Tse <samttsee@gmail.com>
+Date:   Tue Nov 15 10:09:15 2022 -0800
+
+    add email verification page
+
+[33mcommit 61fbea01179be7bd41f346823c194fc25ed05021[m
+Author: Samantha Tse <samttsee@gmail.com>
+Date:   Tue Nov 15 08:52:45 2022 -0800
+
+    allow login only when email is verified
+
+[33mcommit d2d0fe31039fdd8de93174bbc64d5561fea3f67d[m
+Author: ChrisFong604 <ccffoonngg@gmail.com>
+Date:   Tue Nov 15 02:37:30 2022 -0800
+
+    added sign-in logic; need to implement home activity to redirect to
+
+[33mcommit 4d7b298bd42b0a4d47127a839d3905cf601decd2[m
+Merge: 7615368 08ce76a
+Author: ChristopherFong604 <76576876+ChrisFong604@users.noreply.github.com>
+Date:   Tue Nov 15 02:16:24 2022 -0800
+
+    Merge pull request #4 from kevins10/firebase-database
+    
+    Firebase database
+
+[33mcommit 08ce76a49e58c09fe639c7aab462cbaf49d15e4b[m[33m ([m[1;31morigin/firebase-database[m[33m)[m
+Author: ChrisFong604 <ccffoonngg@gmail.com>
+Date:   Tue Nov 15 02:15:00 2022 -0800
+
+    fixed resource bug
+
+[33mcommit 87f95cca746b95e213cdcc87b526cdcd7f2eaccc[m
+Author: ChrisFong604 <ccffoonngg@gmail.com>
+Date:   Tue Nov 15 02:14:19 2022 -0800
+
+    profile fragment added to application layout
+
+[33mcommit 7615368b9fcdd27bae95a7f0e6480d64e5b353c7[m
+Merge: d981473 3417196
+Author: ChristopherFong604 <76576876+ChrisFong604@users.noreply.github.com>
+Date:   Tue Nov 15 02:07:47 2022 -0800
+
+    Merge pull request #3 from kevins10/firebase-database
+    
+    Firebase database
+
+[33mcommit b9f640646fc1c628f795147213ce68949f4eb698[m
+Merge: 3417196 d981473
+Author: ChrisFong604 <ccffoonngg@gmail.com>
+Date:   Tue Nov 15 02:06:43 2022 -0800
+
+    Merge branch 'main' of https://github.com/kevins10/BackseatDrivers into firebase-database
+
+[33mcommit 3417196774ccf960385e3dcd20d716e8a2f9ac25[m
+Author: ChrisFong604 <ccffoonngg@gmail.com>
+Date:   Tue Nov 15 02:06:12 2022 -0800
+
+    added profile page fragment and viewmodel
+
+[33mcommit 8086cc9d1cb239dc039a2ce6e19487042d92a24b[m
+Author: ChrisFong604 <ccffoonngg@gmail.com>
+Date:   Tue Nov 15 02:04:15 2022 -0800
+
+    added remaining data models
+
+[33mcommit d981473bcafb33aef642c0132e7febfa7cef7c47[m
+Merge: 7332afb 4b0841f
+Author: ChristopherFong604 <76576876+ChrisFong604@users.noreply.github.com>
+Date:   Tue Nov 15 01:59:29 2022 -0800
+
+    Merge pull request #2 from kevins10/firebase-database
+    
+    created initial data models and added user data to database on signup
+
+[33mcommit 4b0841f3873934dd670ede15d9a41093b058f9e6[m
+Author: ChrisFong604 <ccffoonngg@gmail.com>
+Date:   Tue Nov 15 01:58:20 2022 -0800
+
+    created initial data models and added user data to database on signup
+
+[33mcommit 7332afb204666d862b518c733903ec0a254703b5[m
+Merge: b3dd26e ed4a3ef
+Author: kevins10 <79349218+kevins10@users.noreply.github.com>
+Date:   Sun Nov 13 23:29:15 2022 -0800
+
+    Merge pull request #1 from kevins10/auth
+    
+    init signup
+
+[33mcommit ed4a3efc2994f2dfdaac67408c02b52dfe405ef9[m
+Author: Samantha Tse <samttsee@gmail.com>
+Date:   Sun Nov 13 23:09:30 2022 -0800
+
+    init signup
+
+[33mcommit b3dd26ef5bf66097fee45a662ceed0e21eb4ff64[m
+Author: Kevin Shi <kevins.shi2001@gmail.com>
+Date:   Sun Nov 13 16:09:59 2022 -0800
+
+    initial commit
