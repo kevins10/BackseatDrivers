@@ -131,6 +131,7 @@ class DriverRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
                         val currentTime = LocalDateTime.now().format(dateFormatter)
                         val notificationsRef = Firebase.database.getReference("Users").child(key).child("notifications")
                         var notification = RequestNotification(
+                            host_id = rideObj.host_id,
                             ride_id = rideObj.ride_id,
                             passenger_id = key,
                             passenger_name = Queries().getFirstName(key).toString(),

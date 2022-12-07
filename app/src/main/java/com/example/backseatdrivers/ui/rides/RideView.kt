@@ -189,6 +189,7 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
             val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
             val currentTime = LocalDateTime.now().format(dateFormatter)
             val newNotification = RequestNotification(
+                host_id = rideobj.host_id,
                 ride_id = rideobj.ride_id,
                 passenger_id = userViewModel.getUser()!!.uid,
                 passenger_name = userName,

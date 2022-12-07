@@ -12,6 +12,7 @@ import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.example.backseatdrivers.MainActivity
+import com.example.backseatdrivers.database.Queries
 import com.example.backseatdrivers.database.Request
 import com.example.backseatdrivers.database.RequestNotification
 import com.example.backseatdrivers.database.User
@@ -20,6 +21,10 @@ import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 class NotificationService: Service() {
     private val CHANNEL_ID = "channel id"
@@ -68,7 +73,12 @@ class NotificationService: Service() {
                 val requestNotification = snapshot.getValue<RequestNotification>()
                 println("debug: new notification has been added,  $snapshot")
                 if (requestNotification != null)
-                    showRequestNotification(requestNotification)
+                    CoroutineScope(Dispatchers.Main).launch {
+                        var fn = requestNotification.host_id?.let { Queries().getFirstName(it) }
+                        requestNotification.host_name = fn as String?
+                        showRequestNotification(requestNotification)
+                    }
+
 
             }
 
@@ -119,15 +129,15 @@ class NotificationService: Service() {
             notificationBuilder
                 .setSmallIcon(com.example.backseatdrivers.R.drawable.ic_baseline_person_pin_16)
                 .setContentTitle("New Request!")
-                .setContentText("${notification.passenger_name} has requested to join your ride!")
+                .setContentText("${notification.passenger_name} has requested to join your ride! myname: ${notification.host_name}")
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
         }
         else{
             notificationBuilder
                 .setSmallIcon(com.example.backseatdrivers.R.drawable.ic_baseline_person_pin_16)
-                .setContentTitle("New Request!")
-                .setContentText("${notification.passenger_name} has requested to join your ride!")
+                .setContentTitle("Ride Started")
+                .setContentText("${notification.host_id} has started at ${notification.post_time}")
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
         }
