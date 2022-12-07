@@ -1,24 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_filled_in"
     android:orientation="vertical">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id = "@+id/hf_date_time"
-        android:text="Date/Time"/>
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id = "@+id/hf_driver"
-        android:text="Driver"/>
+        <TextView
+            android:id="@+id/hf_date_time"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/date_icon"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Date/Time" />
 
-    <TextView
+        <ImageView
+            android:layout_margin="5dp"
+            android:id="@+id/date_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="10.3dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_baseline_calendar_today_24" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id = "@+id/hf_dest"
-        android:text="Destination"/>
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/hf_driver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/driver_icon"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Driver" />
+
+        <ImageView
+            android:layout_margin="5dp"
+            android:id="@+id/driver_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="10.3dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_baseline_person_24" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/hf_dest"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/dest_icon1"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Destination" />
+
+        <ImageView
+            android:layout_margin="5dp"
+            android:id="@+id/dest_icon1"
+            android:layout_width="wrap_content"
+            android:layout_height="10.3dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_baseline_location_on_24" />
+    </RelativeLayout>
+
+
 </LinearLayout>
+
+
+
+
+
+
+
+
+
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id = "@+id/hf_dest"-->
+<!--        android:text="Destination"/>-->
+<!--</LinearLayout>-->
