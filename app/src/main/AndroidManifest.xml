@@ -34,6 +34,7 @@
         <activity
             android:name=".ui.home.PassengerRideViewActivity"
             android:exported="false"
+            android:theme = "@style/Theme.Design.Light.NoActionBar"
             android:label="@string/title_activity_passenger_ride_view" />
         <activity
             android:name=".ui.home.DriverRideViewActivity"

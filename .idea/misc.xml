@@ -4,9 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/drawable/blue_border_rounded_cornwe.xml" value="0.166" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/drawable/red_fill__rounded_color.xml" value="0.1175" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/drawable/signupbackground.xml" value="0.166" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_chat.xml" value="0.25" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_chat_activty_adapter.xml" value="0.25" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_create_ride.xml" value="0.16979166666666667" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_driver_ride_view.xml" value="0.25" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_edit_profile.xml" value="0.25" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/activity_login.xml" value="0.25" />
@@ -28,6 +30,8 @@
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_rides.xml" value="0.2" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_user_profile_set_up.xml" value="0.264" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/home_adapter.xml" value="0.234375" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/item_right.xml" value="0.234375" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/item_user.xml" value="0.234375" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/myrequests_adapter.xml" value="0.25" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/notification_adapter.xml" value="0.4" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/rides_adapter.xml" value="0.536" />

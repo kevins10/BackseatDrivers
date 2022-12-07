@@ -10,6 +10,9 @@
     <ListView
         android:id="@+id/hf_lv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:dividerHeight="10dp"
+        android:divider="@null"
+        android:layout_height="wrap_content" >
+    </ListView>
 
 </LinearLayout>
