@@ -149,6 +149,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:layout_margin="10dp"
                     android:layout_width="150dp"
+                    android:textColor="@color/white"
                     android:layout_height="wrap_content"
                     android:text="@string/back" />
 
@@ -159,6 +160,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:background="@drawable/red_fill__rounded_color"
                     android:layout_margin="10dp"
+                    android:textColor="@color/white"
                     android:text="@string/post_ride" />
 
 

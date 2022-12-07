@@ -2,8 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginRight="5dp"
-    android:layout_marginLeft="5dp"
     android:background="@drawable/list_filled_in"
     android:orientation="vertical">
 
@@ -13,7 +11,6 @@
 
         <TextView
             android:id="@+id/ra_date"
-            android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/date_icon"
@@ -35,7 +32,7 @@
 
         <TextView
             android:id="@+id/ra_driver"
-            android:layout_margin="5dp"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/driver_icon"
@@ -59,10 +56,6 @@
             android:id="@+id/ra_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
             android:layout_toRightOf="@+id/dest_icon1"
             android:fontFamily="@font/poppins_regular"
             android:text="Start" />
@@ -84,10 +77,7 @@
             android:id="@+id/ra_dest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
+
             android:layout_toRightOf="@+id/dest_icon"
             android:fontFamily="@font/poppins_regular"
             android:text="Destination" />
@@ -109,10 +99,6 @@
             android:id="@+id/ra_seats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
             android:layout_toRightOf="@+id/seat_icon"
             android:fontFamily="@font/poppins_regular"
             android:text="Seats" />
