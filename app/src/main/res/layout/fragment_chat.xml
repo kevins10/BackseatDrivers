@@ -7,15 +7,25 @@
     tools:context=".ui.chat.ChatFragment"
     android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <TextView
+        android:id="@+id/chat_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/chatRecyclerView">
-    </androidx.recyclerview.widget.RecyclerView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/hello">
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Chat"
+        android:textAlignment="center"
+        android:textColor="#54585A"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
-    </TextView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/chatRecyclerView"
+        android:layout_marginBottom="60dp">
+    </androidx.recyclerview.widget.RecyclerView>
+
 </LinearLayout>
