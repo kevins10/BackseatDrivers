@@ -150,9 +150,9 @@ class NotificationService: Service() {
             notificationManager.createNotificationChannel(channel)
         }
         notificationManager.notify(NOTIFICATION_ID, notification)
-        val database : DatabaseReference = Firebase.database.getReference("Users")
-            .child(mAuth.currentUser!!.uid).child("notifications")
-        database.removeValue()
+//        val database : DatabaseReference = Firebase.database.getReference("Users")
+//            .child(mAuth.currentUser!!.uid).child("notifications")
+//        database.removeValue()
     }
 
 

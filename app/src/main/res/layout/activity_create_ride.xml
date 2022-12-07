@@ -84,8 +84,6 @@
 
             </LinearLayout>
 
-
-
             <TextView
                 android:id="@+id/routeInfoTV"
                 android:textColor="@color/black"

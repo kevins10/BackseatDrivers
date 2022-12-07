@@ -61,14 +61,13 @@
             android:id="@+id/createRideBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="60dp"
             android:layout_alignRight="@id/ride_content"
-            android:layout_marginTop="550dp"
+            android:layout_alignParentBottom="true"
             app:fabSize="normal"
             app:rippleColor="#CC0633"
             app:backgroundTint="#CC0633"
             app:srcCompat="@drawable/ic_baseline_add_24" />
-
     </RelativeLayout>
 
 
