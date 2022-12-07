@@ -55,6 +55,7 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
     private lateinit var polylines: ArrayList<Polyline>
     private lateinit var geocoder: Geocoder
     private lateinit var geocoder2: Geocoder
+    private var routeFound = false
 
     private var user: User? = null
     private var ride: Ride? = null
@@ -109,10 +110,16 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
             endLocationAddress = spinner.selectedItem.toString()
 
             findRoute()
+            routeFound = true
         }
 
         binding.nextBtn.setOnClickListener {
-            next()
+            if (routeFound) {
+                next()
+            } else {
+                Toast.makeText(this, "Please find a route before moving to the next step", Toast.LENGTH_LONG).show()
+            }
+            routeFound = false
         }
     }
 
@@ -156,11 +163,9 @@ class CreateRideActivity : FragmentActivity(), OnMapReadyCallback {
         // Set up a PlaceSelectionListener to handle the response
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
-                println("debug4: Place: ${place.address}, ${place.latLng}")
-                if (fragmentId == R.id.autoComplete_fragment_start_location) {
-                    startLocationLatLng = place.latLng
-                    startLocationAddress = "${place.name}\n${place.address}"
-                }
+                startLocationLatLng = place.latLng
+                startLocationAddress = "${place.name}\n${place.address}"
+                routeFound = false
             }
 
             override fun onError(status: Status) {
