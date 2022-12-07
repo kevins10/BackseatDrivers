@@ -139,7 +139,7 @@ class NotificationService: Service() {
                 .setAutoCancel(true)
         }
 
-        else if (notification.request_type == "ride_canceled"){
+        else if (notification.request_type == "ride_cancel"){
             notificationBuilder
                 .setSmallIcon(com.example.backseatdrivers.R.drawable.ic_baseline_person_pin_16)
                 .setContentTitle("Ride Canceled")
@@ -164,6 +164,9 @@ class NotificationService: Service() {
             notificationManager.createNotificationChannel(channel)
         }
         notificationManager.notify(NOTIFICATION_ID, notification)
+        val database : DatabaseReference = Firebase.database.getReference("Users")
+            .child(mAuth.currentUser!!.uid).child("notifications")
+        database.removeValue()
     }
 
 

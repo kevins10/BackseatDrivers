@@ -95,27 +95,6 @@ class PassengerRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
                     .setCancelable(true)
                     .setPositiveButton("Yes") { dialogInterface, it ->
 
-                        CoroutineScope(Dispatchers.Main).launch {
-                            for (key in rideObj.passengers!!.keys){
-                                println("THESE R THE KEYS $key")
-                                val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
-                                val currentTime = LocalDateTime.now().format(dateFormatter)
-                                val notificationsRef = Firebase.database.getReference("Users").child(rideObj.host_id!!).child("notifications")
-                                var notification = RequestNotification(
-                                    host_id = rideObj.host_id,
-                                    ride_id = rideObj.ride_id,
-                                    passenger_id = key,
-                                    passenger_name = Queries().getFirstName(key).toString(),
-                                    post_time = currentTime,
-                                    request_type = "ride_dropped"
-                                )
-                                try {
-                                    notificationsRef.child(UUID.randomUUID().toString()).setValue(notification)
-                                }
-                                catch (e: Exception) { println("debug: error in creating notification = $e")
-                                }
-                            }
-                        }
 
                         // remove passenger from ride request
                         val database : DatabaseReference = Firebase.database.getReference("Requests").child("$requestId")
@@ -195,6 +174,28 @@ class PassengerRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
                     .setCancelable(true)
                     .setPositiveButton("Yes") { dialogInterface, it ->
                         // remove passenger from passengers list
+                        println("INSIDE DIALOG")
+                        CoroutineScope(Dispatchers.Main).launch {
+                            println("INSIDE COROUTINE")
+                            val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+                            val currentTime = LocalDateTime.now().format(dateFormatter)
+                            val notificationsRef = Firebase.database.getReference("Users").child(rideObj.host_id!!).child("notifications")
+                            var notification = RequestNotification(
+                                host_id = rideObj.host_id,
+                                ride_id = rideObj.ride_id,
+                                passenger_id = userId,
+                                passenger_name = Queries().getFirstName(userId).toString(),
+                                post_time = currentTime,
+                                request_type = "ride_dropped"
+                            )
+                            try {
+                                println("SENT NOTIF")
+                                notificationsRef.child(UUID.randomUUID().toString()).setValue(notification)
+                            }
+                            catch (e: Exception) { println("debug: error in creating notification = $e")
+                            }
+
+                        }
                         val database : DatabaseReference = Firebase.database.getReference("Rides")
                             .child("${rideObj.ride_id}")
                             .child("passengers")
