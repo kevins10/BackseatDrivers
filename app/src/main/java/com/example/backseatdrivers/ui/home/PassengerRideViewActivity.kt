@@ -100,7 +100,7 @@ class PassengerRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
                                 println("THESE R THE KEYS $key")
                                 val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
                                 val currentTime = LocalDateTime.now().format(dateFormatter)
-                                val notificationsRef = Firebase.database.getReference("Users").child(key).child("notifications")
+                                val notificationsRef = Firebase.database.getReference("Users").child(rideObj.host_id!!).child("notifications")
                                 var notification = RequestNotification(
                                     host_id = rideObj.host_id,
                                     ride_id = rideObj.ride_id,
