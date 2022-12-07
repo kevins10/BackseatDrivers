@@ -34,36 +34,45 @@
         <activity
             android:name=".ui.home.PassengerRideViewActivity"
             android:exported="false"
-            android:label="@string/title_activity_passenger_ride_view" />
+            android:label="@string/title_activity_passenger_ride_view"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.home.DriverRideViewActivity"
             android:exported="false"
-            android:label="@string/title_activity_driver_ride_view" />
+            android:label="@string/title_activity_driver_ride_view"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.profile.myrequests.MyRequestsActivity"
             android:exported="false"
-            android:label="@string/title_activity_my_requests" />
+            android:label="@string/title_activity_my_requests"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.profile.EditProfileActivity"
             android:exported="false"
-            android:label="@string/edit_profile_text" />
+            android:label="@string/edit_profile_text"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.rides.RideView"
             android:exported="true"
-            android:label="@string/title_activity_ride_view" />
+            android:label="@string/title_activity_ride_view"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.rides.CreateRideActivity"
             android:exported="false"
-            android:label="@string/title_activity_create_ride" />
+            android:label="@string/title_activity_create_ride"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".auth.VerifySignUpActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".auth.SignUpActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".auth.LoginActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -72,13 +81,12 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.chat.ChatActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ui.notifications.NotificationsActivity"
-            android:exported="false" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <service android:name=".ui.notifications.NotificationService"/>
 
     </application>
