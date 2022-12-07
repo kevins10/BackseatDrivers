@@ -13,7 +13,6 @@
 
         <TextView
             android:id="@+id/na_date"
-            android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/dest_icon1"
@@ -34,7 +33,6 @@
         android:layout_height="wrap_content">
         <TextView
             android:id = "@+id/na_pickup"
-            android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/date_icon"
@@ -55,7 +53,6 @@
         android:layout_height="wrap_content">
         <TextView
             android:id = "@+id/na_passenger"
-            android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/driver_icon"

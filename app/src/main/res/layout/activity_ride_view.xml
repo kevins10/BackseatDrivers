@@ -5,12 +5,36 @@
     android:layout_width="match_parent">
 
     <LinearLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#CC0633"
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
+            android:text="Ride Request"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_wave__3_" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/title"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/rv_date"
+            android:fontFamily="@font/poppins_medium"
             android:gravity="center_horizontal"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
@@ -21,6 +45,7 @@
         <TextView
             android:id="@+id/rv_driver"
             android:gravity="center_horizontal"
+            android:fontFamily="@font/poppins_medium"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:text="Testing"
@@ -32,6 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:text="Planned Route"
+            android:fontFamily="@font/poppins_medium"
             android:layout_marginBottom="16dp" />
 
         <TextView
@@ -40,6 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:text="Planned Route"
+            android:fontFamily="@font/poppins_medium"
             android:layout_marginBottom="16dp" />
 
 
@@ -54,8 +81,10 @@
 
         <TextView
             android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="wrap_content"
             android:text="Enter Pickup Location"
+            android:fontFamily="@font/poppins_medium"
             android:layout_marginTop="16dp" />
 
         <fragment
@@ -76,17 +105,19 @@
 
         <Button
             android:id="@+id/rv_cancel"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text= "Cancel"
+            android:fontFamily="@font/poppins_medium"
             android:background="@drawable/red_fill__rounded_color"
             android:layout_margin="10dp"
             android:layout_weight="1"/>
 
         <Button
             android:id="@+id/send_req"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
             android:text= "Send Request"
             android:background="@drawable/red_fill__rounded_color"
             android:layout_margin="10dp"
