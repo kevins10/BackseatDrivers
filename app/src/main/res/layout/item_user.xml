@@ -10,8 +10,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:id="@+id/chatUserPicture"
             android:src="@drawable/profile_tab">
         </de.hdodenhof.circleimageview.CircleImageView>
