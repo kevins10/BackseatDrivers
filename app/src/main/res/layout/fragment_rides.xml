@@ -1,46 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.rides.RidesFragment"
-    android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints">
-        <Button
+    android:orientation="vertical"
+    tools:context=".ui.rides.RidesFragment">
+
+        <LinearLayout
+            android:id="@+id/ride_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Create a Ride"
-            android:id="@+id/createRideBtn"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/text_dashboard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:entries="@array/ride_filter"
-        android:id="@+id/rides_filter">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Filter by Campus"
+                android:textAlignment="center"
+                android:textColor="#54585A"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-    </Spinner>
-    <ListView
-        android:id="@+id/rides_lv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="62dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginRight="62dp"
+                android:background="@drawable/blue_border_rounded_cornwe">
 
-</LinearLayout>
+                <Spinner
+                    android:id="@+id/rides_filter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:entries="@array/ride_filter"
+                    android:fontFamily="@font/poppins_regular"
+                    android:spinnerMode="dropdown" />
+            </RelativeLayout>
+
+            <ListView
+                android:layout_below="@id/ride_content"
+                android:id="@+id/rides_lv"
+                android:layout_width="match_parent"
+                android:dividerHeight="10dp"
+                android:divider="@null"
+                android:layout_height="wrap_content" >
+            </ListView>
+
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/createRideBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:layout_alignRight="@id/ride_content"
+            android:layout_marginTop="550dp"
+            app:fabSize="normal"
+            app:rippleColor="#CC0633"
+            app:backgroundTint="#CC0633"
+            app:srcCompat="@drawable/ic_baseline_add_24" />
+
+    </RelativeLayout>
+
+
+

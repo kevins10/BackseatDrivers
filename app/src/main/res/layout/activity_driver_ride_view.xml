@@ -73,6 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancel Ride"
+            android:background="@drawable/red_fill__rounded_color"
             android:layout_margin="10dp"
             android:layout_weight="1"/>
 
@@ -82,7 +83,12 @@
             android:layout_height="wrap_content"
             android:text="Start Ride"
             android:layout_margin="10dp"
+            android:background="@drawable/red_fill__rounded_color"
             android:layout_weight="1"/>
+
+
+
+
     </LinearLayout>
 
 </RelativeLayout>
