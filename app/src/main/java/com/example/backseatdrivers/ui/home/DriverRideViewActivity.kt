@@ -138,6 +138,7 @@ class DriverRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
                             request_type = "ride_start"
                         )
                         try {
+                            println("SENT LOL")
                             notificationsRef.child(UUID.randomUUID().toString()).setValue(notification)
                         }
                         catch (e: Exception) { println("debug: error in creating notification = $e")}

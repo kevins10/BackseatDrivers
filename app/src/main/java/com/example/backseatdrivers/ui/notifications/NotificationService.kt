@@ -66,7 +66,7 @@ class NotificationService: Service() {
         notificationEventListener = object: ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val requestNotification = snapshot.getValue<RequestNotification>()
-                println("debug: new notification has been added\nid=${snapshot.key}\nrequest notification = $requestNotification")
+                println("debug: new notification has been added,  $snapshot")
                 if (requestNotification != null)
                     showRequestNotification(requestNotification)
 
