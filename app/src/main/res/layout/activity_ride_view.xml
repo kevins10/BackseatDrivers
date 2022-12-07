@@ -81,6 +81,7 @@
 
         <TextView
             android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="wrap_content"
             android:text="Enter Pickup Location"
             android:fontFamily="@font/poppins_medium"
