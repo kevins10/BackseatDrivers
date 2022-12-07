@@ -21,11 +21,13 @@
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_chat.xml" value="0.25" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_driver_profile_set_up.xml" value="0.25" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_driver_tab.xml" value="0.25" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_home.xml" value="0.234375" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_notifications.xml" value="0.25" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_ride_details.xml" value="0.264" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_rides.xml" value="0.25" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/fragment_user_profile_set_up.xml" value="0.264" />
+        <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/home_adapter.xml" value="0.234375" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/notification_adapter.xml" value="0.4" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/layout/rides_adapter.xml" value="0.536" />
         <entry key="..\:/Users/david/AndroidStudioProjects/BackseatDrivers/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
