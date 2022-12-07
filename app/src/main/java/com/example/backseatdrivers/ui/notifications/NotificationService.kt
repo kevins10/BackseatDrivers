@@ -21,10 +21,7 @@ import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class NotificationService: Service() {
     private val CHANNEL_ID = "channel id"
@@ -72,14 +69,14 @@ class NotificationService: Service() {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val requestNotification = snapshot.getValue<RequestNotification>()
                 println("debug: new notification has been added,  $snapshot")
-                if (requestNotification != null)
+
+                if (requestNotification != null){
                     CoroutineScope(Dispatchers.Main).launch {
                         var fn = requestNotification.host_id?.let { Queries().getFirstName(it) }
                         requestNotification.host_name = fn as String?
                         showRequestNotification(requestNotification)
                     }
-
-
+                }
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
@@ -142,11 +139,20 @@ class NotificationService: Service() {
                 .setAutoCancel(true)
         }
 
-        else{
+        else if (notification.request_type == "ride_canceled"){
             notificationBuilder
                 .setSmallIcon(com.example.backseatdrivers.R.drawable.ic_baseline_person_pin_16)
                 .setContentTitle("Ride Canceled")
-                .setContentText("${notification.host_name} has started canceled a ride")
+                .setContentText("${notification.host_name} has canceled a ride")
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+        }
+
+        else{
+            notificationBuilder
+                .setSmallIcon(com.example.backseatdrivers.R.drawable.ic_baseline_person_pin_16)
+                .setContentTitle("Rider Dropped")
+                .setContentText("${notification.passenger_name} has dropped out of your ride")
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
         }

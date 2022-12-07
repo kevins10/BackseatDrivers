@@ -131,7 +131,6 @@ class DriverRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
                                 catch (e: Exception) { println("debug: error in creating notification = $e")}
                             }
                         }
-                        finish()
                     }
                     // delete ride from database
                     val database : DatabaseReference = Firebase.database.getReference("Rides").child("${rideObj.ride_id}")
