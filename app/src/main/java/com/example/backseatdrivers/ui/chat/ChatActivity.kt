@@ -2,10 +2,7 @@ package com.example.backseatdrivers.ui.chat
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +22,7 @@ class ChatActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
+        supportActionBar?.hide()
 
         chatActivityRecyclerView = findViewById<RecyclerView>(R.id.chatActivityRecyclerView)
         chatActivityRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
@@ -45,7 +43,7 @@ class ChatActivity : AppCompatActivity() {
                 //TODO("Not yet implemented")
             }
         })
-        var sendBtn = findViewById<Button>(R.id.btnSendMessage)
+        var sendBtn = findViewById<ImageButton>(R.id.btnSendMessage)
         var et = findViewById<EditText>(R.id.etMessage)
         sendBtn.setOnClickListener{
             var message:String = et.text.toString()

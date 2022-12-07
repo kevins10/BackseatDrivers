@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.backseatdrivers.database.DriverProfile
 import com.example.backseatdrivers.database.User
@@ -46,6 +47,7 @@ class DriverProfileSetUpFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDriverProfileSetUpBinding.inflate(inflater, container, false)
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
 
         val licenseTypeSpinner = binding.licenseTypeSpinner
 

@@ -16,6 +16,7 @@ class VerifySignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityVerifySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
 
         val user = intent.getParcelableExtra<FirebaseUser>("user")
         val userEmail = user?.email

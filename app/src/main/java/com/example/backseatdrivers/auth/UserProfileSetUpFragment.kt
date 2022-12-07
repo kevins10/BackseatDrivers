@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.example.backseatdrivers.R
 import com.example.backseatdrivers.database.User
 import com.example.backseatdrivers.databinding.FragmentUserProfileSetUpBinding
@@ -27,6 +28,7 @@ class UserProfileSetUpFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentUserProfileSetUpBinding.inflate(inflater, container, false)
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
 
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)

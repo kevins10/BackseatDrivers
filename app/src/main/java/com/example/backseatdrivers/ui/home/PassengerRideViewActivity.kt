@@ -52,6 +52,7 @@ class PassengerRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
 
         binding = ActivityPassengerRideViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
 
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null){

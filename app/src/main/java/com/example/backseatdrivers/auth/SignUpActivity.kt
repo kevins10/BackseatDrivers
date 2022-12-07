@@ -13,6 +13,7 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
 
         val userProfileSetUpFragment = UserProfileSetUpFragment()
         val transaction = supportFragmentManager.beginTransaction()

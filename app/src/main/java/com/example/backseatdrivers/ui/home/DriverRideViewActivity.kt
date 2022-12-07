@@ -47,6 +47,7 @@ class DriverRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
 
         binding = ActivityDriverRideViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
 
         val intent = intent
         rideObj = intent.getSerializableExtra("data") as Ride

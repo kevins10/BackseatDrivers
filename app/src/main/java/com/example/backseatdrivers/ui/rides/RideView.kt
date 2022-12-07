@@ -64,6 +64,7 @@ class RideView : AppCompatActivity(), OnMapReadyCallback {
 
         binding = ActivityRideViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
 
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         val intent = intent

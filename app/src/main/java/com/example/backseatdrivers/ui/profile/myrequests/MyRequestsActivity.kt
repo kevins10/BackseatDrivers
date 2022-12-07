@@ -4,13 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ListView
-import androidx.lifecycle.ViewModelProvider
 import com.example.backseatdrivers.database.Request
 import com.example.backseatdrivers.database.Ride
 import com.example.backseatdrivers.databinding.ActivityMyRequestsBinding
 import com.example.backseatdrivers.ui.home.PassengerRideViewActivity
-import com.example.backseatdrivers.ui.notifications.NotificationsActivity
-import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
