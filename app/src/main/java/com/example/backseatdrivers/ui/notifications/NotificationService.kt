@@ -133,11 +133,20 @@ class NotificationService: Service() {
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
         }
-        else{
+        else if (notification.request_type == "ride_start"){
             notificationBuilder
                 .setSmallIcon(com.example.backseatdrivers.R.drawable.ic_baseline_person_pin_16)
                 .setContentTitle("Ride Started")
                 .setContentText("${notification.host_name} has started at ${notification.post_time}")
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+        }
+
+        else{
+            notificationBuilder
+                .setSmallIcon(com.example.backseatdrivers.R.drawable.ic_baseline_person_pin_16)
+                .setContentTitle("Ride Canceled")
+                .setContentText("${notification.host_name} has started canceled a ride")
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
         }
