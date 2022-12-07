@@ -30,6 +30,11 @@ class LoginActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
+        if (auth.currentUser != null) {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+
         binding.loginBtn.setOnClickListener {
             binding.errorMsg.text = null
             val email = binding.emailEt.text.toString()
