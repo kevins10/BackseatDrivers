@@ -75,6 +75,7 @@ android:layout_height="match_parent">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Drop Out of Ride"
+            android:background="@drawable/red_fill__rounded_color"
             android:layout_margin="10dp"
             android:layout_weight="1"/>
 
@@ -83,6 +84,7 @@ android:layout_height="match_parent">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Accept Request"
+            android:background="@drawable/red_fill__rounded_color"
             android:layout_margin="10dp"
             android:layout_weight="1"/>
     </LinearLayout>
