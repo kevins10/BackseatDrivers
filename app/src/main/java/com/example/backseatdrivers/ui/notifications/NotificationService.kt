@@ -129,7 +129,7 @@ class NotificationService: Service() {
             notificationBuilder
                 .setSmallIcon(com.example.backseatdrivers.R.drawable.ic_baseline_person_pin_16)
                 .setContentTitle("New Request!")
-                .setContentText("${notification.passenger_name} has requested to join your ride! myname: ${notification.host_name}")
+                .setContentText("${notification.passenger_name} has requested to join your ride!")
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
         }
@@ -137,7 +137,7 @@ class NotificationService: Service() {
             notificationBuilder
                 .setSmallIcon(com.example.backseatdrivers.R.drawable.ic_baseline_person_pin_16)
                 .setContentTitle("Ride Started")
-                .setContentText("${notification.host_id} has started at ${notification.post_time}")
+                .setContentText("${notification.host_name} has started at ${notification.post_time}")
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
         }
