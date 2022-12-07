@@ -2,6 +2,7 @@ package com.example.backseatdrivers.ui.home
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -59,6 +60,17 @@ class DriverRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
         binding.rvDate.text = rideObj.departure_time
         binding.rvStart.text = "Start: ${rideObj.start_address}"
         binding.rvDestination.text = "Destination: ${rideObj.end_address}"
+        if (rideObj.in_progress == "0"){
+            println("WHY AM I VISIBLE?!?1 ${rideObj.in_progress}")
+            binding.finishButton.visibility = View.GONE
+            binding.saveButton.visibility = View.VISIBLE
+
+
+        }
+        else{
+            binding.saveButton.visibility = View.GONE
+            binding.finishButton.visibility = View.VISIBLE
+        }
         val hostId = rideObj.host_id
         val passengers = rideObj.passengers
         CoroutineScope(Dispatchers.Main).launch {
@@ -168,10 +180,22 @@ class DriverRideViewActivity : AppCompatActivity(), OnMapReadyCallback {
                         catch (e: Exception) { println("debug: error in creating notification = $e")}
                     }
                 }
-                finish()
             }
+            CoroutineScope(Dispatchers.Main).launch {
+                Firebase.database.reference.child("Rides").child(rideObj.ride_id!!).child("in_progress").setValue("1")
+            }
+            finish()
 
         }
+        binding.finishButton.setOnClickListener{
+            val database3 : DatabaseReference = Firebase.database.getReference("Rides").child("${rideObj.ride_id}")
+            database3.removeValue()
+
+            // send passengers notification
+            finish()
+
+        }
+
     }
 
     override fun onMapReady(googleMap: GoogleMap) {

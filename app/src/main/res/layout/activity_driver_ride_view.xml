@@ -1,131 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:map="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+
+    <TextView
+        android:id="@+id/rv_date"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:text="Testing"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/rv_driver"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Testing"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@+id/rv_date" />
+
+    <TextView
+        android:id="@+id/rv_start"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Planned Route"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@+id/rv_driver" />
+
+    <TextView
+        android:id="@+id/rv_destination"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Planned Route"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@+id/rv_start" />
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        tools:context=".ui.home.DriverRideViewActivity"
+        android:layout_below="@+id/rv_destination" />
+
+    <LinearLayout
+        android:id="@+id/pickup_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/map">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Passengers" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@+id/title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#CC0633"
-                android:fontFamily="@font/poppins_medium"
-                android:gravity="center"
-                android:text="Ride Details"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="25sp" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/ic_wave__2_" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_below="@+id/title"
-            android:id="@+id/rv_date"
-            android:gravity="center_horizontal"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="Testing"
-            android:fontFamily="@font/poppins_medium"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp" />
-
-        <TextView
-            android:id="@+id/rv_driver"
-            android:gravity="center_horizontal"
-            android:fontFamily="@font/poppins_medium"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="Testing"
-            android:layout_marginBottom="16dp"
-            android:layout_below="@+id/rv_date" />
-
-        <TextView
-            android:id="@+id/rv_start"
-            android:fontFamily="@font/poppins_medium"
-            android:gravity="center_horizontal"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="Planned Route"
-            android:layout_marginBottom="16dp"
-            android:layout_below="@+id/rv_driver" />
-
-        <TextView
-            android:id="@+id/rv_destination"
-            android:gravity="center_horizontal"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Planned Route"
-            android:layout_marginBottom="16dp"
-            android:layout_below="@+id/rv_start" />
-
-        <fragment
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            tools:context=".ui.home.DriverRideViewActivity"
-            android:layout_below="@+id/rv_destination" />
-
-        <LinearLayout
-            android:id="@+id/pickup_location"
-            android:layout_margin="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_below="@+id/map">
-            <TextView
-                android:layout_width="match_parent"
-                android:fontFamily="@font/poppins_medium"
-                android:layout_height="wrap_content"
-                android:text="Passengers" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/buttons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/pickup_location"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/cancel_button"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/red_fill__rounded_color"
-                android:fontFamily="@font/poppins_medium"
                 android:text="Cancel Ride" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/save_button"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/red_fill__rounded_color"
-                android:fontFamily="@font/poppins_medium"
                 android:text="Start Ride" />
+
+            <Button
+                android:id="@+id/finish_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/red_fill__rounded_color"
+                android:text="Finish Ride" />
+
         </LinearLayout>
 
-    </RelativeLayout>
 
 
 
-</ScrollView>
 
+    </LinearLayout>
+
+</RelativeLayout>
